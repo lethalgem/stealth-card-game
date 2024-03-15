@@ -74,14 +74,30 @@ func addCard(card:Card):
 			positions.append(leftMost + i*distanceBetweenCards)
 			rotations.append(leftMostRotation + i*rotationBetweenCards)
 	
-	
-	
+	var yPositions:Array = []
+	var yAdjust = 10;
+	var yOffset = -20;
+	if len(cards) <= 2:
+		for i in range(len(cards)):
+			yPositions.append(0)
+	elif len(cards) % 2 == 0:
+		for i in range(len(cards) / 2):
+			yPositions.append( (((len(cards) / 2) - 1) - i) * yAdjust)
+		for i in range(len(cards) / 2):
+			yPositions.append(yPositions[((len(cards) / 2) - 1) - i])
+	else:
+		for i in range(int(len(cards) / 2)):
+			yPositions.append( ( int(len(cards) / 2) - i) * yAdjust)
+		yPositions.append(0)
+		for i in range(int(len(cards) / 2)):
+			yPositions.append(yPositions[ int(len(cards) / 2)  - i - 1])
+		
 	var tweenTime = .5
 	
 	for i in range(len(cards)):
 		var tween = create_tween()
 		tween.tween_property(cards[i], 'rotation', deg_to_rad(rotations[i]), tweenTime)
-		tween.parallel().tween_property(cards[i], 'position', Vector2(positions[i], 0), tweenTime)
+		tween.parallel().tween_property(cards[i], 'position', Vector2(positions[i], yPositions[i] + yOffset), tweenTime)
 		
 	#tween.tween_property(card, 'rotation', deg_to_rad(-15), tweenTime)
 	#tween.parallel().tween_property(card, 'position', Vector2(0, 0), tweenTime)
