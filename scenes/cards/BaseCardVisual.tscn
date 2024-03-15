@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmf342xnhal20"]
+[gd_scene load_steps=6 format=3 uid="uid://csjrm6ju3nkvu"]
 
 [ext_resource type="Script" path="res://scenes/cards/BaseCardVisual.gd" id="1_ckq6k"]
 
@@ -9,6 +9,9 @@
 [sub_resource type="LabelSettings" id="LabelSettings_kqrs0"]
 font_size = 48
 shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_io3b5"]
+size = Vector2(274, 390)
 
 [node name="BaseCardVisual" type="Node2D" node_paths=PackedStringArray("cardTitle")]
 position = Vector2(0, 1)
@@ -29,6 +32,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -45,6 +49,7 @@ offset_right = 125.0
 offset_bottom = 175.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = SubResource("Theme_10tek")
 color = Color(0.635294, 0.635294, 0.635294, 1)
 metadata/_edit_use_anchors_ = true
@@ -61,3 +66,11 @@ text = "????"
 label_settings = SubResource("LabelSettings_kqrs0")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_io3b5")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
