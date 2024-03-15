@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://h0ym2os0neor"]
+
+[sub_resource type="TileSet" id="TileSet_up7qm"]
+
+[node name="TestMap" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1164.0
+offset_bottom = 663.0
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_up7qm")
+format = 2

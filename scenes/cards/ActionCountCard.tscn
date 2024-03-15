@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://boyt0dbecrfic"]
+
+[ext_resource type="Script" path="res://scenes/cards/ActionCountCard.gd" id="1_mfqe4"]
+[ext_resource type="PackedScene" uid="uid://bmf342xnhal20" path="res://scenes/cards/BaseCard.tscn" id="2_23ewo"]
+
+[node name="ActionCountCard" type="Node2D" node_paths=PackedStringArray("baseCard")]
+script = ExtResource("1_mfqe4")
+baseCard = NodePath("BaseCard")
+
+[node name="BaseCard" parent="." instance=ExtResource("2_23ewo")]
