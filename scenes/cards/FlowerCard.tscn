@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2l476fv8kh6i"]
 
 [ext_resource type="Script" path="res://scenes/cards/FlowerCard.gd" id="1_h1v4u"]
-[ext_resource type="PackedScene" uid="uid://bmf342xnhal20" path="res://scenes/cards/BaseCardVisual.tscn" id="2_wyrwo"]
+[ext_resource type="PackedScene" uid="uid://csjrm6ju3nkvu" path="res://scenes/cards/BaseCardVisual.tscn" id="2_wyrwo"]
 
 [node name="FlowerCard" type="Node2D" node_paths=PackedStringArray("baseCardVisual")]
 script = ExtResource("1_h1v4u")

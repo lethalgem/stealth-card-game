@@ -3,14 +3,15 @@ class_name ActionCountCard
 extends Card
 
 @export var baseCardVisual: BaseCardVisual
-const CardType = 'ActionCountCard'
+const CardType = "ActionCountCard"
+
 
 func _ready():
 	cardType = CardType
 
-
 	#createCard(3)
-	
+
+
 func _process(delta):
 	pass
 
