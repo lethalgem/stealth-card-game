@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://mo537muasnoi"]
+
+[ext_resource type="Script" path="res://scenes/cards/ActionCard.gd" id="1_r6xvg"]
+[ext_resource type="PackedScene" uid="uid://bmf342xnhal20" path="res://scenes/cards/BaseCardVisual.tscn" id="2_osw6v"]
+
+[node name="ActionCard" type="Node2D" node_paths=PackedStringArray("baseCardVisual")]
+script = ExtResource("1_r6xvg")
+baseCardVisual = NodePath("BaseCardVisual")
+
+[node name="BaseCardVisual" parent="." instance=ExtResource("2_osw6v")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 48.0
+offset_top = 128.0
+offset_right = 230.0
+offset_bottom = 217.0
+text = "Action"
+horizontal_alignment = 1
+vertical_alignment = 1

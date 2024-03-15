@@ -1,10 +1,27 @@
 [gd_scene load_steps=3 format=3 uid="uid://boyt0dbecrfic"]
 
 [ext_resource type="Script" path="res://scenes/cards/ActionCountCard.gd" id="1_mfqe4"]
-[ext_resource type="PackedScene" uid="uid://bmf342xnhal20" path="res://scenes/cards/BaseCard.tscn" id="2_23ewo"]
+[ext_resource type="PackedScene" uid="uid://bmf342xnhal20" path="res://scenes/cards/BaseCardVisual.tscn" id="2_7qu7m"]
 
-[node name="ActionCountCard" type="Node2D" node_paths=PackedStringArray("baseCard")]
+[node name="ActionCountCard" type="Node2D" node_paths=PackedStringArray("baseCardVisual")]
 script = ExtResource("1_mfqe4")
-baseCard = NodePath("BaseCard")
+baseCardVisual = NodePath("BaseCardVisual")
 
-[node name="BaseCard" parent="." instance=ExtResource("2_23ewo")]
+[node name="BaseCardVisual" parent="." instance=ExtResource("2_7qu7m")]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 58.0
+offset_top = 144.0
+offset_right = 207.0
+offset_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "Action Count"
+horizontal_alignment = 1
+vertical_alignment = 1

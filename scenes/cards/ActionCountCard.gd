@@ -1,12 +1,16 @@
-extends Node2D
+class_name ActionCountCard
 
-@export var baseCard: BaseCard
+extends Card
 
+@export var baseCardVisual: BaseCardVisual
 
 func _ready():
 	createCard(3)
+	
+func _process(delta):
+	pass
 
 
 func createCard(count: int):
 	var title = "Action: {}".format([count], "{}")
-	baseCard.applyTitle(title)
+	baseCardVisual.applyTitle(title)

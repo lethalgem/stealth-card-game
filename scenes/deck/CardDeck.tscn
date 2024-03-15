@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://dageblc58jcj8"]
+
+[ext_resource type="Script" path="res://scenes/deck/CardDeck.gd" id="1_uw3he"]
+
+[sub_resource type="Theme" id="Theme_3vh8h"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7td4"]
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g607w"]
+size = Vector2(278.5, 390)
+
+[node name="CardDeck" type="Node2D"]
+script = ExtResource("1_uw3he")
+
+[node name="Border" type="ColorRect" parent="."]
+offset_right = 110.0
+offset_bottom = 110.0
+scale = Vector2(2.5, 3.5)
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Card" type="ColorRect" parent="Border"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_3vh8h")
+color = Color(0.560784, 0.596078, 0.968627, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CardTitle" type="Label" parent="Border/Card"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.361429
+anchor_right = 1.0
+anchor_bottom = 0.361429
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Your Deck"
+label_settings = SubResource("LabelSettings_r7td4")
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(136.75, 193)
+shape = SubResource("RectangleShape2D_g607w")

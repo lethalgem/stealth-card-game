@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcmbwr8yc52fw"]
+
+[ext_resource type="Script" path="res://scenes/characters/Guard.gd" id="1_rm0nl"]
+
+[node name="Guard" type="Node2D"]
+script = ExtResource("1_rm0nl")

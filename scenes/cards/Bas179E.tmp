@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bmf342xnhal20"]
 
-[ext_resource type="Script" path="res://scenes/cards/BaseCard.gd" id="1_oj807"]
+[ext_resource type="Script" path="res://scenes/cards/BaseCardVisual.gd" id="1_ckq6k"]
 
 [sub_resource type="Theme" id="Theme_10tek"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kqrs0"]
 shadow_color = Color(0, 0, 0, 1)
 
-[node name="BaseCard" type="Node2D" node_paths=PackedStringArray("cardTitle")]
-script = ExtResource("1_oj807")
+[node name="BaseCardVisual" type="Node2D" node_paths=PackedStringArray("cardTitle")]
+script = ExtResource("1_ckq6k")
 cardTitle = NodePath("Border/Card/CardTitle")
 
 [node name="Border" type="ColorRect" parent="."]
