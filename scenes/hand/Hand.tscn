@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://qxdqo1uvgquh"]
+[gd_scene load_steps=3 format=3 uid="uid://qxdqo1uvgquh"]
 
 [ext_resource type="Script" path="res://scenes/hand/Hand.gd" id="1_mop5v"]
 
-[node name="Hand" type="Node2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfaih"]
+radius = 114.0
+height = 626.0
+
+[node name="Hand" type="Node2D" node_paths=PackedStringArray("leftMarker", "rightMarker")]
 script = ExtResource("1_mop5v")
+leftMarker = NodePath("Left Marker")
+rightMarker = NodePath("Right Marker")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jfaih")
+
+[node name="Left Marker" type="Marker2D" parent="."]
+position = Vector2(-250, 0)
+
+[node name="Right Marker" type="Marker2D" parent="."]
+position = Vector2(250, 0)

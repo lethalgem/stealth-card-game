@@ -9,11 +9,11 @@ func _ready():
 	
 	#cardDeck = CardDeck.new()	
 	#hand = Hand.new()
+	cardDeck.createDeck(20)
 	
-	for i in range(5):
-		await get_tree().create_timer(1.0).timeout
-		var card = cardDeck.draw() 
-		hand.addCard(card)
+	for i in range(7):
+		await get_tree().create_timer(.75).timeout
+		draw()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

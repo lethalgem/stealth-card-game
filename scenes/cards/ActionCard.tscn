@@ -10,10 +10,10 @@ baseCardVisual = NodePath("BaseCardVisual")
 [node name="BaseCardVisual" parent="." instance=ExtResource("2_osw6v")]
 
 [node name="Label" type="Label" parent="."]
-offset_left = 48.0
-offset_top = 128.0
-offset_right = 230.0
-offset_bottom = 217.0
+offset_left = -88.0
+offset_top = -42.0
+offset_right = 94.0
+offset_bottom = 47.0
 text = "Action"
 horizontal_alignment = 1
 vertical_alignment = 1
