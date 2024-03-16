@@ -13,9 +13,18 @@ func _process(delta):
 	pass
 	
 #func walkLeft(tweenTime):
-func moveTo(tilePosition):
+func moveTo(incomingPosition):
 	#flip_h = true
-	$AnimationPlayer.play('walk_right')
-	var tween = create_tween()
-	tween.tween_property(self, 'position', Vector2(position.x + 500 , position.y), 2)
+	$AnimationPlayer.play('teleport')
+	
+	await get_tree().create_timer(.1).timeout
+	position = incomingPosition
+	
+	$AnimationPlayer.play('teleport_end')
+	
+	#await get_tree().create_timer(.5).timeout
+	#
+	#var tween = create_tween()
+	#tween.tween_property(self, 'position', Vector2(position.x + 500 , position.y), 2)
 	#pass
+ 

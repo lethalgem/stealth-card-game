@@ -48,7 +48,9 @@ func aboutToMoveCharacter():
 	return false
 	
 func characterFinishedMoving():
-	pass
+	if global.currentState == global.States.characterMoving:
+		updatePrevious()
+		global.currentState = global.States.waitingForUserCard
 
 
 # Called when the node enters the scene tree for the first time.

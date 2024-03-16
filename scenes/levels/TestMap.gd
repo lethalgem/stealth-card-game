@@ -88,13 +88,22 @@ func prep_for_movement(player_global_position: Vector2):
 	game.highlightFinished()
 
 
+var highlightedTiles:Array = []
 func highlight_tiles(tile_coords: PackedVector2Array):
 	for coord in tile_coords:
 		var unpacked_scene = highlightingTile.instantiate()
 		var position_to_highlight = tileMap.map_to_local(coord)
 		add_child(unpacked_scene)
+		
+		highlightedTiles.append(unpacked_scene)
+				
 		unpacked_scene.position = position_to_highlight
-
+		
+func removeHighlightedTiles():
+	for highlightedTile in highlightedTiles:
+		remove_child(highlightedTile)
+	highlightedTiles = []
+	
 
 #func get_surrounding_tiles_in_range(current_coords: Vector2, distance: int) -> PackedVector2Array:
 #var tiles = []
@@ -119,7 +128,16 @@ func _input(event):
 		#if confirmed_movement_tile_coords.has(tilePosition):		
 			if confirmedTile.x == tilePosition.x and confirmedTile.y == tilePosition.y:		
 				if game.aboutToMoveCharacter():
-					player.moveTo(tilePosition)
+					
+					
+					var playerTilePosition = tileMap.local_to_map(player.position)
+					#var newPosition = Vector2((playerTilePosition.x - tilePosition.x)*16, (playerTilePosition.y - tilePosition.y)*16)
+					var newPosition = Vector2(tilePosition.x*16 + 8, tilePosition.y*16 + 8)
+					
+					player.moveTo(newPosition)
+					await get_tree().create_timer(.25).timeout
+					
+					removeHighlightedTiles()					
 					game.characterFinishedMoving()
 
 
