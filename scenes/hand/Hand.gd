@@ -6,17 +6,23 @@ var cardCount = 0
 var cards = []
 var grabbed_card: Card
 var deckLocation
+var played_cards = []
+var game:Game :
+	set(value):
+		game = value
 
 @export var leftMarker: Marker2D
 @export var rightMarker: Marker2D
-
+@export var playPile: Area2D
 @export var debugMode: bool = false
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if debugMode:
-		global_position = get_viewport_rect().size / 2
+		var viewport = get_viewport_rect().size
+		global_position = Vector2(viewport.x / 2, viewport.y / 1.2)
 		var testCard = preload("res://scenes/cards/ActionCountCard.tscn")
 		for i in 3:
 			var newCard = testCard.instantiate()
@@ -28,7 +34,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
+	
 
 func _on_card_deck_deck_location(location):
 	deckLocation = location
@@ -104,7 +110,7 @@ func position_cards():
 		for i in range(int(len(cards) / 2)):
 			yPositions.append(yPositions[int(len(cards) / 2) - i - 1])
 
-	var tweenTime = .5
+	var tweenTime = .25
 
 	for i in range(len(cards)):
 		var tween = create_tween()
@@ -125,10 +131,25 @@ func card_grabbed(card: Card):
 
 
 func card_dropped(card: Card):
-	cards.append(grabbed_card)
+	var overlapping_bodies = grabbed_card.get_node("BaseCardVisual").overlapping_bodies
+	if overlapping_bodies.has(playPile):
+		grabbed_card.get_node("BaseCardVisual").is_interactable = false
+		played_cards.append(grabbed_card)
+		distribute_play_pile()
+		
+		game.droppedCard()
+		
+	else:
+		cards.append(grabbed_card)
+		position_cards()
 	grabbed_card = null
-	position_cards()
-	pass
+
+
+func distribute_play_pile():
+	var cardIndex = 0
+	for card in played_cards:
+		card.z_index = cardIndex
+		cardIndex += 1
 
 
 func play():

@@ -18,4 +18,4 @@ func moveTo(tilePosition):
 	$AnimationPlayer.play('walk_right')
 	var tween = create_tween()
 	tween.tween_property(self, 'position', Vector2(position.x + 500 , position.y), 2)
-	
+	#pass

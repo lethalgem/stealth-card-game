@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1pkkv6kbblnt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tkyao"]
+font_color = Color(0.592157, 0.180392, 0.239216, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Debugscene" type="Node2D"]
+
+[node name="DebugLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 106.0
+offset_bottom = 34.0
+text = "nothing yet"
+label_settings = SubResource("LabelSettings_tkyao")

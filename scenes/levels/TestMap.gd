@@ -1,10 +1,17 @@
 class_name GameLevel
 extends Node2D
 
+
+@onready var global : GlobalClass = get_node("/root/Global")
 @export var tileMap: TileMap
 @export var badShort1 : BadShorty
 
+var game: Game : 
+	set(value): 
+		game = value
+
 var highlightingTile = preload("res://scenes/levels/highlighted_tile.tscn")
+var confirmed_movement_tile_coords = []
 
 
 var player;
@@ -69,8 +76,7 @@ func prep_for_movement(player_global_position: Vector2):
 	get_surrounding_tiles_in_range(tile_coords, 6)
 	var potential_movement_tiles = gatherAll()
 
-	var confirmed_movement_tile_coords = []
-
+	confirmed_movement_tile_coords = []
 	for potential_tile_coords in potential_movement_tiles:
 		print(potential_tile_coords)
 		if tileMap.get_cell_tile_data(0, potential_tile_coords).get_custom_data("canMove"):
@@ -78,6 +84,8 @@ func prep_for_movement(player_global_position: Vector2):
 			confirmed_movement_tile_coords.append(potential_tile_coords)
 
 	highlight_tiles(confirmed_movement_tile_coords)
+	
+	game.highlightFinished()
 
 
 func highlight_tiles(tile_coords: PackedVector2Array):
@@ -103,11 +111,16 @@ var _totalCount = 0
 
 
 func _input(event):
-	if event is InputEventMouseButton and event.is_pressed():
+	if event is InputEventMouseButton and event.is_pressed() and global.currentState == global.States.waitingForTileClick:
 		var mousePosition = event.position
 		var tilePosition = tileMap.local_to_map(mousePosition)
 		
-		player.moveTo(tilePosition)
+		for confirmedTile in confirmed_movement_tile_coords:
+		#if confirmed_movement_tile_coords.has(tilePosition):		
+			if confirmedTile.x == tilePosition.x and confirmedTile.y == tilePosition.y:		
+				if game.aboutToMoveCharacter():
+					player.moveTo(tilePosition)
+					game.characterFinishedMoving()
 
 
 func get_surrounding_tiles_in_range(current_coords: Vector2, maxDistance: int):

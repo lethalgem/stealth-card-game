@@ -67,10 +67,12 @@ label_settings = SubResource("LabelSettings_kqrs0")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="BaseCardArea" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaseCardArea"]
 shape = SubResource("RectangleShape2D_io3b5")
 
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="area_entered" from="BaseCardArea" to="." method="_on_base_card_area_area_entered"]
+[connection signal="area_exited" from="BaseCardArea" to="." method="_on_base_card_area_area_exited"]
+[connection signal="mouse_entered" from="BaseCardArea" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="BaseCardArea" to="." method="_on_area_2d_mouse_exited"]
