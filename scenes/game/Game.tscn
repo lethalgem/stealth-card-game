@@ -42,6 +42,7 @@ offset_left = 97.0
 offset_top = 80.0
 offset_right = 111.0
 offset_bottom = 94.0
+mouse_filter = 2
 color = Color(1, 0.356863, 0.592157, 1)
 metadata/_edit_use_anchors_ = true
 

@@ -24,6 +24,7 @@ func applyTitle(title: String):
 
 
 func _on_area_2d_mouse_entered():
+	print("test")
 	is_hovered = true
 
 
