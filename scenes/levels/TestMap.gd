@@ -12,7 +12,7 @@ func prep_for_movement(player_global_position: Vector2):
 	print(tile_coords)
 	#var potential_movement_tiles = get_surrounding_tiles_in_range(tile_coords, 3)
 	#var potential_movement_tiles = get_surrounding_tiles_in_range_New(tile_coords, 1, 3)
-	get_surrounding_tiles_in_range(tile_coords, 4)
+	get_surrounding_tiles_in_range(tile_coords, 3)
 	var potential_movement_tiles = gatherAll()
 	
 	var confirmed_movement_tile_coords = []
@@ -45,6 +45,7 @@ func highlight_tiles(tile_coords: PackedVector2Array):
 	
 
 var _possibleSpaces = {}
+var _totalCount = 0;
 func get_surrounding_tiles_in_range(current_coords: Vector2, maxDistance: int):
 	#for key in _possibleSpaces:
 		#for innerKey in _possibleSpaces[key]:
@@ -64,14 +65,21 @@ func get_surrounding_tiles_in_range_recurse(current_coords: Vector2, distance: i
 	if distance > maxDistance:
 		return
 		
+	_totalCount += 1
+	print('XYZ')
+	print(_totalCount)
+		
 	if distance != 0:
-		if not (_possibleSpaces.has(current_coords.x) and _possibleSpaces[current_coords.x].has(current_coords.y)):
+		if not _possibleSpaces.has(current_coords.x) or not _possibleSpaces[current_coords.x].has(current_coords.y):
 			if not _possibleSpaces.has(current_coords.x):
 				_possibleSpaces[current_coords.x] = {}
 			
 			_possibleSpaces[current_coords.x][current_coords.y] = true
-	
-	
+		
+		#TODO HERE for efficieny bug
+		#else:
+			#return
+		
 	
 	var tiles = []
 	for x in range(-1, 2):
@@ -85,17 +93,18 @@ func get_surrounding_tiles_in_range_recurse(current_coords: Vector2, distance: i
 			
 			if x!= 0 or y != 0:
 				var newPosition = current_coords + Vector2(x, y)
-				if tileMap.get_cell_tile_data(0, newPosition).get_custom_data("canMove"):
-					#if _possibleSpaces.has(newPosition.x) and _possibleSpaces[newPosition.x].has(newPosition.y):
-						#continue
-					#
-					#elif not _possibleSpaces.has(newPosition.x):
-						#_possibleSpaces[newPosition.x] = {}
-					#
-					#_possibleSpaces[newPosition.x][newPosition.y] = true
-					#tiles.append(newPosition)
-					
-					tiles.append(newPosition)
+				if newPosition.x >= 0 and newPosition.y >= 0:
+					if tileMap.get_cell_tile_data(0, newPosition).get_custom_data("canMove"):
+						#if _possibleSpaces.has(newPosition.x) and _possibleSpaces[newPosition.x].has(newPosition.y):
+							#continue
+						#
+						#elif not _possibleSpaces.has(newPosition.x):
+							#_possibleSpaces[newPosition.x] = {}
+						#
+						#_possibleSpaces[newPosition.x][newPosition.y] = true
+						#tiles.append(newPosition)
+						
+						tiles.append(newPosition)
 					
 	
 	for tile in tiles:
