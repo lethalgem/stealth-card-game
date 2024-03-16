@@ -2,9 +2,59 @@ class_name GameLevel
 extends Node2D
 
 @export var tileMap: TileMap
+@export var badShort1 : BadShorty
 
 var highlightingTile = preload("res://scenes/levels/highlighted_tile.tscn")
 
+
+func _ready():
+	badShort1.setTileMap(tileMap)
+	#badShort1.setPath([
+		#Vector2(-1,0),
+		#Vector2(-2,0),
+		#Vector2(-3,0),
+		#Vector2(-2,0),
+		#Vector2(-1,0),
+		#Vector2(0,0),
+		#Vector2(1,0),
+		#Vector2(2,0),
+		#Vector2(3,0),
+		#Vector2(2,0),
+		#Vector2(1,0),
+		#Vector2(0,0)
+	#])
+	
+	#badShort1.setPath([
+		#Vector2(0,-1),
+		#Vector2(0,-2),
+		#Vector2(0,-3),
+		#Vector2(0,-2),
+		#Vector2(0,-1),
+		#Vector2(0,0),
+		#Vector2(0,1),
+		#Vector2(0,2),
+		#Vector2(0,3),
+		#Vector2(0,2),
+		#Vector2(0,1),
+		#Vector2(0,0)
+	#])
+	
+	badShort1.setPath([
+		
+		Vector2(-1,0),
+		Vector2(-2,0),
+		Vector2(-3,0),
+		Vector2(-3,-1),
+		Vector2(-3,-2),
+		Vector2(-3,-3),
+		Vector2(-2,-3),
+		Vector2(-1,-3),
+		Vector2(0,-3),
+		Vector2(0,-2),
+		Vector2(0,-1),
+		Vector2(0,0)
+	])
+	
 
 func prep_for_movement(player_global_position: Vector2):
 	print("prepping for movement")

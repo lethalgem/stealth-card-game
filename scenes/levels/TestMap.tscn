@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://h0ym2os0neor"]
+[gd_scene load_steps=25 format=3 uid="uid://h0ym2os0neor"]
 
 [ext_resource type="Texture2D" uid="uid://bdyr54if66ayg" path="res://tiles/tilesheet_complete.png" id="1_666xx"]
 [ext_resource type="Script" path="res://scenes/levels/TestMap.gd" id="1_qhp3t"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b250b7avvgxiq" path="res://tiles/TX Tileset Stone Ground.png" id="9_ubcwi"]
 [ext_resource type="Texture2D" uid="uid://bi30j4bl6q3jy" path="res://tiles/TX Tileset Wall.png" id="10_xpk8y"]
 [ext_resource type="PackedScene" uid="uid://bf07awwu7l704" path="res://scenes/levels/highlighted_tile.tscn" id="12_oip3w"]
+[ext_resource type="PackedScene" uid="uid://c1alxqu6qky1d" path="res://scenes/characters/BadShorty.tscn" id="13_3datl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4d0gn"]
 texture = ExtResource("1_666xx")
@@ -6858,9 +6859,10 @@ sources/7 = SubResource("TileSetAtlasSource_jswvy")
 sources/8 = SubResource("TileSetAtlasSource_h6lro")
 sources/9 = SubResource("TileSetAtlasSource_njnru")
 
-[node name="TestMap" type="Node2D" node_paths=PackedStringArray("tileMap")]
+[node name="TestMap" type="Node2D" node_paths=PackedStringArray("tileMap", "badShort1")]
 script = ExtResource("1_qhp3t")
 tileMap = NodePath("TileMap")
+badShort1 = NodePath("BadShorty1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1164.0
@@ -6875,3 +6877,6 @@ layer_0/tile_data = PackedInt32Array(196614, 131073, 8, 262150, 131073, 9, 32768
 [node name="TestHighlightedTile" parent="." instance=ExtResource("12_oip3w")]
 visible = false
 position = Vector2(88, 87)
+
+[node name="BadShorty1" parent="." instance=ExtResource("13_3datl")]
+position = Vector2(1080, 285)

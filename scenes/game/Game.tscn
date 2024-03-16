@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=8 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
 [ext_resource type="PackedScene" uid="uid://h0ym2os0neor" path="res://scenes/levels/TestMap.tscn" id="2_a2eje"]
 [ext_resource type="PackedScene" uid="uid://dageblc58jcj8" path="res://scenes/deck/CardDeck.tscn" id="3_2lrq6"]
 [ext_resource type="Script" path="res://scenes/characters/TestPlayer.gd" id="5_stm1j"]
+[ext_resource type="PackedScene" uid="uid://cnhaomjsg2qy7" path="res://scenes/characters/Player.tscn" id="6_akoob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_odam1"]
 size = Vector2(14, 14)
@@ -45,5 +46,8 @@ offset_bottom = 94.0
 mouse_filter = 2
 color = Color(1, 0.356863, 0.592157, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." instance=ExtResource("6_akoob")]
+position = Vector2(104, 53)
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]
