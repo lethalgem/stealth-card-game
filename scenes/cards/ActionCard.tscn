@@ -7,8 +7,7 @@
 script = ExtResource("1_r6xvg")
 baseCardVisual = NodePath("BaseCardVisual")
 
-[node name="BaseCardVisual" parent="." node_paths=PackedStringArray("parent_card") instance=ExtResource("2_osw6v")]
-parent_card = NodePath("..")
+[node name="BaseCardVisual" parent="." instance=ExtResource("2_osw6v")]
 
 [node name="Label" type="Label" parent="."]
 offset_left = -88.0

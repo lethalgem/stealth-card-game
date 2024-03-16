@@ -15,7 +15,7 @@ script = ExtResource("1_g3ms6")
 cardDeck = NodePath("CardDeck")
 hand = NodePath("Hand")
 map = NodePath("TestMap")
-player = NodePath("TestPlayer")
+player = NodePath("Player")
 
 [node name="TestMap" parent="." instance=ExtResource("2_a2eje")]
 

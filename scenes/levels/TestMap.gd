@@ -7,6 +7,10 @@ extends Node2D
 var highlightingTile = preload("res://scenes/levels/highlighted_tile.tscn")
 
 
+var player;
+func setPlayer(playerFromParent:Player):
+	player = playerFromParent
+
 func _ready():
 	badShort1.setTileMap(tileMap)
 	#badShort1.setPath([
@@ -95,6 +99,15 @@ func highlight_tiles(tile_coords: PackedVector2Array):
 
 var _possibleSpaces = {}
 var _totalCount = 0
+
+
+
+func _input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+		var mousePosition = event.position
+		var tilePosition = tileMap.local_to_map(mousePosition)
+		
+		player.moveTo(tilePosition)
 
 
 func get_surrounding_tiles_in_range(current_coords: Vector2, maxDistance: int):

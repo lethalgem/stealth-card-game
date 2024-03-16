@@ -3,13 +3,32 @@ extends Node2D
 @export var cardDeck: CardDeck
 @export var hand: Hand
 @export var map: GameLevel
-@export var player: TestPlayer
+@export var player: Player
 var action_count: int = 0
+
+
+
+
+enum States {
+	waitingForUserCard,
+	multipleActionState,
+	characterMoving, 
+	showPossibleSpaces,
+	badGuysMove
+}
+
+var previousState: States
+var currentState: States
+
+
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	cardDeck.createDeck(20)
+	map.setPlayer(player)
+	
 
 	for i in range(7):
 		await get_tree().create_timer(.75).timeout

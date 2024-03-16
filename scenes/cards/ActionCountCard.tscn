@@ -7,8 +7,7 @@
 script = ExtResource("1_mfqe4")
 baseCardVisual = NodePath("BaseCardVisual")
 
-[node name="BaseCardVisual" parent="." node_paths=PackedStringArray("parent_card") instance=ExtResource("2_7qu7m")]
-parent_card = NodePath("..")
+[node name="BaseCardVisual" parent="." instance=ExtResource("2_7qu7m")]
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
