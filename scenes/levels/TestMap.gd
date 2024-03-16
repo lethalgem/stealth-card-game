@@ -165,7 +165,7 @@ func get_surrounding_tiles_in_range_recurse(
 	#var z = 0
 	#if current_coords.x == 3 and current_coords.y == 7:
 	#z = 1
-	
+
 	distance = abs(player_coords.x - current_coords.x) + abs(player_coords.y - current_coords.y)
 
 	if distance > maxDistance:
@@ -174,8 +174,8 @@ func get_surrounding_tiles_in_range_recurse(
 	_totalCount += 1
 	print("XYZ")
 	print(_totalCount)
-	
-	
+
+
 	var z = 4
 	if current_coords.x == 7 and current_coords.y == 3:
 		z = 3

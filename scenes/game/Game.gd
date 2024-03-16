@@ -18,7 +18,7 @@ func droppedCard(card:Card):
 	if global.currentState == global.States.waitingForUserCard:
 		updatePrevious()
 		global.currentState = global.States.highlightingTiles
-		
+
 		if card.cardType == ActionCard.CardType:
 			map.prep_for_movement(player.global_position, card.movementAmount)
 		elif card.cardType == ActionCountCard.CardType:

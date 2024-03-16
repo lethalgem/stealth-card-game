@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://qxdqo1uvgquh"]
+[gd_scene load_steps=7 format=3 uid="uid://qxdqo1uvgquh"]
 
 [ext_resource type="Script" path="res://scenes/hand/Hand.gd" id="1_mop5v"]
+[ext_resource type="AudioStream" uid="uid://c0v63c8lst22w" path="res://assets/sound/card_dealt_1.mp3" id="2_0ye3v"]
+[ext_resource type="AudioStream" uid="uid://d3tentw7b86f2" path="res://assets/sound/card_sliding.mp3" id="2_6ph8t"]
+[ext_resource type="AudioStream" uid="uid://ct3plb6g2jh11" path="res://assets/sound/card_played.mp3" id="2_53ln6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfaih"]
 radius = 114.0
@@ -21,6 +24,11 @@ playPile = NodePath("PlayPile")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_jfaih")
 
+[node name="CardSlidingAudioPlayer" type="AudioStreamPlayer2D" parent="HandArea"]
+unique_name_in_owner = true
+stream = ExtResource("2_6ph8t")
+volume_db = 10.0
+
 [node name="Left Marker" type="Marker2D" parent="."]
 position = Vector2(-250, 0)
 
@@ -32,3 +40,15 @@ position = Vector2(250, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayPile"]
 position = Vector2(-105, -389)
 shape = SubResource("CircleShape2D_f8prm")
+
+[node name="CardPlayAudioPlayer" type="AudioStreamPlayer2D" parent="PlayPile"]
+unique_name_in_owner = true
+position = Vector2(-105, -387)
+stream = ExtResource("2_53ln6")
+volume_db = 10.0
+
+[node name="CardDrawAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(447, -1)
+stream = ExtResource("2_0ye3v")
+volume_db = 10.0

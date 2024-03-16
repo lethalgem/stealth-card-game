@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=10 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
-[ext_resource type="PackedScene" uid="uid://h0ym2os0neor" path="res://scenes/levels/TestMap.tscn" id="2_a2eje"]
 [ext_resource type="PackedScene" uid="uid://1h27degcya6u" path="res://scenes/levels/CardTestMap.tscn" id="2_ub8qe"]
 [ext_resource type="PackedScene" uid="uid://dageblc58jcj8" path="res://scenes/deck/CardDeck.tscn" id="3_2lrq6"]
 [ext_resource type="PackedScene" uid="uid://cnhaomjsg2qy7" path="res://scenes/characters/Player.tscn" id="6_akoob"]
@@ -25,9 +24,6 @@ map = NodePath("CardTestMap")
 player = NodePath("Player")
 
 [node name="CardTestMap" parent="." instance=ExtResource("2_ub8qe")]
-
-[node name="TestMap" parent="." instance=ExtResource("2_a2eje")]
-visible = false
 
 [node name="CardDeck" parent="." instance=ExtResource("3_2lrq6")]
 position = Vector2(1063, 536)
