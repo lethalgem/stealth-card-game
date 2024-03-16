@@ -68,7 +68,6 @@ texture_filter = 1
 texture = ExtResource("1_8w33q")
 hframes = 6
 vframes = 5
-frame = 6
 script = ExtResource("2_welte")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

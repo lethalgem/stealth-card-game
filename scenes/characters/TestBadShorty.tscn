@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://rvm4ht5pdqam"]
+
+[ext_resource type="PackedScene" uid="uid://c1alxqu6qky1d" path="res://scenes/characters/BadShorty.tscn" id="1_5umgb"]
+
+[node name="TestBadShorty" type="Node2D"]
+position = Vector2(828, 286)
+
+[node name="BadShorty" parent="." instance=ExtResource("1_5umgb")]
