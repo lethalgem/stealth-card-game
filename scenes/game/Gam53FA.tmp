@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://bfowoc2lljor1"]
+
+[ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
+[ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
+[ext_resource type="PackedScene" uid="uid://h0ym2os0neor" path="res://scenes/levels/TestMap.tscn" id="2_a2eje"]
+[ext_resource type="PackedScene" uid="uid://1h27degcya6u" path="res://scenes/levels/CardTestMap.tscn" id="2_ub8qe"]
+[ext_resource type="PackedScene" uid="uid://dageblc58jcj8" path="res://scenes/deck/CardDeck.tscn" id="3_2lrq6"]
+[ext_resource type="PackedScene" uid="uid://cnhaomjsg2qy7" path="res://scenes/characters/Player.tscn" id="6_akoob"]
+[ext_resource type="PackedScene" uid="uid://c1pkkv6kbblnt" path="res://scenes/debug/debugscene.tscn" id="6_gh13b"]
+[ext_resource type="Script" path="res://scenes/debug/debugscene.gd" id="7_02dw6"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("cardDeck", "hand", "map", "player")]
+script = ExtResource("1_g3ms6")
+cardDeck = NodePath("CardDeck")
+hand = NodePath("Hand")
+map = NodePath("CardTestMap")
+player = NodePath("Player")
+
+[node name="CardTestMap" parent="." instance=ExtResource("2_ub8qe")]
+
+[node name="TestMap" parent="." instance=ExtResource("2_a2eje")]
+visible = false
+
+[node name="CardDeck" parent="." instance=ExtResource("3_2lrq6")]
+position = Vector2(1063, 536)
+rotation = 0.0872665
+scale = Vector2(0.5, 0.5)
+
+[node name="Hand" parent="." instance=ExtResource("2_57qf6")]
+position = Vector2(574, 540)
+
+[node name="Player" parent="." instance=ExtResource("6_akoob")]
+position = Vector2(104, 53)
+
+[node name="Debugscene" parent="." instance=ExtResource("6_gh13b")]
+position = Vector2(20, 199)
+script = ExtResource("7_02dw6")
+
+[connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]

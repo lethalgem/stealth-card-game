@@ -14,12 +14,13 @@ func updatePrevious():
 	global.previousState = global.currentState
 
 
-func droppedCard():
+func droppedCard(card:Card):
 	if global.currentState == global.States.waitingForUserCard:
 		updatePrevious()
 		global.currentState = global.States.highlightingTiles
-
-		map.prep_for_movement(player.global_position)
+		
+		if card.cardType == ActionCard.CardType:
+			map.prep_for_movement(player.global_position, card.movementAmount)
 
 
 func highlightFinished():

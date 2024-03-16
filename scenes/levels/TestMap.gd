@@ -69,13 +69,14 @@ func _ready():
 	)
 
 
-func prep_for_movement(player_global_position: Vector2):
+func prep_for_movement(player_global_position: Vector2, movement:int):
 	print("prepping for movement")
 	var tile_coords = tileMap.local_to_map(player_global_position)
 	print(tile_coords)
 	#var potential_movement_tiles = get_surrounding_tiles_in_range(tile_coords, 3)
 	#var potential_movement_tiles = get_surrounding_tiles_in_range_New(tile_coords, 1, 3)
-	get_surrounding_tiles_in_range(tile_coords, 6)
+	#get_surrounding_tiles_in_range(tile_coords, 6)
+	get_surrounding_tiles_in_range(tile_coords, movement)
 	var potential_movement_tiles = gatherAll()
 
 	confirmed_movement_tile_coords = []
@@ -152,16 +153,20 @@ func get_surrounding_tiles_in_range(current_coords: Vector2, maxDistance: int):
 	#_possibleSpaces[key].erase(innerKey)
 	#_possibleSpaces.erase(key)
 	_possibleSpaces = {}
+	_possibleSpaces[current_coords.x] = {}
+	_possibleSpaces[current_coords.x][current_coords.y] = true
 
-	get_surrounding_tiles_in_range_recurse(current_coords, 0, maxDistance)
+	get_surrounding_tiles_in_range_recurse(current_coords, current_coords, 0, maxDistance)
 
 
 func get_surrounding_tiles_in_range_recurse(
-	current_coords: Vector2, distance: int, maxDistance: int
+	player_coords: Vector2, current_coords: Vector2, distance: int, maxDistance: int
 ):
 	#var z = 0
 	#if current_coords.x == 3 and current_coords.y == 7:
 	#z = 1
+	
+	distance = abs(player_coords.x - current_coords.x) + abs(player_coords.y - current_coords.y)
 
 	if distance > maxDistance:
 		return
@@ -169,6 +174,11 @@ func get_surrounding_tiles_in_range_recurse(
 	_totalCount += 1
 	print("XYZ")
 	print(_totalCount)
+	
+	
+	var z = 4
+	if current_coords.x == 7 and current_coords.y == 3:
+		z = 3
 
 	if distance != 0:
 		if (
@@ -181,8 +191,11 @@ func get_surrounding_tiles_in_range_recurse(
 			_possibleSpaces[current_coords.x][current_coords.y] = true
 
 		#TODO HERE for efficieny bug
-		#else:
-		#return
+		else:
+			z = 4
+			if current_coords.x == 8 and current_coords.y == 3:
+				z = 3
+			return
 
 	var tiles = []
 	for x in range(-1, 2):
@@ -209,7 +222,7 @@ func get_surrounding_tiles_in_range_recurse(
 						tiles.append(newPosition)
 
 	for tile in tiles:
-		get_surrounding_tiles_in_range_recurse(tile, distance + 1, maxDistance)
+		get_surrounding_tiles_in_range_recurse(player_coords, tile, distance + 1, maxDistance)
 
 
 func gatherAll():

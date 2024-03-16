@@ -14,6 +14,7 @@ script = ExtResource("1_mop5v")
 leftMarker = NodePath("Left Marker")
 rightMarker = NodePath("Right Marker")
 playPile = NodePath("PlayPile")
+debugMode = null
 
 [node name="HandArea" type="Area2D" parent="."]
 

@@ -137,7 +137,7 @@ func card_dropped(card: Card):
 		played_cards.append(grabbed_card)
 		distribute_play_pile()
 
-		game.droppedCard()
+		game.droppedCard(card)
 
 	else:
 		cards.append(grabbed_card)
