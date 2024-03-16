@@ -109,7 +109,7 @@ func position_cards():
 		for i in range(int(len(cards) / 2)):
 			yPositions.append(yPositions[int(len(cards) / 2) - i - 1])
 
-	var tweenTime = .25
+	var tweenTime = .2
 
 	for i in range(len(cards)):
 		var tween = create_tween()

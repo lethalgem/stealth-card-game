@@ -7,7 +7,7 @@ extends Node2D
 @export var map: GameLevel
 @export var player: Player
 @onready var global: GlobalClass = get_node("/root/Global")
-var action_count: int = 0
+var actionCount: int = 0
 
 
 func updatePrevious():
@@ -21,7 +21,8 @@ func droppedCard(card:Card):
 		
 		if card.cardType == ActionCard.CardType:
 			map.prep_for_movement(player.global_position, card.movementAmount)
-
+		elif card.cardType == ActionCountCard.CardType:
+			addActionCount(card.actionCount)
 
 func highlightFinished():
 	if global.currentState == global.States.highlightingTiles:
@@ -42,9 +43,33 @@ func characterFinishedMoving():
 	if global.currentState == global.States.characterMoving:
 		updatePrevious()
 		#delay(.4)
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(.65).timeout
 		draw()
+		
+		checkActionCount()
 		global.currentState = global.States.waitingForUserCard
+
+
+
+func addActionCount(count:int):
+	actionCount += count
+	updateActionCountLabel()
+	updatePrevious()
+	await get_tree().create_timer(.65).timeout
+	draw()
+	global.currentState = global.States.waitingForUserCard
+
+func checkActionCount():
+	if actionCount > 0:
+		actionCount -= 1
+		updateActionCountLabel()
+		global.currentState = global.States.waitingForUserCard
+	else:
+		#TODO Make this the enemy's turn
+		global.currentState = global.States.waitingForUserCard
+
+func updateActionCountLabel():
+		%ActionCountLabel.text = 'Actions: ' + str(actionCount)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -67,8 +92,8 @@ func draw():
 func _input(event):
 	if event.is_action_pressed("start_sim"):
 		for i in range(7):
-			await get_tree().create_timer(.4).timeout
+			await get_tree().create_timer(.25).timeout
 			draw()
 			
-func delay(time):
-	await get_tree().create_timer(time).timeout
+#func delay(time):
+	#await get_tree().create_timer(time).timeout

@@ -209,7 +209,8 @@ func get_surrounding_tiles_in_range_recurse(
 			if x != 0 or y != 0:
 				var newPosition = current_coords + Vector2(x, y)
 				if newPosition.x >= 0 and newPosition.y >= 0:
-					if tileMap.get_cell_tile_data(0, newPosition).get_custom_data("canMove"):
+					var tileData = tileMap.get_cell_tile_data(0, newPosition)
+					if tileData != null and tileData.get_custom_data("canMove"):
 						#if _possibleSpaces.has(newPosition.x) and _possibleSpaces[newPosition.x].has(newPosition.y):
 						#continue
 						#
