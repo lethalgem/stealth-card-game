@@ -49,6 +49,7 @@ func _process(delta):
 		walkUp(delta)
 	elif directionState == DirectionState.down:
 		walkDown(delta)
+		
 	
 
 func walkLeft(tweenTime):
