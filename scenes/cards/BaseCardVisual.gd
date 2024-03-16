@@ -5,6 +5,8 @@ extends Node2D
 @export var cardTitle: Label
 @export var parent_card: Card
 
+@onready var global: GlobalClass = get_node("/root/Global")
+
 signal just_grabbed(card: Card)
 signal just_dropped(card: Card)
 
@@ -29,14 +31,22 @@ func _process(delta):
 
 
 func _input(event):
-	if event is InputEventMouseButton and is_hovered and is_interactable and get_node("/root/Global").currentState == get_node("/root/Global").States.waitingForUserCard:
-		is_grabbed = !is_grabbed
+	if (
+		event.is_action_pressed("user_click")
+		and is_hovered
+		and is_interactable
+		and (global.currentState == global.States.waitingForUserCard)
+	):
+		is_grabbed = true
+		just_grabbed.emit(parent_card)
+		print("grabbed")
+
+	elif event.is_action_released("user_click"):
+		print("released")
 		if is_grabbed:
-			just_grabbed.emit(parent_card)
-			print("clicked")
-		else:
+			is_grabbed = false
 			just_dropped.emit(parent_card)
-			print("unclicked")
+			print("dropped")
 
 
 func applyTitle(title: String):

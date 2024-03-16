@@ -7,7 +7,7 @@ var cards = []
 var grabbed_card: Card
 var deckLocation
 var played_cards = []
-var game:Game :
+var game: Game:
 	set(value):
 		game = value
 
@@ -15,7 +15,6 @@ var game:Game :
 @export var rightMarker: Marker2D
 @export var playPile: Area2D
 @export var debugMode: bool = false
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -126,8 +125,9 @@ func card_grabbed(card: Card):
 	print("got it ")
 	grabbed_card = card
 	cards.erase(card)
+	for cards_in_hands in cards:
+		cards_in_hands.get_node("BaseCardVisual").is_interactable = false
 	position_cards()
-	pass
 
 
 func card_dropped(card: Card):
@@ -136,13 +136,14 @@ func card_dropped(card: Card):
 		grabbed_card.get_node("BaseCardVisual").is_interactable = false
 		played_cards.append(grabbed_card)
 		distribute_play_pile()
-
 		game.droppedCard(card)
 
 	else:
 		cards.append(grabbed_card)
 		position_cards()
 	grabbed_card = null
+	for cards_in_hand in cards:
+		cards_in_hand.get_node("BaseCardVisual").is_interactable = true
 
 
 func distribute_play_pile():
