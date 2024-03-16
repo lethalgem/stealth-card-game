@@ -34,7 +34,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-	
+
 
 func _on_card_deck_deck_location(location):
 	deckLocation = location
@@ -136,9 +136,9 @@ func card_dropped(card: Card):
 		grabbed_card.get_node("BaseCardVisual").is_interactable = false
 		played_cards.append(grabbed_card)
 		distribute_play_pile()
-		
+
 		game.droppedCard()
-		
+
 	else:
 		cards.append(grabbed_card)
 		position_cards()
