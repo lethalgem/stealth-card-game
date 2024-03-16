@@ -34,15 +34,15 @@ func createCard():
 
 var cardsCreated = 0
 func createActionCountCard():
-	
+
 	var number = random.randi_range(1,5)
 	cardsCreated += 1
 	number = cardsCreated
-	
+
 	var actionCountCardScene = preload("res://scenes/cards/ActionCountCard.tscn")
 	var actionCountCard = actionCountCardScene.instantiate()
 	actionCountCard.createCard(number)
-		
+
 	return actionCountCard
-	
-	
+
+

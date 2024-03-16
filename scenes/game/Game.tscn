@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=7 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
+[ext_resource type="PackedScene" uid="uid://h0ym2os0neor" path="res://scenes/levels/TestMap.tscn" id="2_a2eje"]
 [ext_resource type="PackedScene" uid="uid://dageblc58jcj8" path="res://scenes/deck/CardDeck.tscn" id="3_2lrq6"]
+[ext_resource type="Script" path="res://scenes/characters/TestPlayer.gd" id="5_stm1j"]
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("cardDeck", "hand")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odam1"]
+size = Vector2(14, 14)
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("cardDeck", "hand", "map", "player")]
 script = ExtResource("1_g3ms6")
 cardDeck = NodePath("CardDeck")
 hand = NodePath("Hand")
+map = NodePath("TestMap")
+player = NodePath("TestPlayer")
+
+[node name="TestMap" parent="." instance=ExtResource("2_a2eje")]
 
 [node name="CardDeck" parent="." instance=ExtResource("3_2lrq6")]
 position = Vector2(1063, 536)
@@ -16,5 +25,24 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Hand" parent="." instance=ExtResource("2_57qf6")]
 position = Vector2(574, 540)
+
+[node name="TestPlayer" type="CharacterBody2D" parent="."]
+position = Vector2(104, 87)
+motion_mode = 1
+slide_on_ceiling = false
+script = ExtResource("5_stm1j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestPlayer"]
+shape = SubResource("RectangleShape2D_odam1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="TestPlayer"]
+
+[node name="PlayerBody" type="ColorRect" parent="TestPlayer/CanvasLayer"]
+offset_left = 97.0
+offset_top = 80.0
+offset_right = 111.0
+offset_bottom = 94.0
+color = Color(1, 0.356863, 0.592157, 1)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]
