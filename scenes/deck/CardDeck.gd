@@ -27,6 +27,9 @@ var deck_gen: PackedVector2Array = [
 	Vector2(2, 2),
 	Vector2(2, 2),
 ]
+
+@onready var deck_shuffling_audio_player: AudioStreamPlayer2D = %DeckShufflingAudioPlayer
+
 var cards: Array = []
 var actionCountCardScene = preload("res://scenes/cards/ActionCountCard.tscn")
 var actionCardScene = preload("res://scenes/cards/ActionCard.tscn")
@@ -49,6 +52,7 @@ func createDeck():
 		print(card_to_gen)
 		createCard(card_to_gen)
 	deckLocation.emit(global_position)
+	deck_shuffling_audio_player.play()
 
 
 func draw():

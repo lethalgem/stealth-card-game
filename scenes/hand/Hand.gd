@@ -11,6 +11,15 @@ var game: Game:
 	set(value):
 		game = value
 
+@onready var card_draw_audio_player: AudioStreamPlayer2D = %CardDrawAudioPlayer
+@onready var card_draw_sounds = [
+	preload("res://assets/sound/card_dealt_1.mp3"),
+	preload("res://assets/sound/card_dealt_2.mp3"),
+	preload("res://assets/sound/card_dealt_3.mp3")
+]
+@onready var card_play_audio_player: AudioStreamPlayer2D = %CardPlayAudioPlayer
+@onready var card_sliding_audio_player: AudioStreamPlayer2D = %CardSlidingAudioPlayer
+
 @export var leftMarker: Marker2D
 @export var rightMarker: Marker2D
 @export var playPile: Area2D
@@ -27,7 +36,6 @@ func _ready():
 			var newCard = testCard.instantiate()
 			deckLocation = Vector2(global_position.x + 500, global_position.y)
 			addCard(newCard)
-	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,6 +63,8 @@ func addCard(card: Card):
 	cards.append(card)
 
 	position_cards()
+
+	playCardDrawSound()
 
 
 func position_cards():
@@ -119,6 +129,7 @@ func position_cards():
 		)
 
 	cardCount += 1
+	playCardSlidingSound()
 
 
 func card_grabbed(card: Card):
@@ -136,8 +147,8 @@ func card_dropped(card: Card):
 		grabbed_card.get_node("BaseCardVisual").is_interactable = false
 		played_cards.append(grabbed_card)
 		distribute_play_pile()
+		playCardPlaySound()
 		game.droppedCard(card)
-
 	else:
 		cards.append(grabbed_card)
 		position_cards()
@@ -151,6 +162,20 @@ func distribute_play_pile():
 	for card in played_cards:
 		card.z_index = cardIndex
 		cardIndex += 1
+
+
+func playCardDrawSound():
+	var sound = card_draw_sounds.pick_random()
+	card_draw_audio_player.stream = sound
+	card_draw_audio_player.play()
+
+
+func playCardPlaySound():
+	card_play_audio_player.play()
+
+
+func playCardSlidingSound():
+	card_sliding_audio_player.play()
 
 
 func play():

@@ -18,7 +18,7 @@ func droppedCard(card:Card):
 	if global.currentState == global.States.waitingForUserCard:
 		updatePrevious()
 		global.currentState = global.States.highlightingTiles
-		
+
 		if card.cardType == ActionCard.CardType:
 			map.prep_for_movement(player.global_position, card.movementAmount)
 
@@ -69,6 +69,6 @@ func _input(event):
 		for i in range(7):
 			await get_tree().create_timer(.4).timeout
 			draw()
-			
+
 func delay(time):
 	await get_tree().create_timer(time).timeout
