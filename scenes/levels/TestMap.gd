@@ -1,71 +1,73 @@
 class_name GameLevel
 extends Node2D
 
-
-@onready var global : GlobalClass = get_node("/root/Global")
+@onready var global: GlobalClass = get_node("/root/Global")
 @export var tileMap: TileMap
-@export var badShort1 : BadShorty
+@export var badShort1: BadShorty
 
-var game: Game : 
-	set(value): 
+var game: Game:
+	set(value):
 		game = value
 
 var highlightingTile = preload("res://scenes/levels/highlighted_tile.tscn")
 var confirmed_movement_tile_coords = []
 
+var player
 
-var player;
-func setPlayer(playerFromParent:Player):
+
+func setPlayer(playerFromParent: Player):
 	player = playerFromParent
+
 
 func _ready():
 	badShort1.setTileMap(tileMap)
 	#badShort1.setPath([
-		#Vector2(-1,0),
-		#Vector2(-2,0),
-		#Vector2(-3,0),
-		#Vector2(-2,0),
-		#Vector2(-1,0),
-		#Vector2(0,0),
-		#Vector2(1,0),
-		#Vector2(2,0),
-		#Vector2(3,0),
-		#Vector2(2,0),
-		#Vector2(1,0),
-		#Vector2(0,0)
+	#Vector2(-1,0),
+	#Vector2(-2,0),
+	#Vector2(-3,0),
+	#Vector2(-2,0),
+	#Vector2(-1,0),
+	#Vector2(0,0),
+	#Vector2(1,0),
+	#Vector2(2,0),
+	#Vector2(3,0),
+	#Vector2(2,0),
+	#Vector2(1,0),
+	#Vector2(0,0)
 	#])
-	
+
 	#badShort1.setPath([
-		#Vector2(0,-1),
-		#Vector2(0,-2),
-		#Vector2(0,-3),
-		#Vector2(0,-2),
-		#Vector2(0,-1),
-		#Vector2(0,0),
-		#Vector2(0,1),
-		#Vector2(0,2),
-		#Vector2(0,3),
-		#Vector2(0,2),
-		#Vector2(0,1),
-		#Vector2(0,0)
+	#Vector2(0,-1),
+	#Vector2(0,-2),
+	#Vector2(0,-3),
+	#Vector2(0,-2),
+	#Vector2(0,-1),
+	#Vector2(0,0),
+	#Vector2(0,1),
+	#Vector2(0,2),
+	#Vector2(0,3),
+	#Vector2(0,2),
+	#Vector2(0,1),
+	#Vector2(0,0)
 	#])
-	
-	badShort1.setPath([
-		
-		Vector2(-1,0),
-		Vector2(-2,0),
-		Vector2(-3,0),
-		Vector2(-3,-1),
-		Vector2(-3,-2),
-		Vector2(-3,-3),
-		Vector2(-2,-3),
-		Vector2(-1,-3),
-		Vector2(0,-3),
-		Vector2(0,-2),
-		Vector2(0,-1),
-		Vector2(0,0)
-	])
-	
+
+	badShort1.setPath(
+		[
+			Vector2(-1, 0),
+			Vector2(-2, 0),
+			Vector2(-3, 0),
+			Vector2(-3, -1),
+			Vector2(-3, -2),
+			Vector2(-3, -3),
+			Vector2(-2, -3),
+			Vector2(-1, -3),
+			Vector2(0, -3),
+			Vector2(0, -2),
+			Vector2(0, -1),
+			Vector2(0, 0)
+		]
+	)
+
 
 func prep_for_movement(player_global_position: Vector2):
 	print("prepping for movement")
@@ -84,7 +86,7 @@ func prep_for_movement(player_global_position: Vector2):
 			confirmed_movement_tile_coords.append(potential_tile_coords)
 
 	highlight_tiles(confirmed_movement_tile_coords)
-	
+
 	game.highlightFinished()
 
 
@@ -109,15 +111,18 @@ var _possibleSpaces = {}
 var _totalCount = 0
 
 
-
 func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and global.currentState == global.States.waitingForTileClick:
+	if (
+		event is InputEventMouseButton
+		and event.is_pressed()
+		and global.currentState == global.States.waitingForTileClick
+	):
 		var mousePosition = event.position
 		var tilePosition = tileMap.local_to_map(mousePosition)
-		
+
 		for confirmedTile in confirmed_movement_tile_coords:
-		#if confirmed_movement_tile_coords.has(tilePosition):		
-			if confirmedTile.x == tilePosition.x and confirmedTile.y == tilePosition.y:		
+			#if confirmed_movement_tile_coords.has(tilePosition):
+			if confirmedTile.x == tilePosition.x and confirmedTile.y == tilePosition.y:
 				if game.aboutToMoveCharacter():
 					player.moveTo(tilePosition)
 					game.characterFinishedMoving()
