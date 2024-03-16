@@ -6,17 +6,19 @@ var cardCount = 0
 var cards = []
 var grabbed_card: Card
 var deckLocation
+var played_cards = []
 
 @export var leftMarker: Marker2D
 @export var rightMarker: Marker2D
-
+@export var playPile: Area2D
 @export var debugMode: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if debugMode:
-		global_position = get_viewport_rect().size / 2
+		var viewport = get_viewport_rect().size
+		global_position = Vector2(viewport.x / 2, viewport.y / 1.2)
 		var testCard = preload("res://scenes/cards/ActionCountCard.tscn")
 		for i in 3:
 			var newCard = testCard.instantiate()
@@ -125,10 +127,22 @@ func card_grabbed(card: Card):
 
 
 func card_dropped(card: Card):
-	cards.append(grabbed_card)
+	var overlapping_bodies = grabbed_card.get_node("BaseCardVisual").overlapping_bodies
+	if overlapping_bodies.has(playPile):
+		grabbed_card.get_node("BaseCardVisual").is_interactable = false
+		played_cards.append(grabbed_card)
+		distribute_play_pile()
+	else:
+		cards.append(grabbed_card)
+		position_cards()
 	grabbed_card = null
-	position_cards()
-	pass
+
+
+func distribute_play_pile():
+	var cardIndex = 0
+	for card in played_cards:
+		card.z_index = cardIndex
+		cardIndex += 1
 
 
 func play():
