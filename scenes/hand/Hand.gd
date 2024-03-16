@@ -4,6 +4,7 @@ extends Node2D
 
 var cardCount = 0
 var cards = []
+var grabbed_card: Card
 var deckLocation
 
 @export var leftMarker: Marker2D
@@ -19,7 +20,7 @@ func _ready():
 		var testCard = preload("res://scenes/cards/ActionCountCard.tscn")
 		for i in 3:
 			var newCard = testCard.instantiate()
-			deckLocation = Vector2(global_position.x + 100, global_position.y)
+			deckLocation = Vector2(global_position.x + 500, global_position.y)
 			addCard(newCard)
 	pass
 
@@ -43,8 +44,15 @@ func addCard(card: Card):
 	card.position.y = deckLocation.y - card.global_position.y
 	card.rotation = 0
 
+	card.get_node("BaseCardVisual").just_grabbed.connect(card_grabbed.bind())
+	card.get_node("BaseCardVisual").just_dropped.connect(card_dropped.bind())
+
 	cards.append(card)
 
+	position_cards()
+
+
+func position_cards():
 	var cardWidth = 275 / 2
 
 	var maxDistanceBetweenCards = cardWidth * 1.1
@@ -107,7 +115,20 @@ func addCard(card: Card):
 
 	cardCount += 1
 
-	var x = 4
+
+func card_grabbed(card: Card):
+	print("got it ")
+	grabbed_card = card
+	cards.erase(card)
+	position_cards()
+	pass
+
+
+func card_dropped(card: Card):
+	cards.append(grabbed_card)
+	grabbed_card = null
+	position_cards()
+	pass
 
 
 func play():
