@@ -3,8 +3,13 @@ class_name BaseCardVisual
 extends Node2D
 
 @export var cardTitle: Label
+@export var parent_card: Card
+
+signal just_grabbed(card: Card)
+signal just_dropped(card: Card)
 
 var is_hovered: bool = false
+var is_grabbed: bool = false
 var starting_z_index: int
 
 
@@ -13,10 +18,23 @@ func _ready():
 
 
 func _process(delta):
+	if is_grabbed:
+		parent_card.global_position = get_viewport().get_mouse_position()
 	if is_hovered:
 		z_index = 100
 	else:
 		z_index = 0
+
+
+func _input(event):
+	if event is InputEventMouseButton and is_hovered:
+		is_grabbed = !is_grabbed
+		if is_grabbed:
+			just_grabbed.emit(parent_card)
+			print("clicked")
+		else:
+			just_dropped.emit(parent_card)
+			print("unclicked")
 
 
 func applyTitle(title: String):
@@ -24,7 +42,6 @@ func applyTitle(title: String):
 
 
 func _on_area_2d_mouse_entered():
-	print("test")
 	is_hovered = true
 
 
