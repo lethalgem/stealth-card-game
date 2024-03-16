@@ -12,7 +12,7 @@ func prep_for_movement(player_global_position: Vector2):
 	print(tile_coords)
 	#var potential_movement_tiles = get_surrounding_tiles_in_range(tile_coords, 3)
 	#var potential_movement_tiles = get_surrounding_tiles_in_range_New(tile_coords, 1, 3)
-	get_surrounding_tiles_in_range_New(tile_coords, 0, 3)
+	get_surrounding_tiles_in_range(tile_coords, 4)
 	var potential_movement_tiles = gatherAll()
 	
 	var confirmed_movement_tile_coords = []
@@ -34,39 +34,72 @@ func highlight_tiles(tile_coords: PackedVector2Array):
 		unpacked_scene.position = position_to_highlight
 
 
-func get_surrounding_tiles_in_range(current_coords: Vector2, distance: int) -> PackedVector2Array:
-	var tiles = []
-	for x in range(-distance, distance + 1):
-		for y in range(-distance, distance + 1):
-			if x!= 0 or y != 0:
-				tiles.append(current_coords + Vector2(x, y))
-				#tiles.append(current_coords + Vector2(x - 1, y - 1))
-	return tiles
+#func get_surrounding_tiles_in_range(current_coords: Vector2, distance: int) -> PackedVector2Array:
+	#var tiles = []
+	#for x in range(-distance, distance + 1):
+		#for y in range(-distance, distance + 1):
+			#if x!= 0 or y != 0:
+				#tiles.append(current_coords + Vector2(x, y))
+				##tiles.append(current_coords + Vector2(x - 1, y - 1))
+	#return tiles
 	
 
 var _possibleSpaces = {}
-func get_surrounding_tiles_in_range_New(current_coords: Vector2, distance: int, maxDistance: int):
+func get_surrounding_tiles_in_range(current_coords: Vector2, maxDistance: int):
+	#for key in _possibleSpaces:
+		#for innerKey in _possibleSpaces[key]:
+			#_possibleSpaces[key].erase(innerKey)
+		#_possibleSpaces.erase(key)
+	_possibleSpaces = {}	
 	
-	if distance == maxDistance:
+	get_surrounding_tiles_in_range_recurse(current_coords, 0, maxDistance)
+	
+func get_surrounding_tiles_in_range_recurse(current_coords: Vector2, distance: int, maxDistance: int):
+	
+	
+	#var z = 0
+	#if current_coords.x == 3 and current_coords.y == 7:
+		#z = 1
+		
+	if distance > maxDistance:
 		return
+		
+	if distance != 0:
+		if not (_possibleSpaces.has(current_coords.x) and _possibleSpaces[current_coords.x].has(current_coords.y)):
+			if not _possibleSpaces.has(current_coords.x):
+				_possibleSpaces[current_coords.x] = {}
+			
+			_possibleSpaces[current_coords.x][current_coords.y] = true
+	
+	
 	
 	var tiles = []
 	for x in range(-1, 2):
 		for y in range(-1, 2):
+			#print('here')
+			#print(x)
+			#print(y)
+			if abs(x) == abs(y):
+				continue
+				
+			
 			if x!= 0 or y != 0:
 				var newPosition = current_coords + Vector2(x, y)
 				if tileMap.get_cell_tile_data(0, newPosition).get_custom_data("canMove"):
-					if _possibleSpaces.has(newPosition.x) and _possibleSpaces.has(newPosition.y):
-						continue
+					#if _possibleSpaces.has(newPosition.x) and _possibleSpaces[newPosition.x].has(newPosition.y):
+						#continue
+					#
+					#elif not _possibleSpaces.has(newPosition.x):
+						#_possibleSpaces[newPosition.x] = {}
+					#
+					#_possibleSpaces[newPosition.x][newPosition.y] = true
+					#tiles.append(newPosition)
 					
-					elif not _possibleSpaces.has(newPosition.x):
-						_possibleSpaces[newPosition.x] = {}
-					
-					_possibleSpaces[newPosition.x][newPosition.y] = true
 					tiles.append(newPosition)
+					
 	
 	for tile in tiles:
-		get_surrounding_tiles_in_range_New(tile, distance + 1, maxDistance)
+		get_surrounding_tiles_in_range_recurse(tile, distance + 1, maxDistance)
 
 func gatherAll():
 	var tiles:Array = []
