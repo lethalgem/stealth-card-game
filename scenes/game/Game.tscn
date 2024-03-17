@@ -34,12 +34,12 @@ hand = NodePath("Hand")
 map = NodePath("LevelOne")
 player = NodePath("Player")
 
+[node name="LevelOne" parent="." instance=ExtResource("3_b47ui")]
+
 [node name="NewWoodCropped" type="Sprite2D" parent="."]
-position = Vector2(574, 553)
+position = Vector2(574, 633)
 scale = Vector2(0.609259, 0.609259)
 texture = ExtResource("10_4pohc")
-
-[node name="LevelOne" parent="." instance=ExtResource("3_b47ui")]
 
 [node name="CardDeck" parent="." instance=ExtResource("3_2lrq6")]
 position = Vector2(1042, 586)
