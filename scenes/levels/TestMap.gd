@@ -373,16 +373,13 @@ func gatherAll():
 func _on_flower_1_area_area_entered(area):
 	if area.get_name() == "PlayerArea" and flower_one_is_grabbable:
 		game.flower1Touched()
-		print("flower touched!")  # @michael, state machine here
 
 
 func _on_flower_2_area_area_entered(area):
 	if area.get_name() == "PlayerArea" and flower_two_is_grabbable:
 		game.flower2Touched()
-		print("flower touched!")  # @michael, state machine here
 
 
 func _on_flower_3_area_area_entered(area):
 	if area.get_name() == "PlayerArea" and flower_two_is_grabbable:
 		game.flower3Touched()
-		print("flower touched!")  # @michael, state machine here

@@ -10,6 +10,14 @@ extends Node2D
 @onready var global: GlobalClass = get_node("/root/Global")
 @onready var baddie_audio_player: AudioStreamPlayer = %BaddieTurnAudioPlayer
 @onready var player_audio_player: AudioStreamPlayer = %PlayerTurnAudioPlayer
+@onready var flower_touched_audio_player: AudioStreamPlayer = %FlowerTouchedAudioPlayer
+
+var flower1HasBeenTouched = false
+var previousFlower1HasBeenTouched = false
+var flower2HasBeenTouched = false
+var previousFlower2HasBeenTouched = false
+var flower3HasBeenTouched = false
+var previousFlower3HasBeenTouched = false
 
 var actionCount: int = 0
 
@@ -46,27 +54,18 @@ func aboutToMoveCharacter():
 	return false
 
 
-var flower1HasBeenTouched = false
-var previousFlower1HasBeenTouched = false
-
-
 func flower1Touched():
+	flower_touched_audio_player.play()
 	flower1HasBeenTouched = true
 
 
-var flower2HasBeenTouched = false
-var previousFlower2HasBeenTouched = false
-
-
 func flower2Touched():
+	flower_touched_audio_player.play()
 	flower2HasBeenTouched = true
 
 
-var flower3HasBeenTouched = false
-var previousFlower3HasBeenTouched = false
-
-
 func flower3Touched():
+	flower_touched_audio_player.play()
 	flower3HasBeenTouched = true
 
 
