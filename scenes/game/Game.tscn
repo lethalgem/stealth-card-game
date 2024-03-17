@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=16 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
 [ext_resource type="PackedScene" uid="uid://dageblc58jcj8" path="res://scenes/deck/CardDeck.tscn" id="3_2lrq6"]
 [ext_resource type="PackedScene" uid="uid://cuvhlhwjrgsqk" path="res://scenes/levels/LevelOne.tscn" id="3_b47ui"]
-[ext_resource type="Texture2D" uid="uid://bo1vpaxdh446d" path="res://assets/cards/CardBack.png" id="5_2d60j"]
 [ext_resource type="PackedScene" uid="uid://cnhaomjsg2qy7" path="res://scenes/characters/Player.tscn" id="6_akoob"]
 [ext_resource type="PackedScene" uid="uid://c1pkkv6kbblnt" path="res://scenes/debug/debugscene.tscn" id="6_gh13b"]
 [ext_resource type="Script" path="res://scenes/debug/debugscene.gd" id="7_02dw6"]
@@ -12,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bbrb4qp8nd1jx" path="res://scenes/flower/Flower.tscn" id="9_xvrcr"]
 [ext_resource type="Texture2D" uid="uid://b578kft627c6u" path="res://assets/wood/NewWoodCropped.svg" id="10_4pohc"]
 [ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="12_0ee0k"]
+[ext_resource type="AudioStream" uid="uid://djjbj0g1yeom1" path="res://assets/sound/night_ambience.mp3" id="12_mkxo5"]
+[ext_resource type="AudioStream" uid="uid://d0wogrgik3gx1" path="res://assets/sound/baddies_turn_bell.mp3" id="13_qh30m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_elw4s"]
 font_size = 32
@@ -34,24 +35,17 @@ hand = NodePath("Hand")
 map = NodePath("LevelOne")
 player = NodePath("Player")
 
+[node name="LevelOne" parent="." instance=ExtResource("3_b47ui")]
+
 [node name="NewWoodCropped" type="Sprite2D" parent="."]
-position = Vector2(574, 553)
+position = Vector2(574, 633)
 scale = Vector2(0.609259, 0.609259)
 texture = ExtResource("10_4pohc")
-
-[node name="LevelOne" parent="." instance=ExtResource("3_b47ui")]
 
 [node name="CardDeck" parent="." instance=ExtResource("3_2lrq6")]
 position = Vector2(1042, 586)
 rotation = 0.0872665
 scale = Vector2(0.4, 0.4)
-
-[node name="CardBack" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1042, 586)
-rotation = 0.0872665
-scale = Vector2(0.168765, 0.168765)
-texture = ExtResource("5_2d60j")
 
 [node name="Hand" parent="." instance=ExtResource("2_57qf6")]
 position = Vector2(574, 594)
@@ -63,10 +57,6 @@ position = Vector2(72, 24)
 visible = false
 position = Vector2(20, 199)
 script = ExtResource("7_02dw6")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_w3je1")
-autoplay = true
 
 [node name="ActionCountLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -116,5 +106,19 @@ text = "play a card"
 label_settings = SubResource("LabelSettings_a6xpj")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BackgroundMusicAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_w3je1")
+autoplay = true
+
+[node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_mkxo5")
+volume_db = -7.02
+autoplay = true
+
+[node name="BaddieTurnAudioPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("13_qh30m")
+volume_db = -1.0
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]

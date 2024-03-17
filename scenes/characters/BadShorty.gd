@@ -7,6 +7,9 @@ extends Sprite2D
 
 enum DirectionState { left, right, up, down }
 @export var directionState = DirectionState.left
+
+@onready var movement_audio_player: AudioStreamPlayer2D = %MovementAudioPlayer
+
 var tileMap: TileMap
 var gameLevel: GameLevel
 var path: Array
@@ -132,8 +135,11 @@ func moveTo(positionModifier):
 		time
 	)
 
+	movement_audio_player.play(random.randf_range(0, 2))
+
 	await get_tree().create_timer(time).timeout
 	$AnimationPlayer.play("idle")
+	movement_audio_player.stop()
 
 
 

@@ -211,7 +211,7 @@ func _on_smoke_animated_sprite_animation_finished():
 	smoke_animation.visible = false
 	card_being_discarded.global_position = discard_pile.global_position
 	playCardAppearedSmoke(card_being_discarded)
-	card_being_discarded.get_node("BaseCardVisual").is_played = true
+	card_being_discarded.get_node("BaseCardVisual").is_played = false
 	card_being_discarded.z_index = len(discarded_cards)
 	card_being_discarded.visible = true
 

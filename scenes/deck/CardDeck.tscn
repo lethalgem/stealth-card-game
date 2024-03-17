@@ -1,14 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dageblc58jcj8"]
+[gd_scene load_steps=5 format=3 uid="uid://dageblc58jcj8"]
 
 [ext_resource type="Script" path="res://scenes/deck/CardDeck.gd" id="1_uw3he"]
 [ext_resource type="Texture2D" uid="uid://bo1vpaxdh446d" path="res://assets/cards/CardBack.png" id="2_1hhmn"]
 [ext_resource type="AudioStream" uid="uid://cgxmiu4ncuf7b" path="res://assets/sound/deck_shuffling.mp3" id="2_oq5fn"]
-
-[sub_resource type="Theme" id="Theme_3vh8h"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_r7td4"]
-font_size = 48
-shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g607w"]
 size = Vector2(278.5, 390)
@@ -16,59 +10,34 @@ size = Vector2(278.5, 390)
 [node name="CardDeck" type="Node2D"]
 script = ExtResource("1_uw3he")
 
+[node name="CardBack5" type="Sprite2D" parent="."]
+position = Vector2(0.643738, 0.509674)
+rotation = 0.0734189
+scale = Vector2(0.330206, 0.329907)
+texture = ExtResource("2_1hhmn")
+
+[node name="CardBack4" type="Sprite2D" parent="."]
+position = Vector2(0.643738, 0.509674)
+rotation = 0.0596886
+scale = Vector2(0.330206, 0.329907)
+texture = ExtResource("2_1hhmn")
+
+[node name="CardBack3" type="Sprite2D" parent="."]
+position = Vector2(0.643738, 0.509674)
+rotation = 0.0401942
+scale = Vector2(0.330206, 0.329907)
+texture = ExtResource("2_1hhmn")
+
+[node name="CardBack2" type="Sprite2D" parent="."]
+position = Vector2(0.643738, 0.509674)
+rotation = 0.0249151
+scale = Vector2(0.330206, 0.329907)
+texture = ExtResource("2_1hhmn")
+
 [node name="CardBack" type="Sprite2D" parent="."]
 position = Vector2(0.643738, 0.509674)
 scale = Vector2(0.330206, 0.329907)
 texture = ExtResource("2_1hhmn")
-
-[node name="Border" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -137.5
-offset_top = -192.5
-offset_right = 137.5
-offset_bottom = 192.5
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Card" type="ColorRect" parent="Border"]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -175.0
-offset_right = 125.0
-offset_bottom = 175.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_3vh8h")
-color = Color(0.560784, 0.596078, 0.968627, 1)
-
-[node name="CardTitle" type="Label" parent="Border/Card"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -117.0
-offset_top = -33.5
-offset_right = 117.0
-offset_bottom = 33.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Your Deck"
-label_settings = SubResource("LabelSettings_r7td4")
-horizontal_alignment = 1
 
 [node name="Area2D" type="Area2D" parent="."]
 

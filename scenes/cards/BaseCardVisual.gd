@@ -7,6 +7,7 @@ extends Node2D
 @export var parent_card: Card
 
 @onready var global: GlobalClass = get_node("/root/Global")
+@onready var original_scale: Vector2 = parent_card.scale
 
 signal just_grabbed(card: Card)
 signal just_dropped(card: Card)
@@ -29,8 +30,10 @@ func _process(delta):
 	elif is_hovered and not is_played:
 		parent_card.z_index = 100
 	elif is_played:
+		parent_card.scale = original_scale * 0.9
 		parent_card.modulate.a = .15
 	else:
+		parent_card.scale = original_scale
 		parent_card.modulate.a = 1
 		parent_card.z_index = 0
 
@@ -44,7 +47,6 @@ func _input(event):
 	):
 		is_grabbed = true
 		just_grabbed.emit(parent_card)
-
 
 	elif event.is_action_released("user_click"):
 		if is_grabbed:

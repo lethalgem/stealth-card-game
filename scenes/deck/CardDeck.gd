@@ -5,11 +5,8 @@ extends Node2D
 var cardCount = 0
 # 1 = action (movement for now)
 # 2 = action count
-# 3 = flower
 # use by listing vector2s of (card_type, actioncount/movementspeed)
 var deck_gen: PackedVector2Array = [
-	Vector2(1, 1),
-	Vector2(1, 2),
 	Vector2(1, 3),
 	Vector2(1, 4),
 	Vector2(1, 5),
@@ -27,9 +24,6 @@ var deck_gen: PackedVector2Array = [
 	Vector2(2, 3),
 	Vector2(2, 2),
 	Vector2(2, 2),
-	Vector2(3, 1),
-	Vector2(3, 2),
-	Vector2(3, 3),
 ]
 
 @onready var deck_shuffling_audio_player: AudioStreamPlayer2D = %DeckShufflingAudioPlayer
@@ -45,6 +39,7 @@ signal deckLocation(Vector2)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	createDeck()
+	addFlowerCards()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,6 +52,11 @@ func createDeck():
 		createCard(card_to_gen)
 	deckLocation.emit(global_position)
 	deck_shuffling_audio_player.play()
+
+
+func addFlowerCards():
+	for i in range(1, 4):
+		cards.append(createFlowerCard(i))
 
 
 func draw():
@@ -73,8 +73,6 @@ func createCard(card_to_gen: Vector2):
 			cards.append(createActionCard(card_to_gen.y))
 		float(2):
 			cards.append(createActionCountCard(card_to_gen.y))
-		float(3):
-			cards.append(createFlowerCard(card_to_gen.y))
 		_:
 			print("unrecognized card to generate")
 

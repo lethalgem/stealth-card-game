@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnhaomjsg2qy7"]
+[gd_scene load_steps=17 format=3 uid="uid://cnhaomjsg2qy7"]
 
 [ext_resource type="Texture2D" uid="uid://brjhiec7faf8s" path="res://assets/hero/Full Spritesheet.png" id="1_eafcr"]
 [ext_resource type="Script" path="res://scenes/characters/Player.gd" id="1_ni7d1"]
+[ext_resource type="AudioStream" uid="uid://dq72roeloy6xb" path="res://assets/sound/teleport.wav" id="3_xox4s"]
 
 [sub_resource type="Animation" id="Animation_j5a1u"]
 length = 0.001
@@ -202,6 +203,9 @@ _data = {
 "walk_up": SubResource("Animation_lf2x6")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ufqd"]
+size = Vector2(12, 14)
+
 [node name="Player" type="Sprite2D"]
 texture_filter = 1
 texture = ExtResource("1_eafcr")
@@ -214,3 +218,14 @@ script = ExtResource("1_ni7d1")
 libraries = {
 "": SubResource("AnimationLibrary_mr8dn")
 }
+
+[node name="PlayerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea"]
+shape = SubResource("RectangleShape2D_8ufqd")
+
+[node name="PlayerTeleportAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_xox4s")
+volume_db = 3.0
+pitch_scale = 2.0

@@ -33,6 +33,9 @@ var highlightingTile = preload("res://scenes/levels/highlighted_tile.tscn")
 var visionTile = preload("res://scenes/levels/VisionTile.tscn")
 var confirmed_movement_tile_coords = []
 var highlightedTiles: Array = []
+var flower_one_is_grabbable = false
+var flower_two_is_grabbable = false
+var flower_three_is_grabbable = false
 
 var player
 
@@ -138,36 +141,41 @@ func _ready():
 	badShorty20.setTileMap(tileMap)
 	badShorty21.setTileMap(tileMap)
 
+
 func showDemoFlower():
 	var tween = create_tween()
-	tween.tween_property(%DemoFlower, 'modulate:a', 1, .5)
+	tween.tween_property(%DemoFlower, "modulate:a", 1, .5)
 	await tween.finished
+
 
 func hideDemoFlower():
 	var tween = create_tween()
-	tween.tween_property(%DemoFlower, 'modulate:a', 0, .5)
+	tween.tween_property(%DemoFlower, "modulate:a", 0, .5)
 	await tween.finished
+
 
 func showFlower1():
-	#%Flower1.modulate.a = 1
 	var tween = create_tween()
-	tween.tween_property(%Flower1, 'modulate:a', 1, .5)
+	tween.tween_property(%Flower1, "modulate:a", 1, .5)
 	await tween.finished
-	
+	flower_one_is_grabbable = true
+
+
 func showFlower2():
-	#%Flower2.modulate.a = 1
 	var tween = create_tween()
-	tween.tween_property(%Flower2, 'modulate:a', 1, .5)
+	tween.tween_property(%Flower2, "modulate:a", 1, .5)
 	await tween.finished
-	
+	flower_two_is_grabbable = true
+
+
 func showFlower3():
-	#%Flower3.modulate.a = 1
 	var tween = create_tween()
-	tween.tween_property(%Flower3, 'modulate:a', 1, .5)
+	tween.tween_property(%Flower3, "modulate:a", 1, .5)
 	await tween.finished
-	
+	flower_three_is_grabbable = true
 
 
+# TODO: This causes thousands of errors, fix pls
 func draw_vision(shorty: BadShorty):
 	for child in shorty.confirmed_visible_tiles:
 		remove_child(child)
@@ -331,3 +339,18 @@ func gatherAll():
 			tiles.append(Vector2(key, innerKey))
 
 	return tiles
+
+
+func _on_flower_1_area_area_entered(area):
+	if area.get_name() == "PlayerArea" and flower_one_is_grabbable:
+		print("flower touched!")  # @michael, state machine here
+
+
+func _on_flower_2_area_area_entered(area):
+	if area.get_name() == "PlayerArea" and flower_two_is_grabbable:
+		print("flower touched!")  # @michael, state machine here
+
+
+func _on_flower_3_area_area_entered(area):
+	if area.get_name() == "PlayerArea" and flower_two_is_grabbable:
+		print("flower touched!")  # @michael, state machine here
