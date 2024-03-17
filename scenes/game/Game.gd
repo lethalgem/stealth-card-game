@@ -33,6 +33,7 @@ func droppedCard(card: Card):
 		if card.cardType == ActionCard.CardType:
 			global.currentState = global.States.highlightingTiles
 			map.prep_for_movement(player.global_position, card.movementAmount)
+			map.unhide_vision()
 		elif card.cardType == ActionCountCard.CardType:
 			addActionCount(card.actionCount)
 		elif card.cardType == FlowerCard.CardType:
@@ -82,20 +83,14 @@ func characterFinishedMoving():
 
 		var doFLowerText = false
 		if flower1HasBeenTouched and not previousFlower1HasBeenTouched:
-			#await showInstructionText(global.States.playingFlower, "flower collected!", true)
-			#await get_tree().create_timer(1.5).timeout
 			await map.collectedFlower1()
 			%Flower.colorFlower1()
 			doFLowerText = true
 		if flower2HasBeenTouched and not previousFlower2HasBeenTouched:
-			#await showInstructionText(global.States.playingFlower, "flower collected!", true)
-			#await get_tree().create_timer(1.5).timeout
 			await map.collectedFlower2()
 			%Flower.colorFlower2()
 			doFLowerText = true
 		if flower3HasBeenTouched and not previousFlower3HasBeenTouched:
-			#await showInstructionText(global.States.playingFlower, "flower collected!", true)
-			#await get_tree().create_timer(1.5).timeout
 			await map.collectedFlower3()
 			%Flower.colorFlower3()
 			doFLowerText = true
@@ -131,6 +126,7 @@ func discardCards():
 
 
 func badGuysTurn():
+	map.unhide_vision()
 	baddie_audio_player.play()
 	await get_tree().create_timer(1).timeout
 	updatePrevious()
@@ -143,12 +139,6 @@ func playerLost():
 	if global.currentState == global.States.badGuysMove:
 		player.lose()
 		print("YOU LOSE!")
-		#baddie_audio_player.play()
-		#await get_tree().create_timer(1).timeout
-		#updatePrevious()
-		#global.currentState = global.States.badGuysMove
-		#await get_tree().create_timer(1).timeout
-		#map.badGuysMove()
 
 
 func badGuysFinished():
@@ -157,6 +147,7 @@ func badGuysFinished():
 	global.currentState = global.States.waitingForUserCard
 	await get_tree().create_timer(0.65).timeout
 	player_audio_player.play()
+	map.hide_vision()
 
 
 func addActionCount(count: int):
@@ -177,9 +168,6 @@ func checkActionCount():
 		actionCount = 0
 		updateActionCountLabel()
 		discardCards()
-		#badGuysTurn()
-		#TODO Make this the enemy's turn
-		#global.currentState = global.States.waitingForUserCard
 
 
 func updateActionCountLabel():
@@ -206,16 +194,6 @@ func playFlower(card: FlowerCard):
 	await showInstructionText(global.States.playingFlower, "flower revealed on map", true)
 	await map.showDemoFlower()
 	await get_tree().create_timer(2).timeout
-	#
-	#flowerCount += 1
-	#if flowerCount >= 3:
-	#await showInstructionText(global.States.playingFlower, "all flowers revealed!", true)
-	#await get_tree().create_timer(2).timeout
-	#else:
-	#await showInstructionText(
-	#global.States.playingFlower, str(flowerCount) + "/3 flowers revealed", true
-	#)
-	#await get_tree().create_timer(2).timeout
 
 	await showInstructionText(global.States.playingFlower, "gather all 3 flowers to win!", true)
 	await get_tree().create_timer(2).timeout
@@ -280,7 +258,6 @@ func _process(delta):
 	var z = global.currentState
 	if global.currentState == global.States.waitingForUserCard:
 		map.hide_vision()
-
 		if showingInfo:
 			pass
 		elif lastProcessState == global.States.waitingForstart:
@@ -343,7 +320,6 @@ func _process(delta):
 		await showInstructionText(global.States.badGuysMove, "baddies moving")
 
 	elif global.currentState == global.States.multipleActionState:
-		#await showInstructionText(global.States.multipleActionState, 'XXXXXXXXXX')
 		pass
 
 	lastProcessState = global.currentState
@@ -364,6 +340,3 @@ func draw():
 func _input(event):
 	if event.is_action_pressed("start_sim"):
 		draw_first_hand()
-
-#func delay(time):
-#await get_tree().create_timer(time).timeout
