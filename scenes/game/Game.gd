@@ -19,6 +19,8 @@ var previousFlower2HasBeenTouched = false
 var flower3HasBeenTouched = false
 var previousFlower3HasBeenTouched = false
 
+var win = false
+var gameOver = false
 var actionCount: int = 0
 
 
@@ -102,6 +104,7 @@ func characterFinishedMoving():
 					global.States.characterMoving, "all flowers collected!", true
 				)
 				await get_tree().create_timer(1.5).timeout
+				playerWin()
 			else:
 				await showInstructionText(
 					global.States.characterMoving, str(flowerCount) + "/3 flowers collected!", true
@@ -137,8 +140,15 @@ func badGuysTurn():
 
 func playerLost():
 	if global.currentState == global.States.badGuysMove:
+		gameOver = true
 		player.lose()
-		print("YOU LOSE!")
+		fade_out()
+
+
+func playerWin():
+	win = true
+	await get_tree().create_timer(1).timeout
+	fade_out()
 
 
 func badGuysFinished():
@@ -335,6 +345,20 @@ func draw_first_hand():
 func draw():
 	var card = cardDeck.draw()
 	hand.addCard(card)
+
+
+func fade_out():
+	await get_tree().create_timer(1).timeout
+	var tween = create_tween()
+	tween.tween_property(%FadeInRect, "modulate:a", 1, 0.5).set_ease(Tween.EASE_IN)
+	tween.connect("finished", fade_out_finished)
+
+
+func fade_out_finished():
+	if gameOver:
+		get_tree().change_scene_to_file("res://scenes/endScreens/LoseScreen.tscn")
+	elif win:
+		get_tree().change_scene_to_file("res://scenes/endScreens/WinScreen.tscn")
 
 
 func _input(event):
