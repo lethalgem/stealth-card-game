@@ -104,7 +104,7 @@ var flowerCount = 0
 func playFlower(card: FlowerCard):
 	updatePrevious()
 	global.currentState = global.States.playingFlower
-	
+
 	if card.flowerId == 1:
 		await map.showFlower1()
 		%Flower.colorFlower1()
@@ -117,30 +117,30 @@ func playFlower(card: FlowerCard):
 		await map.showFlower3()
 		%Flower.colorFlower3()
 		pass
-		
+
 	flowerCount += 1
-		
-	
-		
+
+
+
 	await showInstructionText(global.States.playingFlower, 'flower revealed on map', true)
 	await map.showDemoFlower()
 	await get_tree().create_timer(2).timeout
-	
-	
+
+
 	if flowerCount >= 3:
 		await showInstructionText(global.States.playingFlower, 'all flowers revealed!', true)
 		await get_tree().create_timer(2).timeout
 	else:
 		await showInstructionText(global.States.playingFlower, str(flowerCount) + '/3 flowers revealed', true)
 		await get_tree().create_timer(2).timeout
-		
+
 	await showInstructionText(global.States.playingFlower, 'gather all 3 flowers to win!', true)
 	await get_tree().create_timer(2).timeout
 	await showInstructionText(global.States.playingFlower, 'GROW your combos for victory!', true)
 	await get_tree().create_timer(2).timeout
-		
+
 	await map.hideDemoFlower()
-		
+
 	draw()
 	checkActionCount()
 	#global.currentState = global.States.waitingForUserCard
@@ -194,8 +194,8 @@ func _process(delta):
 			#tween2.tween_property(%InstructionLabel, 'modulate:a', 1, 2)
 			#await tween.finished
 			#
-			
-			
+
+
 		if showingInfo:
 			pass
 		elif lastProcessState == global.States.waitingForstart:
