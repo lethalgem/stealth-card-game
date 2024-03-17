@@ -20,4 +20,4 @@ func createCard(count: int):
 	#actionCount = count
 	#var title = "Action: {}".format([count], "{}")
 	flowerId = count
-	baseCardVisual.applyTitle('Flower')
+	baseCardVisual.applyTitle('flower')

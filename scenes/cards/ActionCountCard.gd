@@ -17,5 +17,5 @@ func _process(delta):
 
 func createCard(count: int):
 	actionCount = count
-	var title = "Action: {}".format([count], "{}")
+	var title = "{} ~ combo".format([count], "{}")
 	baseCardVisual.applyTitle(title)

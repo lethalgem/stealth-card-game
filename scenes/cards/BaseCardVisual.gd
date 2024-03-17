@@ -3,6 +3,7 @@ class_name BaseCardVisual
 extends Node2D
 
 @export var cardTitle: Label
+@export var cardAmount: Label
 @export var parent_card: Card
 
 @onready var global: GlobalClass = get_node("/root/Global")
@@ -25,9 +26,9 @@ func _process(delta):
 	if is_grabbed:
 		parent_card.global_position = get_viewport().get_mouse_position()
 	if is_hovered:
-		z_index = 100
+		parent_card.z_index = 100
 	else:
-		z_index = 0
+		parent_card.z_index = 0
 
 
 func _input(event):
@@ -51,6 +52,9 @@ func _input(event):
 
 func applyTitle(title: String):
 	cardTitle.text = title
+	
+func applyCount(count: String):
+	cardAmount.text = count
 
 
 func _on_area_2d_mouse_entered():

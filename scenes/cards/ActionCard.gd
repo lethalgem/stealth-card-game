@@ -14,5 +14,8 @@ func _ready():
 
 func createCard(count: int):
 	movementAmount = count
-	var title = "Move {}".format([count], "{}")
+	var title = "{} ~ move".format([count], "{}")
 	baseCardVisual.applyTitle(title)
+	#baseCardVisual.applyTitle("move")
+	##var title = "move {}".format([count], "{}")
+	#baseCardVisual.applyCount(str(count))

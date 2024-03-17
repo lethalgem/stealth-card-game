@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2l476fv8kh6i"]
+[gd_scene load_steps=4 format=3 uid="uid://b2l476fv8kh6i"]
 
 [ext_resource type="Script" path="res://scenes/cards/FlowerCard.gd" id="1_h1v4u"]
 [ext_resource type="PackedScene" uid="uid://csjrm6ju3nkvu" path="res://scenes/cards/BaseCardVisual.tscn" id="2_wyrwo"]
+[ext_resource type="Texture2D" uid="uid://buxe5vnaeebyl" path="res://assets/flower/WhiteFlower.svg" id="3_pd1aw"]
 
 [node name="FlowerCard" type="Node2D" node_paths=PackedStringArray("baseCardVisual")]
 script = ExtResource("1_h1v4u")
@@ -10,19 +11,9 @@ baseCardVisual = NodePath("BaseCardVisual")
 [node name="BaseCardVisual" parent="." node_paths=PackedStringArray("parent_card") instance=ExtResource("2_wyrwo")]
 parent_card = NodePath("..")
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -98.0
-offset_top = -43.0
-offset_right = 100.0
-offset_bottom = 51.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-text = "FLOWER"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="WhiteFlower" type="Sprite2D" parent="."]
+modulate = Color(0.780392, 0.533333, 0.439216, 0.376471)
+position = Vector2(5, 17)
+rotation = 0.349066
+scale = Vector2(0.73, 0.73)
+texture = ExtResource("3_pd1aw")

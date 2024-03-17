@@ -1,24 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://csjrm6ju3nkvu"]
+[gd_scene load_steps=8 format=3 uid="uid://csjrm6ju3nkvu"]
 
 [ext_resource type="Script" path="res://scenes/cards/BaseCardVisual.gd" id="1_ckq6k"]
+[ext_resource type="Texture2D" uid="uid://dpudqcpg7fcuk" path="res://assets/cards/CardFront.png" id="2_enmfg"]
+[ext_resource type="LabelSettings" uid="uid://d33esrpx423ke" path="res://scenes/cards/BaseCardVisual.tres" id="3_oxswo"]
+[ext_resource type="LabelSettings" uid="uid://dncaurhyjrbsj" path="res://scenes/cards/BaseCardVisualCardNumber.tres" id="4_7v2fc"]
 
 [sub_resource type="Theme" id="Theme_10tek"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_io3b5"]
+size = Vector2(275, 386)
+
 [sub_resource type="Theme" id="Theme_4jn8d"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_kqrs0"]
-font_size = 48
-shadow_color = Color(0, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_io3b5"]
-size = Vector2(274, 390)
-
-[node name="BaseCardVisual" type="Node2D" node_paths=PackedStringArray("cardTitle")]
+[node name="BaseCardVisual" type="Node2D" node_paths=PackedStringArray("cardTitle", "cardAmount")]
 position = Vector2(0, 1)
 script = ExtResource("1_ckq6k")
-cardTitle = NodePath("Border/Card/CardTitle")
+cardTitle = NodePath("CardTitle")
+cardAmount = NodePath("CardAmount")
 
 [node name="Border" type="ColorRect" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -37,6 +38,7 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Card" type="ColorRect" parent="Border"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -54,23 +56,54 @@ theme = SubResource("Theme_10tek")
 color = Color(0.635294, 0.635294, 0.635294, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="CardTitle" type="Label" parent="Border/Card"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.108571
-offset_bottom = 23.0
-grow_horizontal = 2
-theme = SubResource("Theme_4jn8d")
-text = "????"
-label_settings = SubResource("LabelSettings_kqrs0")
-horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="CardFront" type="Sprite2D" parent="."]
+position = Vector2(0, -0.699896)
+scale = Vector2(0.328162, 0.328162)
+texture = ExtResource("2_enmfg")
 
 [node name="BaseCardArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BaseCardArea"]
+position = Vector2(0.5, -1)
 shape = SubResource("RectangleShape2D_io3b5")
+
+[node name="CardTitle" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -175.0
+offset_right = 56.0
+offset_bottom = -108.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_4jn8d")
+text = "????"
+label_settings = ExtResource("3_oxswo")
+horizontal_alignment = 1
+
+[node name="CardAmount" type="Label" parent="."]
+visible = false
+z_index = 20
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = -34.0
+offset_right = 202.0
+offset_bottom = 177.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_4jn8d")
+text = "????"
+label_settings = ExtResource("4_7v2fc")
+horizontal_alignment = 1
 
 [connection signal="area_entered" from="BaseCardArea" to="." method="_on_base_card_area_area_entered"]
 [connection signal="area_exited" from="BaseCardArea" to="." method="_on_base_card_area_area_exited"]
