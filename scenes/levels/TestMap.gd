@@ -186,6 +186,10 @@ func draw_vision(shorty: BadShorty):
 		add_child(unpacked_scene)
 		unpacked_scene.position = position_to_draw
 		shorty.confirmed_visible_tiles.append(unpacked_scene)
+		var player_tile_location = tileMap.local_to_map(player.position)
+		if tile_location == Vector2(player_tile_location.x, player_tile_location.y):
+			print("spotted!")
+			# at michael, statemachine here
 
 
 func getOuterMost(playerCoordinated: Vector2, potential_movement_tiles: Array):
