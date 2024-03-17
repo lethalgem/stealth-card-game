@@ -175,7 +175,6 @@ func showFlower3():
 	flower_three_is_grabbable = true
 
 
-
 func collectedFlower1():
 	var tween = create_tween()
 	tween.tween_property(%Flower1, "modulate:a", 0, .5)
@@ -197,8 +196,6 @@ func collectedFlower3():
 	flower_three_is_grabbable = false
 
 
-
-
 # TODO: This causes thousands of errors, fix pls
 func draw_vision(shorty: BadShorty):
 	for child in shorty.confirmed_visible_tiles:
@@ -212,9 +209,21 @@ func draw_vision(shorty: BadShorty):
 		shorty.confirmed_visible_tiles.append(unpacked_scene)
 		var player_tile_location = tileMap.local_to_map(player.position)
 		if tile_location == Vector2(player_tile_location.x, player_tile_location.y):
-			print("spotted!")
 			game.playerLost()
-			# at michael, statemachine here
+
+
+func hide_vision():
+	for child in get_children():
+		if child is BadShorty:
+			for tile in child.confirmed_visible_tiles:
+				tile.visible = false
+
+
+func unhide_vision():
+	for child in get_children():
+		if child is BadShorty:
+			for tile in child.confirmed_visible_tiles:
+				tile.visible = true
 
 
 func getOuterMost(playerCoordinated: Vector2, potential_movement_tiles: Array):

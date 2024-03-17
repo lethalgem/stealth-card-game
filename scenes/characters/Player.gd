@@ -2,16 +2,20 @@ class_name Player
 
 extends Sprite2D
 
+var lost = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.play("idleDown")
 
-var lost = false
+
 func lose():
 	if not lost:
 		$AnimationPlayer.play("lose")
+		%PlayerDeathAudioPlayer.play()
 	lost = true
+
 
 func moveTo(incomingPosition):
 	if lost:
