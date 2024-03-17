@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
-[ext_resource type="PackedScene" uid="uid://1h27degcya6u" path="res://scenes/levels/CardTestMap.tscn" id="2_ub8qe"]
 [ext_resource type="PackedScene" uid="uid://dageblc58jcj8" path="res://scenes/deck/CardDeck.tscn" id="3_2lrq6"]
+[ext_resource type="PackedScene" uid="uid://cuvhlhwjrgsqk" path="res://scenes/levels/LevelOne.tscn" id="3_b47ui"]
 [ext_resource type="PackedScene" uid="uid://cnhaomjsg2qy7" path="res://scenes/characters/Player.tscn" id="6_akoob"]
 [ext_resource type="PackedScene" uid="uid://c1pkkv6kbblnt" path="res://scenes/debug/debugscene.tscn" id="6_gh13b"]
 [ext_resource type="Script" path="res://scenes/debug/debugscene.gd" id="7_02dw6"]
@@ -22,10 +22,15 @@ shadow_offset = Vector2(3, 3)
 script = ExtResource("1_g3ms6")
 cardDeck = NodePath("CardDeck")
 hand = NodePath("Hand")
-map = NodePath("CardTestMap")
+map = NodePath("LevelOne")
 player = NodePath("Player")
 
-[node name="CardTestMap" parent="." instance=ExtResource("2_ub8qe")]
+[node name="NewWoodCropped" type="Sprite2D" parent="."]
+position = Vector2(574, 553)
+scale = Vector2(0.609259, 0.609259)
+texture = ExtResource("10_4pohc")
+
+[node name="LevelOne" parent="." instance=ExtResource("3_b47ui")]
 
 [node name="CardDeck" parent="." instance=ExtResource("3_2lrq6")]
 position = Vector2(1063, 536)
@@ -67,10 +72,5 @@ unique_name_in_owner = true
 position = Vector2(1061, 543)
 rotation = 0.165806
 scale = Vector2(0.4, 0.4)
-
-[node name="NewWoodCropped" type="Sprite2D" parent="."]
-position = Vector2(574, 609)
-scale = Vector2(0.609259, 0.609259)
-texture = ExtResource("10_4pohc")
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]
