@@ -207,7 +207,7 @@ func playFlower(card: FlowerCard):
 	await map.showDemoFlower()
 	await get_tree().create_timer(2).timeout
 	#
-	#flowerCount += 1  
+	#flowerCount += 1
 	#if flowerCount >= 3:
 	#await showInstructionText(global.States.playingFlower, "all flowers revealed!", true)
 	#await get_tree().create_timer(2).timeout
