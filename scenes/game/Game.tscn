@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=14 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
 [ext_resource type="PackedScene" uid="uid://dageblc58jcj8" path="res://scenes/deck/CardDeck.tscn" id="3_2lrq6"]
 [ext_resource type="PackedScene" uid="uid://cuvhlhwjrgsqk" path="res://scenes/levels/LevelOne.tscn" id="3_b47ui"]
-[ext_resource type="Texture2D" uid="uid://bo1vpaxdh446d" path="res://assets/cards/CardBack.png" id="5_2d60j"]
 [ext_resource type="PackedScene" uid="uid://cnhaomjsg2qy7" path="res://scenes/characters/Player.tscn" id="6_akoob"]
 [ext_resource type="PackedScene" uid="uid://c1pkkv6kbblnt" path="res://scenes/debug/debugscene.tscn" id="6_gh13b"]
 [ext_resource type="Script" path="res://scenes/debug/debugscene.gd" id="7_02dw6"]
@@ -45,13 +44,6 @@ texture = ExtResource("10_4pohc")
 position = Vector2(1042, 586)
 rotation = 0.0872665
 scale = Vector2(0.4, 0.4)
-
-[node name="CardBack" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1042, 586)
-rotation = 0.0872665
-scale = Vector2(0.168765, 0.168765)
-texture = ExtResource("5_2d60j")
 
 [node name="Hand" parent="." instance=ExtResource("2_57qf6")]
 position = Vector2(574, 594)
