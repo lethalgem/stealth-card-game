@@ -139,6 +139,7 @@ func badGuysTurn():
 
 
 func playerLost():
+	#return # enables god mode
 	if global.currentState == global.States.badGuysMove:
 		gameOver = true
 		player.lose()
@@ -378,8 +379,9 @@ func fade_out_finished():
 
 
 func _input(event):
-	if event.is_action_pressed("start_sim"):
-		draw_first_hand()
+	pass
+	#if event.is_action_pressed("start_sim"):
+		#draw_first_hand()
 
 
 var skipPressed = false
