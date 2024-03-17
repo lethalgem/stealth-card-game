@@ -5,17 +5,34 @@
 [ext_resource type="PackedScene" uid="uid://c1alxqu6qky1d" path="res://scenes/characters/BadShorty.tscn" id="2_6hf75"]
 [ext_resource type="TileSet" uid="uid://bdmyru5aeqfg6" path="res://tiles/RA_Jungle.tres" id="3_40u5n"]
 
-[node name="LevelOne" type="Node2D" node_paths=PackedStringArray("tileMap", "badShort1")]
+[node name="LevelOne" type="Node2D" node_paths=PackedStringArray("tileMap", "badShorty1", "badShorty2", "badShorty3", "badShorty4", "badShorty5", "badShorty6", "badShorty7", "badShorty8", "badShorty9", "badShorty10", "badShorty11", "badShorty12", "badShorty13", "badShorty14", "badShorty15", "badShorty16", "badShorty17", "badShorty18", "badShorty19", "badShorty20", "badShorty21")]
 script = ExtResource("1_b7vpi")
 tileMap = NodePath("TileMap")
-badShort1 = NodePath("BadShorty1")
+badShorty1 = NodePath("BadShorty1")
+badShorty2 = NodePath("BadShorty2")
+badShorty3 = NodePath("BadShorty3")
+badShorty4 = NodePath("BadShorty4")
+badShorty5 = NodePath("BadShorty5")
+badShorty6 = NodePath("BadShorty6")
+badShorty7 = NodePath("BadShorty7")
+badShorty8 = NodePath("BadShorty8")
+badShorty9 = NodePath("BadShorty9")
+badShorty10 = NodePath("BadShorty10")
+badShorty11 = NodePath("BadShorty11")
+badShorty12 = NodePath("BadShorty12")
+badShorty13 = NodePath("BadShorty13")
+badShorty14 = NodePath("BadShorty14")
+badShorty15 = NodePath("BadShorty15")
+badShorty16 = NodePath("BadShorty16")
+badShorty17 = NodePath("BadShorty17")
+badShorty18 = NodePath("BadShorty18")
+badShorty19 = NodePath("BadShorty19")
+badShorty20 = NodePath("BadShorty20")
+badShorty21 = NodePath("BadShorty21")
 
 [node name="TestHighlightedTile" parent="." instance=ExtResource("1_jupkf")]
 visible = false
 position = Vector2(88, 87)
-
-[node name="BadShorty1" parent="." instance=ExtResource("2_6hf75")]
-position = Vector2(1080, 285)
 
 [node name="Background" type="TileMap" parent="."]
 tile_set = ExtResource("3_40u5n")
@@ -45,3 +62,66 @@ unique_name_in_owner = true
 tile_set = ExtResource("3_40u5n")
 format = 2
 layer_0/tile_data = PackedInt32Array(786474, 2031616, 21)
+
+[node name="BadShorty1" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(343, 111)
+
+[node name="BadShorty2" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(280, 304)
+
+[node name="BadShorty3" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(24, 192)
+
+[node name="BadShorty4" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(136, 320)
+
+[node name="BadShorty5" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(55, 461)
+
+[node name="BadShorty6" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(56, 368)
+
+[node name="BadShorty7" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(408, 352)
+
+[node name="BadShorty8" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(632, 352)
+
+[node name="BadShorty9" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(392, 48)
+
+[node name="BadShorty10" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(344, 192)
+
+[node name="BadShorty11" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(632, 112)
+
+[node name="BadShorty12" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(632, 240)
+
+[node name="BadShorty13" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(808, 64)
+
+[node name="BadShorty14" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(872, 176)
+
+[node name="BadShorty15" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(776, 352)
+
+[node name="BadShorty16" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(712, 368)
+
+[node name="BadShorty17" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(1032, 288)
+
+[node name="BadShorty18" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(920, 416)
+
+[node name="BadShorty19" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(904, 112)
+
+[node name="BadShorty20" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(1112, 368)
+
+[node name="BadShorty21" parent="." instance=ExtResource("2_6hf75")]
+position = Vector2(778, 118)

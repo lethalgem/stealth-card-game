@@ -8,9 +8,12 @@ var tileMap: TileMap
 var path: Array
 var pathIndex = 0
 
+static var random = RandomNumberGenerator.new()
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	await get_tree().create_timer(random.randf_range(.1, .8)).timeout
 	$AnimationPlayer.play('idle')
 	pass
 

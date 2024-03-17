@@ -3,7 +3,27 @@ extends Node2D
 
 @onready var global: GlobalClass = get_node("/root/Global")
 @export var tileMap: TileMap
-@export var badShort1: BadShorty
+@export var badShorty1: BadShorty
+@export var badShorty2: BadShorty
+@export var badShorty3: BadShorty
+@export var badShorty4: BadShorty
+@export var badShorty5: BadShorty
+@export var badShorty6: BadShorty
+@export var badShorty7: BadShorty
+@export var badShorty8: BadShorty
+@export var badShorty9: BadShorty
+@export var badShorty10: BadShorty
+@export var badShorty11: BadShorty
+@export var badShorty12: BadShorty
+@export var badShorty13: BadShorty
+@export var badShorty14: BadShorty
+@export var badShorty15: BadShorty
+@export var badShorty16: BadShorty
+@export var badShorty17: BadShorty
+@export var badShorty18: BadShorty
+@export var badShorty19: BadShorty
+@export var badShorty20: BadShorty
+@export var badShorty21: BadShorty
 
 var game: Game:
 	set(value):
@@ -14,17 +34,55 @@ var confirmed_movement_tile_coords = []
 
 var player
 
-var up = true
-
-
+var firstMove = true
 func badGuysMove():
-	if up:
-		await badShort1.moveTo(Vector2(0, -15))
-		up = false
+	if firstMove:
+		badShorty1.moveTo(Vector2(-10, 0))
+		badShorty2.moveTo(Vector2(0, -5))
+		badShorty3.moveTo(Vector2(7, 0))
+		badShorty4.moveTo(Vector2(0, -5))
+		badShorty5.moveTo(Vector2(10, 0))
+		badShorty6.moveTo(Vector2(0, 4))
+		badShorty7.moveTo(Vector2(-3, 0))
+		badShorty8.moveTo(Vector2(6, 0))
+		badShorty9.moveTo(Vector2(0, 8))
+		badShorty10.moveTo(Vector2(-4, 0))
+		badShorty11.moveTo(Vector2(6,0))
+		badShorty12.moveTo(Vector2(4,0))
+		badShorty13.moveTo(Vector2(0,7))
+		badShorty14.moveTo(Vector2(-7,0))
+		badShorty15.moveTo(Vector2(10,0))
+		badShorty16.moveTo(Vector2(-4,0))
+		badShorty17.moveTo(Vector2(0,5))
+		badShorty18.moveTo(Vector2(0,6))
+		badShorty19.moveTo(Vector2(5,0))
+		badShorty20.moveTo(Vector2(-4,0))
+		await badShorty21.moveTo(Vector2(0,12))
+		firstMove = false
 	else:
-		await badShort1.moveTo(Vector2(0, 15))
-		up = true
-
+		badShorty1.moveTo(Vector2(10,0))
+		badShorty2.moveTo(Vector2(0, 5))
+		badShorty3.moveTo(Vector2(-7, 0))
+		badShorty4.moveTo(Vector2(0, 5))
+		badShorty5.moveTo(Vector2(-10, 0))
+		badShorty6.moveTo(Vector2(0, -4))
+		badShorty7.moveTo(Vector2(3, 0))
+		badShorty8.moveTo(Vector2(-6, 0))
+		badShorty9.moveTo(Vector2(0, -8))
+		badShorty10.moveTo(Vector2(4, 0))
+		badShorty11.moveTo(Vector2(-6,0))
+		badShorty12.moveTo(Vector2(-4,0))
+		badShorty13.moveTo(Vector2(0,-7))
+		badShorty14.moveTo(Vector2(7,0))
+		badShorty15.moveTo(Vector2(-10,0))
+		badShorty16.moveTo(Vector2(4,0))
+		badShorty17.moveTo(Vector2(0,-5))
+		badShorty18.moveTo(Vector2(0,-6))
+		badShorty19.moveTo(Vector2(-5,0))
+		badShorty20.moveTo(Vector2(4,0))
+		await badShorty21.moveTo(Vector2(0,-12))
+		firstMove = true
+		
 	game.badGuysFinished()
 
 
@@ -33,53 +91,27 @@ func setPlayer(playerFromParent: Player):
 
 
 func _ready():
-	badShort1.setTileMap(tileMap)
-	#badShort1.setPath([
-	#Vector2(-1,0),
-	#Vector2(-2,0),
-	#Vector2(-3,0),
-	#Vector2(-2,0),
-	#Vector2(-1,0),
-	#Vector2(0,0),
-	#Vector2(1,0),
-	#Vector2(2,0),
-	#Vector2(3,0),
-	#Vector2(2,0),
-	#Vector2(1,0),
-	#Vector2(0,0)
-	#])
-
-	#badShort1.setPath([
-	#Vector2(0,-1),
-	#Vector2(0,-2),
-	#Vector2(0,-3),
-	#Vector2(0,-2),
-	#Vector2(0,-1),
-	#Vector2(0,0),
-	#Vector2(0,1),
-	#Vector2(0,2),
-	#Vector2(0,3),
-	#Vector2(0,2),
-	#Vector2(0,1),
-	#Vector2(0,0)
-	#])
-
-	badShort1.setPath(
-		[
-			Vector2(-1, 0),
-			Vector2(-2, 0),
-			Vector2(-3, 0),
-			Vector2(-3, -1),
-			Vector2(-3, -2),
-			Vector2(-3, -3),
-			Vector2(-2, -3),
-			Vector2(-1, -3),
-			Vector2(0, -3),
-			Vector2(0, -2),
-			Vector2(0, -1),
-			Vector2(0, 0)
-		]
-	)
+	badShorty1.setTileMap(tileMap)
+	badShorty2.setTileMap(tileMap)
+	badShorty3.setTileMap(tileMap)
+	badShorty4.setTileMap(tileMap)
+	badShorty5.setTileMap(tileMap)
+	badShorty6.setTileMap(tileMap)
+	badShorty7.setTileMap(tileMap)
+	badShorty8.setTileMap(tileMap)
+	badShorty9.setTileMap(tileMap)
+	badShorty10.setTileMap(tileMap)
+	badShorty11.setTileMap(tileMap)
+	badShorty12.setTileMap(tileMap)
+	badShorty13.setTileMap(tileMap)
+	badShorty14.setTileMap(tileMap)
+	badShorty15.setTileMap(tileMap)
+	badShorty16.setTileMap(tileMap)
+	badShorty17.setTileMap(tileMap)
+	badShorty18.setTileMap(tileMap)
+	badShorty19.setTileMap(tileMap)
+	badShorty20.setTileMap(tileMap)
+	badShorty21.setTileMap(tileMap)
 
 
 func prep_for_movement(player_global_position: Vector2, movement: int):

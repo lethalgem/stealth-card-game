@@ -20,10 +20,11 @@ func moveTo(incomingPosition):
 	#flip_h = true
 	$AnimationPlayer.play('teleport')
 
-	await get_tree().create_timer(.1).timeout
+	await get_tree().create_timer(.25).timeout
 	position = incomingPosition
 
 	$AnimationPlayer.play('teleport_end')
+	await get_tree().create_timer(.5).timeout
 
 	if abs(originalPosition.x - incomingPosition.x) >= abs(originalPosition.y - incomingPosition.y):
 		if incomingPosition.x >= originalPosition.x:
