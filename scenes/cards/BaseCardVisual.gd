@@ -11,6 +11,7 @@ extends Node2D
 signal just_grabbed(card: Card)
 signal just_dropped(card: Card)
 
+var is_played: bool = false
 var is_hovered: bool = false
 var is_grabbed: bool = false
 var is_interactable: bool = true
@@ -25,9 +26,14 @@ func _ready():
 func _process(delta):
 	if is_grabbed:
 		parent_card.global_position = get_viewport().get_mouse_position()
-	if is_hovered:
+	elif is_hovered and not is_played:
 		parent_card.z_index = 100
+	elif is_hovered and is_played:
+		parent_card.modulate.a = 0.15
+	elif is_played:
+		parent_card.modulate.a = 0.85
 	else:
+		parent_card.modulate.a = 1
 		parent_card.z_index = 0
 
 
@@ -52,13 +58,17 @@ func _input(event):
 
 func applyTitle(title: String):
 	cardTitle.text = title
-	
+
+
 func applyCount(count: String):
 	cardAmount.text = count
 
 
 func _on_area_2d_mouse_entered():
+	print("entered")
 	if is_interactable:
+		is_hovered = true
+	elif is_played:
 		is_hovered = true
 
 
