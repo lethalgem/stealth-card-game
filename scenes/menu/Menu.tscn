@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://lr5e8jh022pu"]
+[gd_scene load_steps=9 format=3 uid="uid://lr5e8jh022pu"]
 
 [ext_resource type="Script" path="res://scenes/menu/Menu.gd" id="1_qhltx"]
 [ext_resource type="Script" path="res://scenes/menu/Start Game.gd" id="2_5hhx2"]
 [ext_resource type="PackedScene" uid="uid://bfowoc2lljor1" path="res://scenes/game/Game.tscn" id="2_skkil"]
 [ext_resource type="AudioStream" uid="uid://dpv2cfmu27paa" path="res://assets/sound/perfect-vocal-game-sound_A_major.wav" id="4_3tkod"]
 [ext_resource type="Script" path="res://scenes/menu/Quit Game.gd" id="4_6ypdo"]
+[ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="4_yu0x1"]
+[ext_resource type="LabelSettings" uid="uid://cgx2b22dl3th6" path="res://scenes/cards/SneakyLink.tres" id="7_e1hq7"]
 [ext_resource type="AudioStream" uid="uid://ccpbnmxqo3mgp" path="res://assets/sound/cheeky-happy-video-game-chiptune-melody_154bpm_D.wav" id="7_r4a1v"]
 
 [node name="Control" type="Control"]
@@ -26,45 +28,47 @@ offset_bottom = 695.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.105882)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -108.0
-offset_right = 48.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="Label" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-text = "Sneaky Link"
-
-[node name="Start Game" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Start"
-script = ExtResource("2_5hhx2")
-
-[node name="PerfectAudioPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Start Game"]
-unique_name_in_owner = true
-stream = ExtResource("4_3tkod")
-volume_db = -5.0
-bus = &"MenuSoundEffects"
-
-[node name="Quit Game" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Quit"
-script = ExtResource("4_6ypdo")
-
 [node name="MenuMusicAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_r4a1v")
 volume_db = -1.0
 autoplay = true
 bus = &"MenuMusic"
+
+[node name="Start Game" type="Button" parent="."]
+offset_left = 101.0
+offset_top = 537.0
+offset_right = 181.0
+offset_bottom = 585.0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_yu0x1")
+theme_override_font_sizes/font_size = 32
+text = "Start"
+script = ExtResource("2_5hhx2")
+
+[node name="PerfectAudioPlayer" type="AudioStreamPlayer" parent="Start Game"]
+unique_name_in_owner = true
+stream = ExtResource("4_3tkod")
+volume_db = -5.0
+bus = &"MenuSoundEffects"
+
+[node name="Label" type="Label" parent="."]
+offset_left = 274.0
+offset_top = 508.0
+offset_right = 881.0
+offset_bottom = 641.0
+text = "Sneaky Link"
+label_settings = ExtResource("7_e1hq7")
+
+[node name="Quit Game" type="Button" parent="."]
+offset_left = 107.0
+offset_top = 589.0
+offset_right = 176.0
+offset_bottom = 637.0
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("4_yu0x1")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
+script = ExtResource("4_6ypdo")
 
 [node name="FadeRect" type="ColorRect" parent="."]
 unique_name_in_owner = true
@@ -75,7 +79,7 @@ offset_bottom = 747.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
-[connection signal="pressed" from="VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/Start Game" to="VBoxContainer/Start Game" method="_on_pressed"]
-[connection signal="finished" from="VBoxContainer/Start Game/PerfectAudioPlayer" to="." method="_on_perfect_audio_player_finished"]
-[connection signal="pressed" from="VBoxContainer/Quit Game" to="." method="_on_quit_game_pressed"]
+[connection signal="pressed" from="Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Start Game" to="Start Game" method="_on_pressed"]
+[connection signal="finished" from="Start Game/PerfectAudioPlayer" to="." method="_on_perfect_audio_player_finished"]
+[connection signal="pressed" from="Quit Game" to="." method="_on_quit_game_pressed"]
