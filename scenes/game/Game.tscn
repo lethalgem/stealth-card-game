@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=18 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
@@ -15,7 +15,6 @@
 [ext_resource type="AudioStream" uid="uid://d0wogrgik3gx1" path="res://assets/sound/baddies_turn_bell.mp3" id="13_qh30m"]
 [ext_resource type="AudioStream" uid="uid://0x2fhkvltuc4" path="res://assets/sound/player_turn_chime_trimmed.mp3" id="14_un10b"]
 [ext_resource type="AudioStream" uid="uid://5mdssysa8ly3" path="res://assets/sound/positive-massive-logo-13624.mp3" id="15_bhegy"]
-[ext_resource type="AudioStream" uid="uid://ccpbnmxqo3mgp" path="res://assets/sound/cheeky-happy-video-game-chiptune-melody_154bpm_D.wav" id="15_kyroc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_elw4s"]
 font_size = 32
@@ -137,11 +136,6 @@ bus = &"GameSoundEffects"
 [node name="FlowerTouchedAudioPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("15_bhegy")
-bus = &"GameSoundEffects"
-
-[node name="PerfectAudioPlayer" type="AudioStreamPlayer" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("15_kyroc")
 bus = &"GameSoundEffects"
 
 [node name="FadeInRect" type="ColorRect" parent="."]

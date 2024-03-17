@@ -4,6 +4,7 @@ extends Node2D
 func _ready():
 	var tween = create_tween()
 	tween.tween_property(%WinFadeInRect, "modulate:a", 0, 1).set_ease(Tween.EASE_OUT)
+	%MusicPlayer.play(235)
 
 
 func _on_button_pressed():

@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://scenes/menu/Menu.gd" id="1_qhltx"]
 [ext_resource type="Script" path="res://scenes/menu/Start Game.gd" id="2_5hhx2"]
 [ext_resource type="PackedScene" uid="uid://bfowoc2lljor1" path="res://scenes/game/Game.tscn" id="2_skkil"]
+[ext_resource type="AudioStream" uid="uid://726s62plvyt1" path="res://assets/sound/cheeky-happy-video-game-chiptune-melody_154bpm_D.mp3" id="3_m1to3"]
 [ext_resource type="AudioStream" uid="uid://dpv2cfmu27paa" path="res://assets/sound/perfect-vocal-game-sound_A_major.wav" id="4_3tkod"]
 [ext_resource type="Script" path="res://scenes/menu/Quit Game.gd" id="4_6ypdo"]
 [ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="4_yu0x1"]
 [ext_resource type="LabelSettings" uid="uid://cgx2b22dl3th6" path="res://scenes/cards/SneakyLink.tres" id="7_e1hq7"]
-[ext_resource type="AudioStream" uid="uid://ccpbnmxqo3mgp" path="res://assets/sound/cheeky-happy-video-game-chiptune-melody_154bpm_D.wav" id="7_r4a1v"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -29,7 +29,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0.105882)
 
 [node name="MenuMusicAudioPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_r4a1v")
+stream = ExtResource("3_m1to3")
 volume_db = -1.0
 autoplay = true
 bus = &"MenuMusic"

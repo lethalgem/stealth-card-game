@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce342lf76jqb3"]
+[gd_scene load_steps=7 format=3 uid="uid://ce342lf76jqb3"]
 
 [ext_resource type="Script" path="res://scenes/endScreens/WinScreen.gd" id="1_i6kd5"]
 [ext_resource type="Texture2D" uid="uid://6sy5iul0guuf" path="res://assets/endScreens/winScreen.png" id="1_rx6wq"]
 [ext_resource type="LabelSettings" uid="uid://fqk5cwkupvo8" path="res://scenes/cards/WINLOSE.tres" id="2_kbus6"]
 [ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="3_08lfk"]
+[ext_resource type="AudioStream" uid="uid://ci1np53biala4" path="res://assets/sound/victory.mp3" id="5_2bdmj"]
 
 [sub_resource type="Theme" id="Theme_p7bis"]
 
@@ -51,5 +52,11 @@ offset_right = 1156.0
 offset_bottom = 652.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_2bdmj")
+volume_db = -5.0
+bus = &"GameMusic"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

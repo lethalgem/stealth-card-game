@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://xhjr07c11k1q"]
+[gd_scene load_steps=7 format=3 uid="uid://xhjr07c11k1q"]
 
 [ext_resource type="Texture2D" uid="uid://hrlh00kv2t0q" path="res://assets/endScreens/loseScreen.png" id="1_g0y85"]
 [ext_resource type="Script" path="res://scenes/endScreens/LoseScreen.gd" id="1_l24ps"]
 [ext_resource type="LabelSettings" uid="uid://b05vj3s207vii" path="res://scenes/cards/LOSE.tres" id="2_p66ev"]
 [ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="3_8poc1"]
+[ext_resource type="AudioStream" uid="uid://d0n18hrkyl1cj" path="res://assets/sound/defeat(chosic.com).mp3" id="5_4n5fe"]
 
 [sub_resource type="Theme" id="Theme_omqld"]
 
@@ -51,5 +52,10 @@ offset_right = 1156.0
 offset_bottom = 652.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="LoseMusicPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_4n5fe")
+volume_db = -10.0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
