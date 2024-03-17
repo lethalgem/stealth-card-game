@@ -273,37 +273,37 @@ func _process(delta):
 		elif lastProcessState == global.States.waitingForstart:
 			showingInfo = true
 			%Skip.visible = true
-			
+
 			if not skipPressed:
 				await showInstructionText(global.States.playingFlower, "play cards to", true)
 				await get_tree().create_timer(2).timeout
-			
+
 			if not skipPressed:
 				await showInstructionText(global.States.playingFlower, "move", true)
 				await get_tree().create_timer(2).timeout
-			
+
 			if not skipPressed:
 				await showInstructionText(global.States.playingFlower, "GROW combos", true)
 				await get_tree().create_timer(2).timeout
-			
+
 			if not skipPressed:
 				await showInstructionText(global.States.playingFlower, "and collect flowers", true)
 				await get_tree().create_timer(3).timeout
-			
+
 			if not skipPressed:
 				await showInstructionText(
 					global.States.playingFlower, "play flower cards to reveal flowers", true
 				)
 				await get_tree().create_timer(2).timeout
-			
+
 			if not skipPressed:
 				await showInstructionText(
 					global.States.playingFlower, "collect flowers by moving to them", true
 				)
 				await get_tree().create_timer(2).timeout
-			
+
 			await showInstructionText(global.States.playingFlower, "play a card", true)
-			
+
 			%Skip.visible = false
 			showingInfo = false
 
