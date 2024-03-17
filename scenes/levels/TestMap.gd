@@ -35,6 +35,8 @@ var confirmed_movement_tile_coords = []
 var player
 
 var firstMove = true
+
+
 func badGuysMove():
 	if firstMove:
 		badShorty1.moveTo(Vector2(-10, 0))
@@ -47,20 +49,20 @@ func badGuysMove():
 		badShorty8.moveTo(Vector2(6, 0))
 		badShorty9.moveTo(Vector2(0, 8))
 		badShorty10.moveTo(Vector2(-4, 0))
-		badShorty11.moveTo(Vector2(6,0))
-		badShorty12.moveTo(Vector2(4,0))
-		badShorty13.moveTo(Vector2(0,7))
-		badShorty14.moveTo(Vector2(-7,0))
-		badShorty15.moveTo(Vector2(10,0))
-		badShorty16.moveTo(Vector2(-4,0))
-		badShorty17.moveTo(Vector2(0,5))
-		badShorty18.moveTo(Vector2(0,6))
-		badShorty19.moveTo(Vector2(5,0))
-		badShorty20.moveTo(Vector2(-4,0))
-		await badShorty21.moveTo(Vector2(0,12))
+		badShorty11.moveTo(Vector2(6, 0))
+		badShorty12.moveTo(Vector2(4, 0))
+		badShorty13.moveTo(Vector2(0, 7))
+		badShorty14.moveTo(Vector2(-7, 0))
+		badShorty15.moveTo(Vector2(10, 0))
+		badShorty16.moveTo(Vector2(-4, 0))
+		badShorty17.moveTo(Vector2(0, 5))
+		badShorty18.moveTo(Vector2(0, 6))
+		badShorty19.moveTo(Vector2(5, 0))
+		badShorty20.moveTo(Vector2(-4, 0))
+		await badShorty21.moveTo(Vector2(0, 12))
 		firstMove = false
 	else:
-		badShorty1.moveTo(Vector2(10,0))
+		badShorty1.moveTo(Vector2(10, 0))
 		badShorty2.moveTo(Vector2(0, 5))
 		badShorty3.moveTo(Vector2(-7, 0))
 		badShorty4.moveTo(Vector2(0, 5))
@@ -70,19 +72,19 @@ func badGuysMove():
 		badShorty8.moveTo(Vector2(-6, 0))
 		badShorty9.moveTo(Vector2(0, -8))
 		badShorty10.moveTo(Vector2(4, 0))
-		badShorty11.moveTo(Vector2(-6,0))
-		badShorty12.moveTo(Vector2(-4,0))
-		badShorty13.moveTo(Vector2(0,-7))
-		badShorty14.moveTo(Vector2(7,0))
-		badShorty15.moveTo(Vector2(-10,0))
-		badShorty16.moveTo(Vector2(4,0))
-		badShorty17.moveTo(Vector2(0,-5))
-		badShorty18.moveTo(Vector2(0,-6))
-		badShorty19.moveTo(Vector2(-5,0))
-		badShorty20.moveTo(Vector2(4,0))
-		await badShorty21.moveTo(Vector2(0,-12))
+		badShorty11.moveTo(Vector2(-6, 0))
+		badShorty12.moveTo(Vector2(-4, 0))
+		badShorty13.moveTo(Vector2(0, -7))
+		badShorty14.moveTo(Vector2(7, 0))
+		badShorty15.moveTo(Vector2(-10, 0))
+		badShorty16.moveTo(Vector2(4, 0))
+		badShorty17.moveTo(Vector2(0, -5))
+		badShorty18.moveTo(Vector2(0, -6))
+		badShorty19.moveTo(Vector2(-5, 0))
+		badShorty20.moveTo(Vector2(4, 0))
+		await badShorty21.moveTo(Vector2(0, -12))
 		firstMove = true
-		
+
 	game.badGuysFinished()
 
 
@@ -114,37 +116,36 @@ func _ready():
 	badShorty21.setTileMap(tileMap)
 
 
-func getOuterMost(playerCoordinated: Vector2, potential_movement_tiles:Array):
+func getOuterMost(playerCoordinated: Vector2, potential_movement_tiles: Array):
 	var minMaxes = {}
-		
+
 	for tile in potential_movement_tiles:
 		if not minMaxes.has(tile.y):
-			minMaxes[tile.y] = { 'min': tile.x, 'max': tile.x}
+			minMaxes[tile.y] = {"min": tile.x, "max": tile.x}
 		else:
 			minMaxes[tile.y].min = min(tile.x, minMaxes[tile.y].min)
 			minMaxes[tile.y].max = max(tile.x, minMaxes[tile.y].max)
-			
+
 	for key in minMaxes.keys():
-		if minMaxes[key]['min'] >= playerCoordinated.x or minMaxes[key]['min'] == 0:
-			minMaxes[key]['min'] = -100000
-		if minMaxes[key]['max'] <= playerCoordinated.x:
-			minMaxes[key]['max'] = 100000
-			
+		if minMaxes[key]["min"] >= playerCoordinated.x or minMaxes[key]["min"] == 0:
+			minMaxes[key]["min"] = -100000
+		if minMaxes[key]["max"] <= playerCoordinated.x:
+			minMaxes[key]["max"] = 100000
+
 	var rangeToIterate = range(len(potential_movement_tiles))
 	rangeToIterate.reverse()
 	for i in rangeToIterate:
-		if minMaxes[potential_movement_tiles[i].y]['min'] != potential_movement_tiles[i].x 	and minMaxes[potential_movement_tiles[i].y]['max'] != potential_movement_tiles[i].x:
+		if (
+			minMaxes[potential_movement_tiles[i].y]["min"] != potential_movement_tiles[i].x
+			and minMaxes[potential_movement_tiles[i].y]["max"] != potential_movement_tiles[i].x
+		):
 			potential_movement_tiles.remove_at(i)
-	
+
 	return potential_movement_tiles
 
+
 func prep_for_movement(player_global_position: Vector2, movement: int):
-	print("prepping for movement")
 	var tile_coords = tileMap.local_to_map(player_global_position)
-	print(tile_coords)
-	#var potential_movement_tiles = get_surrounding_tiles_in_range(tile_coords, 3)
-	#var potential_movement_tiles = get_surrounding_tiles_in_range_New(tile_coords, 1, 3)
-	#get_surrounding_tiles_in_range(tile_coords, 6)
 	get_surrounding_tiles_in_range(tile_coords, movement)
 	var potential_movement_tiles = gatherAll()
 
@@ -152,9 +153,7 @@ func prep_for_movement(player_global_position: Vector2, movement: int):
 
 	confirmed_movement_tile_coords = []
 	for potential_tile_coords in potential_movement_tiles:
-		print(potential_tile_coords)
 		if tileMap.get_cell_tile_data(0, potential_tile_coords).get_custom_data("canMove"):
-			print("can move here")
 			confirmed_movement_tile_coords.append(potential_tile_coords)
 
 	highlight_tiles(confirmed_movement_tile_coords)
@@ -244,8 +243,6 @@ func get_surrounding_tiles_in_range_recurse(
 		return
 
 	_totalCount += 1
-	print("XYZ")
-	print(_totalCount)
 
 	var z = 4
 	if current_coords.x == 7 and current_coords.y == 3:
@@ -261,7 +258,7 @@ func get_surrounding_tiles_in_range_recurse(
 
 			_possibleSpaces[current_coords.x][current_coords.y] = true
 
-		#TODO HERE for efficieny bug
+		#TODO HERE for efficiency bug
 		else:
 			z = 4
 			if current_coords.x == 8 and current_coords.y == 3:
@@ -271,9 +268,6 @@ func get_surrounding_tiles_in_range_recurse(
 	var tiles = []
 	for x in range(-1, 2):
 		for y in range(-1, 2):
-			#print('here')
-			#print(x)
-			#print(y)
 			if abs(x) == abs(y):
 				continue
 

@@ -28,10 +28,8 @@ func _process(delta):
 		parent_card.global_position = get_viewport().get_mouse_position()
 	elif is_hovered and not is_played:
 		parent_card.z_index = 100
-	elif is_hovered and is_played:
-		parent_card.modulate.a = 0.15
 	elif is_played:
-		parent_card.modulate.a = .15 #0.85
+		parent_card.modulate.a = .15
 	else:
 		parent_card.modulate.a = 1
 		parent_card.z_index = 0
@@ -46,14 +44,12 @@ func _input(event):
 	):
 		is_grabbed = true
 		just_grabbed.emit(parent_card)
-		print("grabbed")
+
 
 	elif event.is_action_released("user_click"):
-		print("released")
 		if is_grabbed:
 			is_grabbed = false
 			just_dropped.emit(parent_card)
-			print("dropped")
 
 
 func applyTitle(title: String):
@@ -65,10 +61,7 @@ func applyCount(count: String):
 
 
 func _on_area_2d_mouse_entered():
-	print("entered")
 	if is_interactable:
-		is_hovered = true
-	elif is_played:
 		is_hovered = true
 
 

@@ -135,7 +135,6 @@ func position_cards():
 
 
 func card_grabbed(card: Card):
-	print("got it ")
 	grabbed_card = card
 	cards.erase(card)
 	for cards_in_hands in cards:
