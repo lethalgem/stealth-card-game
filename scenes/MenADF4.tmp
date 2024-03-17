@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://lr5e8jh022pu"]
+
+[ext_resource type="Script" path="res://scenes/Menu.gd" id="1_qhltx"]
+[ext_resource type="Script" path="res://scenes/Start Game.gd" id="2_5hhx2"]
+[ext_resource type="Script" path="res://scenes/Options.gd" id="3_5jqb8"]
+[ext_resource type="Script" path="res://scenes/Quit Game.gd" id="4_6ypdo"]
+[ext_resource type="AudioStream" uid="uid://cntggiyhw6efr" path="res://assets/sound/perfect-vocal-game-sound_A_major.wav" id="5_k4ign"]
+[ext_resource type="Texture2D" uid="uid://b578kft627c6u" path="res://assets/wood/NewWoodCropped.svg" id="5_la5ko"]
+[ext_resource type="PackedScene" uid="uid://cuvhlhwjrgsqk" path="res://scenes/levels/LevelOne.tscn" id="6_bwn3o"]
+[ext_resource type="AudioStream" uid="uid://cxq8nc6ah38t5" path="res://assets/sound/cheeky-happy-video-game-chiptune-melody_154bpm_D.wav" id="7_r4a1v"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qhltx")
+
+[node name="NewWoodCropped" type="Sprite2D" parent="."]
+position = Vector2(574, 553)
+scale = Vector2(0.609259, 0.609259)
+texture = ExtResource("5_la5ko")
+
+[node name="LevelOne" parent="." instance=ExtResource("6_bwn3o")]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_right = 96.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Sneaky Link"
+
+[node name="Start Game" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start"
+script = ExtResource("2_5hhx2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Start Game"]
+stream = ExtResource("5_k4ign")
+
+[node name="Options" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+script = ExtResource("3_5jqb8")
+
+[node name="Quit Game" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+script = ExtResource("4_6ypdo")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_r4a1v")
+autoplay = true
+
+[connection signal="pressed" from="VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit Game" to="." method="_on_quit_game_pressed"]
