@@ -173,6 +173,30 @@ func showFlower3():
 	tween.tween_property(%Flower3, "modulate:a", 1, .5)
 	await tween.finished
 	flower_three_is_grabbable = true
+	
+	
+	
+func collectedFlower1():
+	var tween = create_tween()
+	tween.tween_property(%Flower1, "modulate:a", 0, .5)
+	await tween.finished
+	flower_one_is_grabbable = false
+
+
+func collectedFlower2():
+	var tween = create_tween()
+	tween.tween_property(%Flower2, "modulate:a", 0, .5)
+	await tween.finished
+	flower_two_is_grabbable = false
+
+
+func collectedFlower3():
+	var tween = create_tween()
+	tween.tween_property(%Flower3, "modulate:a", 0, .5)
+	await tween.finished
+	flower_three_is_grabbable = false
+
+
 
 
 # TODO: This causes thousands of errors, fix pls
@@ -343,14 +367,17 @@ func gatherAll():
 
 func _on_flower_1_area_area_entered(area):
 	if area.get_name() == "PlayerArea" and flower_one_is_grabbable:
+		game.flower1Touched()
 		print("flower touched!")  # @michael, state machine here
 
 
 func _on_flower_2_area_area_entered(area):
 	if area.get_name() == "PlayerArea" and flower_two_is_grabbable:
+		game.flower2Touched()
 		print("flower touched!")  # @michael, state machine here
 
 
 func _on_flower_3_area_area_entered(area):
 	if area.get_name() == "PlayerArea" and flower_two_is_grabbable:
+		game.flower3Touched()
 		print("flower touched!")  # @michael, state machine here
