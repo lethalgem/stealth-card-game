@@ -14,6 +14,18 @@ var confirmed_movement_tile_coords = []
 
 var player
 
+var up = true
+
+func badGuysMove():
+	if up:
+		await badShort1.moveTo(Vector2(0, -15))
+		up = false
+	else:
+		await badShort1.moveTo(Vector2(0, 15))
+		up = true
+		
+	game.badGuysFinished()
+	
 
 func setPlayer(playerFromParent: Player):
 	player = playerFromParent

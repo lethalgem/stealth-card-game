@@ -10,6 +10,7 @@ var pathIndex = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationPlayer.play('idle')
 	pass 
 	
 func setTileMap(tileMapFromParent):
@@ -24,33 +25,46 @@ func setPath(pathFromParent):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	pass
 	
-	var currentTilePosition = tileMap.local_to_map(position)
-	if currentTilePosition.x == path[pathIndex].x and currentTilePosition.y == path[pathIndex].y:
-		pathIndex += 1
-		if pathIndex >= len(path):
-			pathIndex = 0
+	#var currentTilePosition = tileMap.local_to_map(position)
+	#if currentTilePosition.x == path[pathIndex].x and currentTilePosition.y == path[pathIndex].y:
+		#pathIndex += 1
+		#if pathIndex >= len(path):
+			#pathIndex = 0
+	#
+	#if currentTilePosition.x > path[pathIndex].x:
+		#directionState = DirectionState.left
+	#elif currentTilePosition.x < path[pathIndex].x:
+		#directionState = DirectionState.right
+	#elif currentTilePosition.y > path[pathIndex].y:
+		#directionState = DirectionState.up
+	#elif currentTilePosition.y < path[pathIndex].y:
+		#directionState = DirectionState.down
+	#
+	#
+	#if directionState == DirectionState.left:
+		#walkLeft(delta)
+	#elif directionState == DirectionState.right:
+		#walkRight(delta)
+	#elif directionState == DirectionState.up:
+		#walkUp(delta)
+	#elif directionState == DirectionState.down:
+		#walkDown(delta)
+
+
+func moveTo(positionModifier):
+	var tileSize = 16
+	var totalMovement = abs(positionModifier.x) + abs(positionModifier.y)
+	var time = .25 * totalMovement
 	
-	if currentTilePosition.x > path[pathIndex].x:
-		directionState = DirectionState.left
-	elif currentTilePosition.x < path[pathIndex].x:
-		directionState = DirectionState.right
-	elif currentTilePosition.y > path[pathIndex].y:
-		directionState = DirectionState.up
-	elif currentTilePosition.y < path[pathIndex].y:
-		directionState = DirectionState.down
+	$AnimationPlayer.play('walk')
+	var tween = create_tween()
+	await tween.tween_property(self, 'position', Vector2(position.x + positionModifier.x * tileSize, position.y + positionModifier.y * tileSize), time)
 	
-	
-	if directionState == DirectionState.left:
-		walkLeft(delta)
-	elif directionState == DirectionState.right:
-		walkRight(delta)
-	elif directionState == DirectionState.up:
-		walkUp(delta)
-	elif directionState == DirectionState.down:
-		walkDown(delta)
-		
-	
+	await get_tree().create_timer(time).timeout
+	$AnimationPlayer.play('idle')
+
 
 func walkLeft(tweenTime):
 	flip_h = true

@@ -5,6 +5,7 @@ extends Node2D
 var cardCount = 0
 # 1 = action (movement for now)
 # 2 = action count
+# 3 = flower
 # use by listing vector2s of (card_type, actioncount/movementspeed)
 var deck_gen: PackedVector2Array = [
 	Vector2(1, 1),
@@ -26,13 +27,17 @@ var deck_gen: PackedVector2Array = [
 	Vector2(2, 3),
 	Vector2(2, 2),
 	Vector2(2, 2),
+	Vector2(3, 1),
+	Vector2(3, 2),
+	Vector2(3, 3),
 ]
 
 @onready var deck_shuffling_audio_player: AudioStreamPlayer2D = %DeckShufflingAudioPlayer
 
 var cards: Array = []
-var actionCountCardScene = preload("res://scenes/cards/ActionCountCard.tscn")
 var actionCardScene = preload("res://scenes/cards/ActionCard.tscn")
+var actionCountCardScene = preload("res://scenes/cards/ActionCountCard.tscn")
+var flowerCardScene = preload("res://scenes/cards/FlowerCard.tscn")
 
 signal deckLocation(Vector2)
 
@@ -72,17 +77,25 @@ func createCard(card_to_gen: Vector2):
 		float(2):
 			print("action count card")
 			cards.append(createActionCountCard(card_to_gen.y))
+		float(3):
+			print("flower card")
+			cards.append(createFlowerCard(card_to_gen.y))
 		_:
 			print("unrecognized card to generate")
-
-
-func createActionCountCard(actions: int) -> Card:
-	var actionCountCard = actionCountCardScene.instantiate()
-	actionCountCard.createCard(actions)
-	return actionCountCard
 
 
 func createActionCard(actions: int) -> Card:
 	var actionCard = actionCardScene.instantiate()
 	actionCard.createCard(actions)
 	return actionCard
+	
+func createActionCountCard(actions: int) -> Card:
+	var actionCountCard = actionCountCardScene.instantiate()
+	actionCountCard.createCard(actions)
+	return actionCountCard
+	
+	
+func createFlowerCard(actions: int) -> Card:
+	var flowerCard = flowerCardScene.instantiate()
+	flowerCard.createCard(actions)
+	return flowerCard

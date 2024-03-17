@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=12 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://c1pkkv6kbblnt" path="res://scenes/debug/debugscene.tscn" id="6_gh13b"]
 [ext_resource type="Script" path="res://scenes/debug/debugscene.gd" id="7_02dw6"]
 [ext_resource type="AudioStream" uid="uid://cccmm745f88ku" path="res://assets/sound/Sneaky-Adventure(chosic.com).mp3" id="9_w3je1"]
+[ext_resource type="PackedScene" uid="uid://bbrb4qp8nd1jx" path="res://scenes/flower/Flower.tscn" id="9_xvrcr"]
+[ext_resource type="Texture2D" uid="uid://b578kft627c6u" path="res://assets/wood/NewWoodCropped.svg" id="10_4pohc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_elw4s"]
 font_size = 32
@@ -59,5 +61,16 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Action Count"
 label_settings = SubResource("LabelSettings_elw4s")
+
+[node name="Flower" parent="." instance=ExtResource("9_xvrcr")]
+unique_name_in_owner = true
+position = Vector2(1061, 543)
+rotation = 0.165806
+scale = Vector2(0.4, 0.4)
+
+[node name="NewWoodCropped" type="Sprite2D" parent="."]
+position = Vector2(574, 609)
+scale = Vector2(0.609259, 0.609259)
+texture = ExtResource("10_4pohc")
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]
