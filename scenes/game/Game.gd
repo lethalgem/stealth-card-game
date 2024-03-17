@@ -208,7 +208,7 @@ func playFlower(card: FlowerCard):
 	await map.showDemoFlower()
 	await get_tree().create_timer(2).timeout
 	#
-	#flowerCount += 1
+	#flowerCount += 1  
 	#if flowerCount >= 3:
 	#await showInstructionText(global.States.playingFlower, "all flowers revealed!", true)
 	#await get_tree().create_timer(2).timeout
@@ -232,6 +232,7 @@ func playFlower(card: FlowerCard):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if fadeIn:
+		var z = global.currentState
 		fade_in()
 		draw_first_hand()
 	map.setPlayer(player)
@@ -270,13 +271,14 @@ func showInstructionText(state, text, force = false):
 		await tween2.finished
 
 
-var lastProcessState = global.States.badGuysMove
+var lastProcessState = global.States.waitingForstart
 var lastProcessActionCount = 0
 var showingInfo = false
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var z = global.currentState
 	if global.currentState == global.States.waitingForUserCard:
 		#if lastProcessState != global.States.waitingForUserCard:
 		#lastProcessState = global.currentState
