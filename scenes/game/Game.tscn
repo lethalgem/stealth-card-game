@@ -151,4 +151,17 @@ offset_bottom = 671.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0.0196078)
 
+[node name="Skip" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 477.0
+offset_top = 396.0
+offset_right = 662.0
+offset_bottom = 436.0
+theme_override_colors/font_color = Color(0.960784, 0.803922, 0.301961, 1)
+theme_override_fonts/font = ExtResource("12_0ee0k")
+theme_override_font_sizes/font_size = 24
+text = "skip instructions"
+
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]
+[connection signal="pressed" from="Skip" to="." method="_on_skip_pressed"]

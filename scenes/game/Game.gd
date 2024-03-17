@@ -272,24 +272,39 @@ func _process(delta):
 			pass
 		elif lastProcessState == global.States.waitingForstart:
 			showingInfo = true
-			await showInstructionText(global.States.playingFlower, "play cards to", true)
-			await get_tree().create_timer(2).timeout
-			await showInstructionText(global.States.playingFlower, "move", true)
-			await get_tree().create_timer(2).timeout
-			await showInstructionText(global.States.playingFlower, "GROW combos", true)
-			await get_tree().create_timer(2).timeout
-			await showInstructionText(global.States.playingFlower, "and collect flowers", true)
-			await get_tree().create_timer(3).timeout
-			await showInstructionText(
-				global.States.playingFlower, "play flower cards to reveal flowers", true
-			)
-			await get_tree().create_timer(2).timeout
-			await showInstructionText(
-				global.States.playingFlower, "collect flowers by moving to them", true
-			)
-			await get_tree().create_timer(2).timeout
-			await get_tree().create_timer(2).timeout
+			%Skip.visible = true
+			
+			if not skipPressed:
+				await showInstructionText(global.States.playingFlower, "play cards to", true)
+				await get_tree().create_timer(2).timeout
+			
+			if not skipPressed:
+				await showInstructionText(global.States.playingFlower, "move", true)
+				await get_tree().create_timer(2).timeout
+			
+			if not skipPressed:
+				await showInstructionText(global.States.playingFlower, "GROW combos", true)
+				await get_tree().create_timer(2).timeout
+			
+			if not skipPressed:
+				await showInstructionText(global.States.playingFlower, "and collect flowers", true)
+				await get_tree().create_timer(3).timeout
+			
+			if not skipPressed:
+				await showInstructionText(
+					global.States.playingFlower, "play flower cards to reveal flowers", true
+				)
+				await get_tree().create_timer(2).timeout
+			
+			if not skipPressed:
+				await showInstructionText(
+					global.States.playingFlower, "collect flowers by moving to them", true
+				)
+				await get_tree().create_timer(2).timeout
+			
 			await showInstructionText(global.States.playingFlower, "play a card", true)
+			
+			%Skip.visible = false
 			showingInfo = false
 
 		elif lastProcessActionCount != actionCount and actionCount > 0:
@@ -364,3 +379,9 @@ func fade_out_finished():
 func _input(event):
 	if event.is_action_pressed("start_sim"):
 		draw_first_hand()
+
+
+var skipPressed = false
+func _on_skip_pressed():
+	skipPressed = true
+	%Skip.visible = false
