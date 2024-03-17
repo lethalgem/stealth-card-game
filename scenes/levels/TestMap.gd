@@ -213,6 +213,7 @@ func draw_vision(shorty: BadShorty):
 		var player_tile_location = tileMap.local_to_map(player.position)
 		if tile_location == Vector2(player_tile_location.x, player_tile_location.y):
 			print("spotted!")
+			game.playerLost()
 			# at michael, statemachine here
 
 

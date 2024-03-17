@@ -132,6 +132,18 @@ func badGuysTurn():
 	map.badGuysMove()
 
 
+func playerLost():
+	if global.currentState == global.States.badGuysMove:
+		player.lose()
+		print('YOU LOSE!')
+		#baddie_audio_player.play()
+		#await get_tree().create_timer(1).timeout
+		#updatePrevious()
+		#global.currentState = global.States.badGuysMove
+		#await get_tree().create_timer(1).timeout
+		#map.badGuysMove()
+
+
 func badGuysFinished():
 	updatePrevious()
 	hand.show_hand()
