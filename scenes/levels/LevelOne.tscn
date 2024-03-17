@@ -68,60 +68,74 @@ position = Vector2(343, 111)
 
 [node name="BadShorty2" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(280, 304)
+directionState = 2
 
 [node name="BadShorty3" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(24, 192)
+directionState = 1
 
 [node name="BadShorty4" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(136, 320)
+directionState = 2
 
 [node name="BadShorty5" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(55, 461)
 
 [node name="BadShorty6" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(56, 368)
+directionState = 3
 
 [node name="BadShorty7" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(408, 352)
 
 [node name="BadShorty8" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(632, 352)
+directionState = 1
 
 [node name="BadShorty9" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(392, 48)
+directionState = 3
 
 [node name="BadShorty10" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(344, 192)
 
 [node name="BadShorty11" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(632, 112)
+directionState = 1
 
 [node name="BadShorty12" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(632, 240)
+directionState = 1
 
 [node name="BadShorty13" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(808, 64)
+directionState = 3
 
 [node name="BadShorty14" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(872, 176)
 
 [node name="BadShorty15" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(776, 352)
+directionState = 1
 
 [node name="BadShorty16" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(712, 368)
 
 [node name="BadShorty17" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(1032, 288)
+directionState = 3
 
 [node name="BadShorty18" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(920, 416)
+directionState = 3
 
 [node name="BadShorty19" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(904, 112)
+directionState = 1
 
 [node name="BadShorty20" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(1112, 368)
 
 [node name="BadShorty21" parent="." instance=ExtResource("2_6hf75")]
 position = Vector2(778, 118)
+directionState = 3

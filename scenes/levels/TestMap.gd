@@ -30,7 +30,9 @@ var game: Game:
 		game = value
 
 var highlightingTile = preload("res://scenes/levels/highlighted_tile.tscn")
+var visionTile = preload("res://scenes/levels/VisionTile.tscn")
 var confirmed_movement_tile_coords = []
+var highlightedTiles: Array = []
 
 var player
 
@@ -93,6 +95,27 @@ func setPlayer(playerFromParent: Player):
 
 
 func _ready():
+	badShorty1.gameLevel = self
+	badShorty2.gameLevel = self
+	badShorty3.gameLevel = self
+	badShorty4.gameLevel = self
+	badShorty5.gameLevel = self
+	badShorty6.gameLevel = self
+	badShorty7.gameLevel = self
+	badShorty8.gameLevel = self
+	badShorty9.gameLevel = self
+	badShorty10.gameLevel = self
+	badShorty11.gameLevel = self
+	badShorty12.gameLevel = self
+	badShorty13.gameLevel = self
+	badShorty14.gameLevel = self
+	badShorty15.gameLevel = self
+	badShorty16.gameLevel = self
+	badShorty17.gameLevel = self
+	badShorty18.gameLevel = self
+	badShorty19.gameLevel = self
+	badShorty20.gameLevel = self
+	badShorty21.gameLevel = self
 	badShorty1.setTileMap(tileMap)
 	badShorty2.setTileMap(tileMap)
 	badShorty3.setTileMap(tileMap)
@@ -114,6 +137,18 @@ func _ready():
 	badShorty19.setTileMap(tileMap)
 	badShorty20.setTileMap(tileMap)
 	badShorty21.setTileMap(tileMap)
+
+
+func draw_vision(shorty: BadShorty):
+	for child in shorty.confirmed_visible_tiles:
+		remove_child(child)
+	var potentially_visible_tiles = shorty.tiles_in_visible_range.keys()
+	for tile_location in potentially_visible_tiles:
+		var unpacked_scene = visionTile.instantiate()
+		var position_to_draw = tileMap.map_to_local(tile_location)
+		add_child(unpacked_scene)
+		unpacked_scene.position = position_to_draw
+		shorty.confirmed_visible_tiles.append(unpacked_scene)
 
 
 func getOuterMost(playerCoordinated: Vector2, potential_movement_tiles: Array):
@@ -161,9 +196,6 @@ func prep_for_movement(player_global_position: Vector2, movement: int):
 	game.highlightFinished()
 
 
-var highlightedTiles: Array = []
-
-
 func highlight_tiles(tile_coords: PackedVector2Array):
 	for coord in tile_coords:
 		var unpacked_scene = highlightingTile.instantiate()
@@ -181,15 +213,6 @@ func removeHighlightedTiles():
 	highlightedTiles = []
 
 
-#func get_surrounding_tiles_in_range(current_coords: Vector2, distance: int) -> PackedVector2Array:
-#var tiles = []
-#for x in range(-distance, distance + 1):
-#for y in range(-distance, distance + 1):
-#if x!= 0 or y != 0:
-#tiles.append(current_coords + Vector2(x, y))
-##tiles.append(current_coords + Vector2(x - 1, y - 1))
-#return tiles
-
 var _possibleSpaces = {}
 var _totalCount = 0
 
@@ -204,11 +227,9 @@ func _input(event):
 		var tilePosition = tileMap.local_to_map(mousePosition)
 
 		for confirmedTile in confirmed_movement_tile_coords:
-			#if confirmed_movement_tile_coords.has(tilePosition):
 			if confirmedTile.x == tilePosition.x and confirmedTile.y == tilePosition.y:
 				if game.aboutToMoveCharacter():
 					var playerTilePosition = tileMap.local_to_map(player.position)
-					#var newPosition = Vector2((playerTilePosition.x - tilePosition.x)*16, (playerTilePosition.y - tilePosition.y)*16)
 					var newPosition = Vector2(tilePosition.x * 16 + 8, tilePosition.y * 16 + 8)
 
 					player.moveTo(newPosition)
@@ -219,10 +240,6 @@ func _input(event):
 
 
 func get_surrounding_tiles_in_range(current_coords: Vector2, maxDistance: int):
-	#for key in _possibleSpaces:
-	#for innerKey in _possibleSpaces[key]:
-	#_possibleSpaces[key].erase(innerKey)
-	#_possibleSpaces.erase(key)
 	_possibleSpaces = {}
 	_possibleSpaces[current_coords.x] = {}
 	_possibleSpaces[current_coords.x][current_coords.y] = true
@@ -233,10 +250,6 @@ func get_surrounding_tiles_in_range(current_coords: Vector2, maxDistance: int):
 func get_surrounding_tiles_in_range_recurse(
 	player_coords: Vector2, current_coords: Vector2, distance: int, maxDistance: int
 ):
-	#var z = 0
-	#if current_coords.x == 3 and current_coords.y == 7:
-	#z = 1
-
 	distance = abs(player_coords.x - current_coords.x) + abs(player_coords.y - current_coords.y)
 
 	if distance > maxDistance:
@@ -276,15 +289,6 @@ func get_surrounding_tiles_in_range_recurse(
 				if newPosition.x >= 0 and newPosition.y >= 0:
 					var tileData = tileMap.get_cell_tile_data(0, newPosition)
 					if tileData != null and tileData.get_custom_data("canMove"):
-						#if _possibleSpaces.has(newPosition.x) and _possibleSpaces[newPosition.x].has(newPosition.y):
-						#continue
-						#
-						#elif not _possibleSpaces.has(newPosition.x):
-						#_possibleSpaces[newPosition.x] = {}
-						#
-						#_possibleSpaces[newPosition.x][newPosition.y] = true
-						#tiles.append(newPosition)
-
 						tiles.append(newPosition)
 
 	for tile in tiles:

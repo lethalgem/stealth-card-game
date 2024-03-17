@@ -130,14 +130,14 @@ func hideInstructionText(state):
 func showInstructionText(state, text, force = false):
 	if lastProcessState != state or force:
 		lastProcessState = state
-		
+
 		if %InstructionLabel.modulate.a == 1:
 			var tween = create_tween()
 			tween.tween_property(%InstructionLabel, 'modulate:a', 0, .25)
 			await tween.finished
-			
+
 		%InstructionLabel.text = text
-		
+
 		var tween2 = create_tween()
 		tween2.tween_property(%InstructionLabel, 'modulate:a', 1, .25)
 		await tween2.finished
@@ -146,7 +146,7 @@ var lastProcessState = global.States.badGuysMove
 var lastProcessActionCount = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+
 	if global.currentState == global.States.waitingForUserCard:
 		#if lastProcessState != global.States.waitingForUserCard:
 			#lastProcessState = global.currentState
@@ -166,36 +166,36 @@ func _process(delta):
 				await showInstructionText(global.States.waitingForUserCard, 'COMBO! play ' + str(actionCount) + ' card!', true)
 			else:
 				await showInstructionText(global.States.waitingForUserCard, 'COMBO! play ' + str(actionCount) + ' cards!', true)
-				
+
 		elif actionCount == 0:
-			lastProcessActionCount = 0			
+			lastProcessActionCount = 0
 			await showInstructionText(global.States.waitingForUserCard, 'play a card')
-			
+
 	elif global.currentState == global.States.highlightingTiles:
 		await hideInstructionText(global.States.highlightingTiles)
-			
+
 	elif global.currentState == global.States.waitingForTileClick:
 		await showInstructionText(global.States.waitingForTileClick, 'click flashing tile to move')
-		
+
 	elif global.currentState == global.States.characterMoving:
 		await hideInstructionText(global.States.characterMoving)
-		
+
 	elif global.currentState == global.States.showPossibleSpaces:
 		await hideInstructionText(global.States.showPossibleSpaces)
-		
+
 	elif global.currentState == global.States.discardingCards:
 		await hideInstructionText(global.States.discardingCards)
-		
+
 	elif global.currentState == global.States.badGuysMove:
 		await showInstructionText(global.States.badGuysMove, 'baddies moving')
-		
+
 	elif global.currentState == global.States.multipleActionState:
 		#await showInstructionText(global.States.multipleActionState, 'XXXXXXXXXX')
 		pass
-		
+
 	lastProcessState = global.currentState
-	
-	
+
+
 
 func draw():
 	var card = cardDeck.draw()

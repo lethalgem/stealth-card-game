@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c1alxqu6qky1d"]
+[gd_scene load_steps=9 format=3 uid="uid://c1alxqu6qky1d"]
 
 [ext_resource type="Texture2D" uid="uid://cc3wx7oipiesc" path="res://assets/monsters/Sprites/Enemy_001_A.png" id="1_8w33q"]
 [ext_resource type="Script" path="res://scenes/characters/BadShorty.gd" id="2_welte"]
@@ -64,6 +64,9 @@ _data = {
 "walk_right": SubResource("Animation_l3ef7")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdv0c"]
+size = Vector2(16, 16)
+
 [node name="BadShorty" type="Sprite2D"]
 texture_filter = 1
 texture = ExtResource("1_8w33q")
@@ -75,3 +78,9 @@ script = ExtResource("2_welte")
 libraries = {
 "": SubResource("AnimationLibrary_7mwrw")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_wdv0c")
