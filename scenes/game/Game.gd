@@ -6,6 +6,7 @@ extends Node2D
 @export var hand: Hand
 @export var map: GameLevel
 @export var player: Player
+@export var fadeIn: bool = false
 @onready var global: GlobalClass = get_node("/root/Global")
 @onready var baddie_audio_player: AudioStreamPlayer = %BaddieTurnAudioPlayer
 @onready var player_audio_player: AudioStreamPlayer = %PlayerTurnAudioPlayer
@@ -43,35 +44,43 @@ func aboutToMoveCharacter():
 		return true
 
 	return false
-	
+
 
 var flower1HasBeenTouched = false
 var previousFlower1HasBeenTouched = false
+
+
 func flower1Touched():
 	flower1HasBeenTouched = true
-	
+
+
 var flower2HasBeenTouched = false
 var previousFlower2HasBeenTouched = false
+
+
 func flower2Touched():
 	flower2HasBeenTouched = true
-	
+
+
 var flower3HasBeenTouched = false
 var previousFlower3HasBeenTouched = false
+
+
 func flower3Touched():
 	flower3HasBeenTouched = true
-	
+
+
 func updatePreviousFlower():
 	previousFlower1HasBeenTouched = flower1HasBeenTouched
 	previousFlower2HasBeenTouched = flower2HasBeenTouched
 	previousFlower3HasBeenTouched = flower3HasBeenTouched
-	
 
 
 func characterFinishedMoving():
 	if global.currentState == global.States.characterMoving:
 		updatePrevious()
 		await get_tree().create_timer(.65).timeout
-		
+
 		var doFLowerText = false
 		if flower1HasBeenTouched and not previousFlower1HasBeenTouched:
 			#await showInstructionText(global.States.playingFlower, "flower collected!", true)
@@ -91,23 +100,22 @@ func characterFinishedMoving():
 			await map.collectedFlower3()
 			%Flower.colorFlower3()
 			doFLowerText = true
-			
-		
+
 		if doFLowerText:
 			flowerCount += 1
 			if flowerCount >= 3:
-				await showInstructionText(global.States.characterMoving, "all flowers collected!", true)
+				await showInstructionText(
+					global.States.characterMoving, "all flowers collected!", true
+				)
 				await get_tree().create_timer(1.5).timeout
 			else:
 				await showInstructionText(
 					global.States.characterMoving, str(flowerCount) + "/3 flowers collected!", true
 				)
 				await get_tree().create_timer(1.5).timeout
-			
-			
-		
+
 		updatePreviousFlower()
-		
+
 		draw()
 
 		checkActionCount()
@@ -176,17 +184,13 @@ func playFlower(card: FlowerCard):
 
 	if card.flowerId == 1:
 		await map.showFlower1()
-		#%Flower.colorFlower1()
 		pass
 	if card.flowerId == 2:
 		await map.showFlower2()
-		#%Flower.colorFlower2()
 		pass
 	if card.flowerId == 3:
 		await map.showFlower3()
-		#%Flower.colorFlower3()
 		pass
-
 
 	await showInstructionText(global.States.playingFlower, "flower revealed on map", true)
 	await map.showDemoFlower()
@@ -194,13 +198,13 @@ func playFlower(card: FlowerCard):
 	#
 	#flowerCount += 1
 	#if flowerCount >= 3:
-		#await showInstructionText(global.States.playingFlower, "all flowers revealed!", true)
-		#await get_tree().create_timer(2).timeout
+	#await showInstructionText(global.States.playingFlower, "all flowers revealed!", true)
+	#await get_tree().create_timer(2).timeout
 	#else:
-		#await showInstructionText(
-			#global.States.playingFlower, str(flowerCount) + "/3 flowers revealed", true
-		#)
-		#await get_tree().create_timer(2).timeout
+	#await showInstructionText(
+	#global.States.playingFlower, str(flowerCount) + "/3 flowers revealed", true
+	#)
+	#await get_tree().create_timer(2).timeout
 
 	await showInstructionText(global.States.playingFlower, "gather all 3 flowers to win!", true)
 	await get_tree().create_timer(2).timeout
@@ -215,10 +219,18 @@ func playFlower(card: FlowerCard):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if fadeIn:
+		fade_in()
 	map.setPlayer(player)
 	hand.game = self
 	map.game = self
 	%Flower.hideFlower()
+
+
+func fade_in():
+	%FadeInRect.modulate.a = 255
+	var tween = create_tween()
+	tween.tween_property(%FadeInRect, "modulate:a", 0, 0.5).set_ease(Tween.EASE_OUT)
 
 
 func hideInstructionText(state):

@@ -173,9 +173,9 @@ func showFlower3():
 	tween.tween_property(%Flower3, "modulate:a", 1, .5)
 	await tween.finished
 	flower_three_is_grabbable = true
-	
-	
-	
+
+
+
 func collectedFlower1():
 	var tween = create_tween()
 	tween.tween_property(%Flower1, "modulate:a", 0, .5)

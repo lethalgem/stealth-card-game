@@ -48,3 +48,4 @@ shape = SubResource("RectangleShape2D_g607w")
 unique_name_in_owner = true
 stream = ExtResource("2_oq5fn")
 volume_db = 10.0
+bus = &"GameSoundEffects"

@@ -229,3 +229,4 @@ unique_name_in_owner = true
 stream = ExtResource("3_xox4s")
 volume_db = 3.0
 pitch_scale = 2.0
+bus = &"GameSoundEffects"

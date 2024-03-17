@@ -57,31 +57,35 @@ func createDeck():
 func addFlowerCards():
 	for i in range(1, 4):
 		cards.append(createFlowerCard(i))
-		#cards.push_front(createFlowerCard(i))
+
 
 func checkTop7CardsForFlower():
 	for i in range(7):
 		if cards[i].CardType == FlowerCard.CardType:
 			return true
-	
+
 	return false
-	
+
+
 func pop3ToBack():
 	cards.push_back(cards.pop_front())
 	cards.push_back(cards.pop_front())
 	cards.push_back(cards.pop_front())
 
+
 var firstPlay = true
+
+
 func draw():
 	if len(cards) == 1:
 		createDeck()
 	cards.shuffle()
-	
+
 	if firstPlay:
 		while not checkTop7CardsForFlower():
 			pop3ToBack()
 		firstPlay = false
-	
+
 	var card = cards.pop_front()
 	return card
 

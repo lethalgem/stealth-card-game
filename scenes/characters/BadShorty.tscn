@@ -90,3 +90,4 @@ shape = SubResource("RectangleShape2D_wdv0c")
 unique_name_in_owner = true
 stream = ExtResource("3_dce6q")
 volume_db = -8.0
+bus = &"GameSoundEffects"
