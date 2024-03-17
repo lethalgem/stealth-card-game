@@ -64,7 +64,6 @@ func draw():
 		createDeck()
 	cards.shuffle()
 	var card = cards.pop_front()
-	print(cards)
 	return card
 
 
