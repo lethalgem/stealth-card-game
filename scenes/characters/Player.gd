@@ -7,8 +7,16 @@ extends Sprite2D
 func _ready():
 	$AnimationPlayer.play("idleDown")
 
+var lost = false
+func lose():
+	if not lost: 
+		$AnimationPlayer.play("lose")
+	lost = true
 
 func moveTo(incomingPosition):
+	if lost:
+		return
+		
 	var originalPosition = position
 
 	$AnimationPlayer.play("teleport")
