@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ce342lf76jqb3"]
+[gd_scene load_steps=6 format=3 uid="uid://ce342lf76jqb3"]
 
+[ext_resource type="Script" path="res://scenes/endScreens/WinScreen.gd" id="1_i6kd5"]
 [ext_resource type="Texture2D" uid="uid://6sy5iul0guuf" path="res://assets/endScreens/winScreen.png" id="1_rx6wq"]
 [ext_resource type="LabelSettings" uid="uid://fqk5cwkupvo8" path="res://scenes/cards/WINLOSE.tres" id="2_kbus6"]
 [ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="3_08lfk"]
@@ -7,6 +8,7 @@
 [sub_resource type="Theme" id="Theme_p7bis"]
 
 [node name="WinScreen" type="Node2D"]
+script = ExtResource("1_i6kd5")
 
 [node name="WinScreen" type="Sprite2D" parent="."]
 position = Vector2(576.375, 323.5)
@@ -42,3 +44,12 @@ theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_08lfk")
 theme_override_font_sizes/font_size = 32
 text = "Replay"
+
+[node name="WinFadeInRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+offset_right = 1156.0
+offset_bottom = 652.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
