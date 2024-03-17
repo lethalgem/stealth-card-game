@@ -16,7 +16,7 @@ func _process(delta):
 #func walkLeft(tweenTime):
 func moveTo(incomingPosition):
 	var originalPosition = position
-	
+
 	#flip_h = true
 	$AnimationPlayer.play('teleport')
 
@@ -28,12 +28,12 @@ func moveTo(incomingPosition):
 
 	if abs(originalPosition.x - incomingPosition.x) >= abs(originalPosition.y - incomingPosition.y):
 		if incomingPosition.x >= originalPosition.x:
-			$AnimationPlayer.play('idleRight')			
+			$AnimationPlayer.play('idleRight')
 		else:
 			$AnimationPlayer.play('idleLeft')
 	else:
 		if incomingPosition.y >= originalPosition.y:
-			$AnimationPlayer.play('idleDown')			
+			$AnimationPlayer.play('idleDown')
 		else:
 			$AnimationPlayer.play('idleUp')
 
