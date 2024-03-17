@@ -34,19 +34,19 @@ texture = ExtResource("10_4pohc")
 [node name="LevelOne" parent="." instance=ExtResource("3_b47ui")]
 
 [node name="CardDeck" parent="." instance=ExtResource("3_2lrq6")]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(1063, 536)
+position = Vector2(1042, 586)
 rotation = 0.0872665
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.4, 0.4)
 
 [node name="CardBack" type="Sprite2D" parent="."]
-position = Vector2(1063, 536)
+visible = false
+position = Vector2(1042, 586)
 rotation = 0.0872665
 scale = Vector2(0.168765, 0.168765)
 texture = ExtResource("5_2d60j")
 
 [node name="Hand" parent="." instance=ExtResource("2_57qf6")]
-position = Vector2(574, 540)
+position = Vector2(574, 594)
 
 [node name="Player" parent="." instance=ExtResource("6_akoob")]
 position = Vector2(72, 24)
@@ -77,7 +77,7 @@ label_settings = SubResource("LabelSettings_elw4s")
 
 [node name="Flower" parent="." instance=ExtResource("9_xvrcr")]
 unique_name_in_owner = true
-position = Vector2(1061, 543)
+position = Vector2(1045, 591)
 rotation = 0.165806
 scale = Vector2(0.4, 0.4)
 

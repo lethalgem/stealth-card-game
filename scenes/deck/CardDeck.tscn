@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dageblc58jcj8"]
+[gd_scene load_steps=7 format=3 uid="uid://dageblc58jcj8"]
 
 [ext_resource type="Script" path="res://scenes/deck/CardDeck.gd" id="1_uw3he"]
+[ext_resource type="Texture2D" uid="uid://bo1vpaxdh446d" path="res://assets/cards/CardBack.png" id="2_1hhmn"]
 [ext_resource type="AudioStream" uid="uid://cgxmiu4ncuf7b" path="res://assets/sound/deck_shuffling.mp3" id="2_oq5fn"]
 
 [sub_resource type="Theme" id="Theme_3vh8h"]
@@ -15,7 +16,13 @@ size = Vector2(278.5, 390)
 [node name="CardDeck" type="Node2D"]
 script = ExtResource("1_uw3he")
 
+[node name="CardBack" type="Sprite2D" parent="."]
+position = Vector2(0.643738, 0.509674)
+scale = Vector2(0.330206, 0.329907)
+texture = ExtResource("2_1hhmn")
+
 [node name="Border" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,6 +37,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Card" type="ColorRect" parent="Border"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
