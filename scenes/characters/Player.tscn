@@ -118,7 +118,6 @@ _data = {
 texture = ExtResource("1_eafcr")
 hframes = 12
 vframes = 15
-frame = 24
 script = ExtResource("1_ni7d1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
