@@ -279,18 +279,7 @@ var showingInfo = false
 func _process(delta):
 	var z = global.currentState
 	if global.currentState == global.States.waitingForUserCard:
-		#if lastProcessState != global.States.waitingForUserCard:
-		#lastProcessState = global.currentState
-		#%InstructionLabel.text = 'play NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO card'
-		#var tween = create_tween()
-		#tween.tween_property(%InstructionLabel, 'modulate:a', 0, 2)
-		#await tween.finished
-		#
-		#%InstructionLabel.text = 'play a card'
-		#var tween2 = create_tween()
-		#tween2.tween_property(%InstructionLabel, 'modulate:a', 1, 2)
-		#await tween.finished
-		#
+		map.hide_vision()
 
 		if showingInfo:
 			pass
