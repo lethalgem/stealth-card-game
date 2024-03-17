@@ -68,6 +68,7 @@ func badGuysTurn():
 
 func badGuysFinished():
 	updatePrevious()
+	hand.show_hand()
 	global.currentState = global.States.waitingForUserCard
 
 

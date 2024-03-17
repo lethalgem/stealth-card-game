@@ -45,11 +45,6 @@ func _ready():
 			addCard(newCard)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func _on_card_deck_deck_location(location):
 	deckLocation = location
 
@@ -152,6 +147,7 @@ func card_dropped(card: Card):
 	var overlapping_bodies = grabbed_card.get_node("BaseCardVisual").overlapping_bodies
 	if overlapping_bodies.has(playPile):
 		grabbed_card.get_node("BaseCardVisual").is_interactable = false
+		grabbed_card.get_node("BaseCardVisual").is_played = true
 		played_cards.append(grabbed_card)
 		distribute_play_pile()
 		playCardPlaySound()
@@ -216,6 +212,7 @@ func _on_smoke_animated_sprite_animation_finished():
 	smoke_animation.visible = false
 	card_being_discarded.global_position = discard_pile.global_position
 	playCardAppearedSmoke(card_being_discarded)
+	card_being_discarded.get_node("BaseCardVisual").is_played = true
 	card_being_discarded.z_index = len(discarded_cards)
 	card_being_discarded.visible = true
 
@@ -226,4 +223,23 @@ func _on_smoke_animated_sprite_2_animation_finished():
 	if len(played_cards) > 0:
 		discard_card()
 	else:
+		hide_hand()
 		game.badGuysTurn()
+
+
+func hide_hand():
+	await get_tree().create_timer(.65).timeout
+	var tween = create_tween()
+	tween.tween_property(self, "global_position:y", global_position.y + 100, 0.35).set_ease(
+		Tween.EASE_IN_OUT
+	)
+	card_sliding_audio_player.play()
+
+
+func show_hand():
+	await get_tree().create_timer(.65).timeout
+	var tween = create_tween()
+	tween.tween_property(self, "global_position:y", global_position.y - 100, 0.35).set_ease(
+		Tween.EASE_IN_OUT
+	)
+	card_sliding_audio_player.play()
