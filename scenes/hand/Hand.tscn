@@ -6,11 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://ct3plb6g2jh11" path="res://assets/sound/card_played.mp3" id="2_53ln6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jfaih"]
-radius = 114.0
+radius = 60.0
 height = 626.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_f8prm"]
-radius = 51.0392
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gn0u7"]
+size = Vector2(1132, 518)
 
 [node name="Hand" type="Node2D" node_paths=PackedStringArray("leftMarker", "rightMarker", "playPile")]
 script = ExtResource("1_mop5v")
@@ -38,12 +38,12 @@ position = Vector2(250, 0)
 [node name="PlayPile" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayPile"]
-position = Vector2(-105, -389)
-shape = SubResource("CircleShape2D_f8prm")
+position = Vector2(0, -330)
+shape = SubResource("RectangleShape2D_gn0u7")
 
-[node name="CardPlayAudioPlayer" type="AudioStreamPlayer2D" parent="PlayPile"]
+[node name="CardPlayAudioPlayer" type="AudioStreamPlayer2D" parent="PlayPile/CollisionShape2D"]
 unique_name_in_owner = true
-position = Vector2(-105, -387)
+position = Vector2(0, 2)
 stream = ExtResource("2_53ln6")
 volume_db = 10.0
 

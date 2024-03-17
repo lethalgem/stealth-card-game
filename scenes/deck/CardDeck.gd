@@ -88,13 +88,13 @@ func createActionCard(actions: int) -> Card:
 	var actionCard = actionCardScene.instantiate()
 	actionCard.createCard(actions)
 	return actionCard
-	
+
 func createActionCountCard(actions: int) -> Card:
 	var actionCountCard = actionCountCardScene.instantiate()
 	actionCountCard.createCard(actions)
 	return actionCountCard
-	
-	
+
+
 func createFlowerCard(actions: int) -> Card:
 	var flowerCard = flowerCardScene.instantiate()
 	flowerCard.createCard(actions)

@@ -12,7 +12,7 @@ var pathIndex = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$AnimationPlayer.play('idle')
-	pass 
+	pass
 
 
 func setTileMap(tileMapFromParent):
@@ -31,7 +31,7 @@ func setPath(pathFromParent):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-	
+
 	#var currentTilePosition = tileMap.local_to_map(position)
 	#if currentTilePosition.x == path[pathIndex].x and currentTilePosition.y == path[pathIndex].y:
 		#pathIndex += 1
@@ -62,15 +62,15 @@ func moveTo(positionModifier):
 	var tileSize = 16
 	var totalMovement = abs(positionModifier.x) + abs(positionModifier.y)
 	var time = .25 * totalMovement
-	
+
 	$AnimationPlayer.play('walk')
 	var tween = create_tween()
 	await tween.tween_property(self, 'position', Vector2(position.x + positionModifier.x * tileSize, position.y + positionModifier.y * tileSize), time)
-	
+
 	await get_tree().create_timer(time).timeout
 	$AnimationPlayer.play('idle')
-	
-	
+
+
 	#var currentTilePosition = tileMap.local_to_map(position)
 	#if currentTilePosition.x == path[pathIndex].x and currentTilePosition.y == path[pathIndex].y:
 		#pathIndex += 1

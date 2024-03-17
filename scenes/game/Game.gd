@@ -55,12 +55,12 @@ func badGuysTurn():
 	updatePrevious()
 	global.currentState = global.States.badGuysMove
 	map.badGuysMove()
-	
+
 
 func badGuysFinished():
 	updatePrevious()
 	global.currentState = global.States.waitingForUserCard
-	
+
 
 
 func addActionCount(count:int):
@@ -85,9 +85,9 @@ func checkActionCount():
 
 func updateActionCountLabel():
 		%ActionCountLabel.text = 'Actions: ' + str(actionCount)
-		
-		
-		
+
+
+
 func playFlower(card:FlowerCard):
 	if card.flowerId == 1:
 		%Flower.colorFlower1()

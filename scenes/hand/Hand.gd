@@ -48,8 +48,8 @@ func _on_card_deck_deck_location(location):
 
 
 func addCard(card: Card):
-	card.scale.x = .5
-	card.scale.y = .5
+	card.scale.x = .4
+	card.scale.y = .4
 
 	add_child(card)
 

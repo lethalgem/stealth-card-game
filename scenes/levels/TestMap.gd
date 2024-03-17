@@ -16,6 +16,7 @@ var player
 
 var up = true
 
+
 func badGuysMove():
 	if up:
 		await badShort1.moveTo(Vector2(0, -15))
@@ -23,9 +24,9 @@ func badGuysMove():
 	else:
 		await badShort1.moveTo(Vector2(0, 15))
 		up = true
-		
+
 	game.badGuysFinished()
-	
+
 
 func setPlayer(playerFromParent: Player):
 	player = playerFromParent
@@ -81,7 +82,7 @@ func _ready():
 	)
 
 
-func prep_for_movement(player_global_position: Vector2, movement:int):
+func prep_for_movement(player_global_position: Vector2, movement: int):
 	print("prepping for movement")
 	var tile_coords = tileMap.local_to_map(player_global_position)
 	print(tile_coords)
@@ -103,7 +104,9 @@ func prep_for_movement(player_global_position: Vector2, movement:int):
 	game.highlightFinished()
 
 
-var highlightedTiles:Array = []
+var highlightedTiles: Array = []
+
+
 func highlight_tiles(tile_coords: PackedVector2Array):
 	for coord in tile_coords:
 		var unpacked_scene = highlightingTile.instantiate()
@@ -113,6 +116,7 @@ func highlight_tiles(tile_coords: PackedVector2Array):
 		highlightedTiles.append(unpacked_scene)
 
 		unpacked_scene.position = position_to_highlight
+
 
 func removeHighlightedTiles():
 	for highlightedTile in highlightedTiles:
@@ -146,11 +150,9 @@ func _input(event):
 			#if confirmed_movement_tile_coords.has(tilePosition):
 			if confirmedTile.x == tilePosition.x and confirmedTile.y == tilePosition.y:
 				if game.aboutToMoveCharacter():
-
-
 					var playerTilePosition = tileMap.local_to_map(player.position)
 					#var newPosition = Vector2((playerTilePosition.x - tilePosition.x)*16, (playerTilePosition.y - tilePosition.y)*16)
-					var newPosition = Vector2(tilePosition.x*16 + 8, tilePosition.y*16 + 8)
+					var newPosition = Vector2(tilePosition.x * 16 + 8, tilePosition.y * 16 + 8)
 
 					player.moveTo(newPosition)
 					await get_tree().create_timer(.25).timeout
@@ -186,7 +188,6 @@ func get_surrounding_tiles_in_range_recurse(
 	_totalCount += 1
 	print("XYZ")
 	print(_totalCount)
-
 
 	var z = 4
 	if current_coords.x == 7 and current_coords.y == 3:
