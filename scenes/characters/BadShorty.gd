@@ -40,9 +40,9 @@ func _process(delta):
 	if current_tile_position != new_tile_position:
 		current_tile_position = new_tile_position
 		calculate_visible_tiles()
-		
+
 		prep_for_movement(new_tile_position, 5)
-		var z = confirmed_movement_tile_coords 
+		var z = confirmed_movement_tile_coords
 		var x = 3
 		var visibleKeys = tiles_in_visible_range.keys()
 		#visibleKeys.reverse()
@@ -51,10 +51,10 @@ func _process(delta):
 			var a2 = confirmed_movement_tile_coords[key.x].has(key.y) if a1 else false
 			if not a1 or not a2:
 				tiles_in_visible_range.erase(key)
-		
+
 		var e = 2
 		gameLevel.draw_vision(self)
-		
+
 
 func calculate_visible_tiles():
 	tiles_in_visible_range.clear()
@@ -100,7 +100,7 @@ func calculate_visible_tiles():
 
 func moveTo(positionModifier):
 	# MB only x or y will be non-zero, method below is more efficient and non-float rounding
-	# compared to rad / trig etc. 
+	# compared to rad / trig etc.
 	#match ceil(rad_to_deg(positionModifier.angle())):
 		#float(180):
 			#directionState = DirectionState.left
@@ -110,13 +110,13 @@ func moveTo(positionModifier):
 			#directionState = DirectionState.down
 		#float(0):
 			#directionState = DirectionState.right
-			
+
 	if positionModifier.x > 0:
 		directionState = DirectionState.right
 	elif positionModifier.x < 0:
 		directionState = DirectionState.left
 	elif positionModifier.y > 0:
-		directionState = DirectionState.down		
+		directionState = DirectionState.down
 	elif positionModifier.y < 0:
 		directionState = DirectionState.up
 
@@ -245,11 +245,11 @@ func gatherAll():
 			tiles.append(Vector2(key, innerKey))
 
 	return tiles
-	
-	
-	
-	
-	
+
+
+
+
+
 
 
 

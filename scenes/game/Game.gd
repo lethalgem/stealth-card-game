@@ -8,6 +8,7 @@ extends Node2D
 @export var player: Player
 @onready var global: GlobalClass = get_node("/root/Global")
 @onready var baddie_audio_player: AudioStreamPlayer = %BaddieTurnAudioPlayer
+@onready var player_audio_player: AudioStreamPlayer = %PlayerTurnAudioPlayer
 
 var actionCount: int = 0
 
@@ -76,6 +77,8 @@ func badGuysFinished():
 	updatePrevious()
 	hand.show_hand()
 	global.currentState = global.States.waitingForUserCard
+	await get_tree().create_timer(0.65).timeout
+	player_audio_player.play()
 
 
 func addActionCount(count: int):
