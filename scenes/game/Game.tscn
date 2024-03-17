@@ -75,6 +75,12 @@ grow_vertical = 2
 text = "Action Count"
 label_settings = SubResource("LabelSettings_elw4s")
 
+[node name="FlowerBlank" parent="." instance=ExtResource("9_xvrcr")]
+modulate = Color(0.396749, 0.0918821, 0, 1)
+position = Vector2(1045, 591)
+rotation = 0.165806
+scale = Vector2(0.4, 0.4)
+
 [node name="Flower" parent="." instance=ExtResource("9_xvrcr")]
 unique_name_in_owner = true
 position = Vector2(1045, 591)

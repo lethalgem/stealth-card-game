@@ -114,6 +114,30 @@ func _ready():
 	badShorty21.setTileMap(tileMap)
 
 
+func getOuterMost(playerCoordinated: Vector2, potential_movement_tiles:Array):
+	var minMaxes = {}
+		
+	for tile in potential_movement_tiles:
+		if not minMaxes.has(tile.y):
+			minMaxes[tile.y] = { 'min': tile.x, 'max': tile.x}
+		else:
+			minMaxes[tile.y].min = min(tile.x, minMaxes[tile.y].min)
+			minMaxes[tile.y].max = max(tile.x, minMaxes[tile.y].max)
+			
+	for key in minMaxes.keys():
+		if minMaxes[key]['min'] >= playerCoordinated.x or minMaxes[key]['min'] == 0:
+			minMaxes[key]['min'] = -100000
+		if minMaxes[key]['max'] <= playerCoordinated.x:
+			minMaxes[key]['max'] = 100000
+			
+	var rangeToIterate = range(len(potential_movement_tiles))
+	rangeToIterate.reverse()
+	for i in rangeToIterate:
+		if minMaxes[potential_movement_tiles[i].y]['min'] != potential_movement_tiles[i].x 	and minMaxes[potential_movement_tiles[i].y]['max'] != potential_movement_tiles[i].x:
+			potential_movement_tiles.remove_at(i)
+	
+	return potential_movement_tiles
+
 func prep_for_movement(player_global_position: Vector2, movement: int):
 	print("prepping for movement")
 	var tile_coords = tileMap.local_to_map(player_global_position)
@@ -123,6 +147,8 @@ func prep_for_movement(player_global_position: Vector2, movement: int):
 	#get_surrounding_tiles_in_range(tile_coords, 6)
 	get_surrounding_tiles_in_range(tile_coords, movement)
 	var potential_movement_tiles = gatherAll()
+
+	potential_movement_tiles = getOuterMost(tile_coords, potential_movement_tiles)
 
 	confirmed_movement_tile_coords = []
 	for potential_tile_coords in potential_movement_tiles:

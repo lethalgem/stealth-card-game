@@ -31,7 +31,7 @@ func _process(delta):
 	elif is_hovered and is_played:
 		parent_card.modulate.a = 0.15
 	elif is_played:
-		parent_card.modulate.a = 0.85
+		parent_card.modulate.a = .15 #0.85
 	else:
 		parent_card.modulate.a = 1
 		parent_card.z_index = 0
