@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b05vj3s207vii"]
+
+[ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="1_voimf"]
+
+[resource]
+font = ExtResource("1_voimf")
+font_size = 72
+font_color = Color(0.682353, 0.168627, 0.662745, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)

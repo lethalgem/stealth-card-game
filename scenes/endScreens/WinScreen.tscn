@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://ce342lf76jqb3"]
+
+[ext_resource type="Texture2D" uid="uid://6sy5iul0guuf" path="res://assets/endScreens/winScreen.png" id="1_rx6wq"]
+[ext_resource type="LabelSettings" uid="uid://fqk5cwkupvo8" path="res://scenes/cards/WINLOSE.tres" id="2_kbus6"]
+[ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="3_08lfk"]
+
+[sub_resource type="Theme" id="Theme_p7bis"]
+
+[node name="WinScreen" type="Node2D"]
+
+[node name="WinScreen" type="Sprite2D" parent="."]
+position = Vector2(576.375, 323.5)
+scale = Vector2(0.649414, 0.649414)
+texture = ExtResource("1_rx6wq")
+
+[node name="YouWin" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 561.0
+offset_bottom = 195.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_p7bis")
+text = "Congratulations!
+You Win!"
+label_settings = ExtResource("2_kbus6")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 884.0
+offset_top = 482.0
+offset_right = 1056.0
+offset_bottom = 571.0
+theme_override_colors/font_color = Color(0.988235, 0.52549, 0.0117647, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_08lfk")
+theme_override_font_sizes/font_size = 32
+text = "Replay"
