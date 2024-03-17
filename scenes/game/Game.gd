@@ -365,11 +365,12 @@ func draw():
 func fade_out():
 	await get_tree().create_timer(1).timeout
 	var tween = create_tween()
-	tween.tween_property(%FadeInRect, "modulate:a", 1, 0.5).set_ease(Tween.EASE_IN)
+	tween.tween_property(%FadeInRect, "modulate:a", 255, 0.5).set_ease(Tween.EASE_IN)
 	tween.connect("finished", fade_out_finished)
 
 
 func fade_out_finished():
+	await get_tree().create_timer(1).timeout
 	if gameOver:
 		get_tree().change_scene_to_file("res://scenes/endScreens/LoseScreen.tscn")
 	elif win:
