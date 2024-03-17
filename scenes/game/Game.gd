@@ -65,6 +65,7 @@ func discardCards():
 func badGuysTurn():
 	updatePrevious()
 	global.currentState = global.States.badGuysMove
+	await get_tree().create_timer(1).timeout
 	map.badGuysMove()
 
 
