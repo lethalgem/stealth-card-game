@@ -14,7 +14,7 @@ func updatePrevious():
 	global.previousState = global.currentState
 
 
-func droppedCard(card:Card):
+func droppedCard(card: Card):
 	if global.currentState == global.States.waitingForUserCard:
 		updatePrevious()
 
@@ -25,6 +25,7 @@ func droppedCard(card:Card):
 			addActionCount(card.actionCount)
 		elif card.cardType == FlowerCard.CardType:
 			playFlower(card)
+
 
 func highlightFinished():
 	if global.currentState == global.States.highlightingTiles:
@@ -51,6 +52,14 @@ func characterFinishedMoving():
 		checkActionCount()
 		#global.currentState = global.States.waitingForUserCard
 
+
+func discardCards():
+	if global.currentState == global.States.characterMoving:
+		updatePrevious()
+		global.currentState = global.States.discardingCards
+		hand.discard_card()
+
+
 func badGuysTurn():
 	updatePrevious()
 	global.currentState = global.States.badGuysMove
@@ -62,14 +71,14 @@ func badGuysFinished():
 	global.currentState = global.States.waitingForUserCard
 
 
-
-func addActionCount(count:int):
+func addActionCount(count: int):
 	actionCount += count
 	updateActionCountLabel()
 	updatePrevious()
 	await get_tree().create_timer(.65).timeout
 	draw()
 	global.currentState = global.States.waitingForUserCard
+
 
 func checkActionCount():
 	if actionCount > 1:
@@ -79,16 +88,17 @@ func checkActionCount():
 	else:
 		actionCount = 0
 		updateActionCountLabel()
-		badGuysTurn()
+		discardCards()
+		#badGuysTurn()
 		#TODO Make this the enemy's turn
 		#global.currentState = global.States.waitingForUserCard
 
+
 func updateActionCountLabel():
-		%ActionCountLabel.text = 'Actions: ' + str(actionCount)
+	%ActionCountLabel.text = "Actions: " + str(actionCount)
 
 
-
-func playFlower(card:FlowerCard):
+func playFlower(card: FlowerCard):
 	if card.flowerId == 1:
 		%Flower.colorFlower1()
 		pass
@@ -100,10 +110,6 @@ func playFlower(card:FlowerCard):
 		pass
 	draw()
 	global.currentState = global.States.waitingForUserCard
-
-
-
-
 
 
 # Called when the node enters the scene tree for the first time.
@@ -132,4 +138,4 @@ func _input(event):
 			draw()
 
 #func delay(time):
-	#await get_tree().create_timer(time).timeout
+#await get_tree().create_timer(time).timeout

@@ -7,9 +7,16 @@ var cards = []
 var grabbed_card: Card
 var deckLocation
 var played_cards = []
+var discarded_cards = []
+var card_being_discarded: Card
 var game: Game:
 	set(value):
 		game = value
+
+@onready var smoke_animation: AnimatedSprite2D = %SmokeAnimatedSprite
+@onready var smoke_animation_2: AnimatedSprite2D = %SmokeAnimatedSprite2
+@onready var smoke_sound_player: AudioStreamPlayer2D = %SmokeSoundPlayer
+@onready var discard_pile: Marker2D = %DiscardPile
 
 @onready var card_draw_audio_player: AudioStreamPlayer2D = %CardDrawAudioPlayer
 @onready var card_draw_sounds = [
@@ -178,5 +185,45 @@ func playCardSlidingSound():
 	card_sliding_audio_player.play()
 
 
+func discard_card():
+	if len(played_cards) > 0:
+		card_being_discarded = played_cards[0]
+		playCardDestroySmoke(card_being_discarded)
+		discarded_cards.append(card_being_discarded)
+		played_cards.erase(card_being_discarded)
+
+
+func playCardDestroySmoke(card: Card):
+	smoke_animation.global_position = card.global_position
+	smoke_animation.visible = true
+	smoke_animation.play()
+	smoke_sound_player.play()
+	card_being_discarded.visible = false
+
+
+func playCardAppearedSmoke(card: Card):
+	smoke_animation_2.global_position = card.global_position
+	smoke_animation_2.visible = true
+	smoke_animation_2.play()
+	smoke_sound_player.play()
+
+
 func play():
 	cardCount -= 1
+
+
+func _on_smoke_animated_sprite_animation_finished():
+	smoke_animation.visible = false
+	card_being_discarded.global_position = discard_pile.global_position
+	playCardAppearedSmoke(card_being_discarded)
+	card_being_discarded.z_index = len(discarded_cards)
+	card_being_discarded.visible = true
+
+
+func _on_smoke_animated_sprite_2_animation_finished():
+	smoke_animation_2.visible = false
+	card_being_discarded = null
+	if len(played_cards) > 0:
+		discard_card()
+	else:
+		game.badGuysTurn()
