@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1alxqu6qky1d"]
+[gd_scene load_steps=10 format=3 uid="uid://c1alxqu6qky1d"]
 
 [ext_resource type="Texture2D" uid="uid://cc3wx7oipiesc" path="res://assets/monsters/Sprites/Enemy_001_A.png" id="1_8w33q"]
 [ext_resource type="Script" path="res://scenes/characters/BadShorty.gd" id="2_welte"]
+[ext_resource type="AudioStream" uid="uid://dxns2fc55w7tt" path="res://assets/sound/gravel_and_grass_walking.mp3" id="3_dce6q"]
 
 [sub_resource type="Animation" id="Animation_rge4l"]
 resource_name = "idle"
@@ -84,3 +85,8 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 9)
 shape = SubResource("RectangleShape2D_wdv0c")
+
+[node name="MovementAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_dce6q")
+volume_db = -8.0

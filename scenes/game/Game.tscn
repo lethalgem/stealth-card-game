@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=16 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b578kft627c6u" path="res://assets/wood/NewWoodCropped.svg" id="10_4pohc"]
 [ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="12_0ee0k"]
 [ext_resource type="AudioStream" uid="uid://djjbj0g1yeom1" path="res://assets/sound/night_ambience.mp3" id="12_mkxo5"]
+[ext_resource type="AudioStream" uid="uid://d0wogrgik3gx1" path="res://assets/sound/baddies_turn_bell.mp3" id="13_qh30m"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_elw4s"]
 font_size = 32
@@ -114,5 +115,10 @@ autoplay = true
 stream = ExtResource("12_mkxo5")
 volume_db = -7.02
 autoplay = true
+
+[node name="BaddieTurnAudioPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("13_qh30m")
+volume_db = -1.0
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]
