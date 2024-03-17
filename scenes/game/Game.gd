@@ -45,7 +45,7 @@ func characterFinishedMoving():
 		#delay(.4)
 		await get_tree().create_timer(.65).timeout
 		draw()
-		
+
 		checkActionCount()
 		global.currentState = global.States.waitingForUserCard
 
@@ -94,6 +94,6 @@ func _input(event):
 		for i in range(7):
 			await get_tree().create_timer(.25).timeout
 			draw()
-			
+
 #func delay(time):
 	#await get_tree().create_timer(time).timeout
