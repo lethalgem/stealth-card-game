@@ -20,14 +20,12 @@ script = ExtResource("1_qhltx")
 [node name="Game" parent="." instance=ExtResource("2_skkil")]
 fadeIn = false
 
-[node name="FadeRect" type="ColorRect" parent="."]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.32549)
+[node name="DimRect" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 1163.0
-offset_bottom = 747.0
+offset_right = 1146.0
+offset_bottom = 695.0
 mouse_filter = 2
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0.105882)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -55,6 +53,7 @@ script = ExtResource("2_5hhx2")
 [node name="PerfectAudioPlayer" type="AudioStreamPlayer" parent="VBoxContainer/Start Game"]
 unique_name_in_owner = true
 stream = ExtResource("4_3tkod")
+volume_db = -5.0
 bus = &"MenuSoundEffects"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
@@ -72,6 +71,15 @@ stream = ExtResource("7_r4a1v")
 volume_db = -1.0
 autoplay = true
 bus = &"MenuMusic"
+
+[node name="FadeRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 1163.0
+offset_bottom = 747.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Start Game" to="VBoxContainer/Start Game" method="_on_pressed"]

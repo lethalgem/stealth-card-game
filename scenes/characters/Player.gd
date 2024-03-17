@@ -9,14 +9,14 @@ func _ready():
 
 var lost = false
 func lose():
-	if not lost: 
+	if not lost:
 		$AnimationPlayer.play("lose")
 	lost = true
 
 func moveTo(incomingPosition):
 	if lost:
 		return
-		
+
 	var originalPosition = position
 
 	$AnimationPlayer.play("teleport")

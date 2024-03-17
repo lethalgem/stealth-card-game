@@ -143,7 +143,7 @@ func badGuysTurn():
 func playerLost():
 	if global.currentState == global.States.badGuysMove:
 		player.lose()
-		print('YOU LOSE!')
+		print("YOU LOSE!")
 		#baddie_audio_player.play()
 		#await get_tree().create_timer(1).timeout
 		#updatePrevious()
@@ -233,6 +233,7 @@ func playFlower(card: FlowerCard):
 func _ready():
 	if fadeIn:
 		fade_in()
+		draw_first_hand()
 	map.setPlayer(player)
 	hand.game = self
 	map.game = self
@@ -242,7 +243,7 @@ func _ready():
 func fade_in():
 	%FadeInRect.modulate.a = 255
 	var tween = create_tween()
-	tween.tween_property(%FadeInRect, "modulate:a", 0, 0.5).set_ease(Tween.EASE_OUT)
+	tween.tween_property(%FadeInRect, "modulate:a", 0, 0.25).set_ease(Tween.EASE_OUT)
 
 
 func hideInstructionText(state):
@@ -358,18 +359,21 @@ func _process(delta):
 	lastProcessState = global.currentState
 
 
+func draw_first_hand():
+	for i in range(7):
+		global.currentState = global.States.waitingForUserCard
+		await get_tree().create_timer(.25).timeout
+		draw()
+
+
 func draw():
 	var card = cardDeck.draw()
 	hand.addCard(card)
-	#%Flower.colorFlower()
 
 
 func _input(event):
 	if event.is_action_pressed("start_sim"):
-		for i in range(7):
-			global.currentState = global.States.waitingForUserCard
-			await get_tree().create_timer(.25).timeout
-			draw()
+		draw_first_hand()
 
 #func delay(time):
 #await get_tree().create_timer(time).timeout
