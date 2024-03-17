@@ -197,8 +197,8 @@ func get_surrounding_tiles_in_range_recurse(
 
 	if distance > maxDistance:
 		return
-		
-		
+
+
 	#var checkTileData = tileMap.get_cell_tile_data(0, current_coords)
 	#if checkTileData == null or checkTileData.get_custom_data("doesBlockVision"):
 		#return
