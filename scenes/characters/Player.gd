@@ -5,7 +5,8 @@ extends Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$AnimationPlayer.play('idleDown')
+	#pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -14,6 +15,8 @@ func _process(delta):
 
 #func walkLeft(tweenTime):
 func moveTo(incomingPosition):
+	var originalPosition = position
+	
 	#flip_h = true
 	$AnimationPlayer.play('teleport')
 
@@ -21,6 +24,20 @@ func moveTo(incomingPosition):
 	position = incomingPosition
 
 	$AnimationPlayer.play('teleport_end')
+
+	if abs(originalPosition.x - incomingPosition.x) >= abs(originalPosition.y - incomingPosition.y):
+		if incomingPosition.x >= originalPosition.x:
+			$AnimationPlayer.play('idleRight')			
+		else:
+			$AnimationPlayer.play('idleLeft')
+	else:
+		if incomingPosition.y >= originalPosition.y:
+			$AnimationPlayer.play('idleDown')			
+		else:
+			$AnimationPlayer.play('idleUp')
+
+
+
 
 	#await get_tree().create_timer(.5).timeout
 	#

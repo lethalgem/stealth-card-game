@@ -50,6 +50,7 @@ position = Vector2(574, 594)
 
 [node name="Player" parent="." instance=ExtResource("6_akoob")]
 position = Vector2(72, 24)
+frame = 63
 
 [node name="Debugscene" parent="." instance=ExtResource("6_gh13b")]
 position = Vector2(20, 199)
