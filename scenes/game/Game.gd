@@ -54,7 +54,9 @@ func characterFinishedMoving():
 
 
 func discardCards():
-	if global.currentState == global.States.characterMoving:
+	#var a = global.currentState
+	#var b = global.States.characterMoving
+	if global.currentState == global.States.characterMoving or global.currentState == global.States.playingFlower:
 		updatePrevious()
 		global.currentState = global.States.discardingCards
 		hand.discard_card()
@@ -98,19 +100,50 @@ func checkActionCount():
 func updateActionCountLabel():
 	%ActionCountLabel.text = "Actions: " + str(actionCount)
 
-
+var flowerCount = 0
 func playFlower(card: FlowerCard):
+	updatePrevious()
+	global.currentState = global.States.playingFlower
+	
 	if card.flowerId == 1:
+		await map.showFlower1()
 		%Flower.colorFlower1()
 		pass
 	if card.flowerId == 2:
+		await map.showFlower2()
 		%Flower.colorFlower2()
 		pass
 	if card.flowerId == 3:
+		await map.showFlower3()
 		%Flower.colorFlower3()
 		pass
+		
+	flowerCount += 1
+		
+	
+		
+	await showInstructionText(global.States.playingFlower, 'flower revealed on map', true)
+	await map.showDemoFlower()
+	await get_tree().create_timer(2).timeout
+	
+	
+	if flowerCount >= 3:
+		await showInstructionText(global.States.playingFlower, 'all flowers revealed!', true)
+		await get_tree().create_timer(2).timeout
+	else:
+		await showInstructionText(global.States.playingFlower, str(flowerCount) + '/3 flowers revealed', true)
+		await get_tree().create_timer(2).timeout
+		
+	await showInstructionText(global.States.playingFlower, 'gather all 3 flowers to win!', true)
+	await get_tree().create_timer(2).timeout
+	await showInstructionText(global.States.playingFlower, 'GROW your combos for victory!', true)
+	await get_tree().create_timer(2).timeout
+		
+	await map.hideDemoFlower()
+		
 	draw()
-	global.currentState = global.States.waitingForUserCard
+	checkActionCount()
+	#global.currentState = global.States.waitingForUserCard
 
 
 # Called when the node enters the scene tree for the first time.
@@ -144,6 +177,7 @@ func showInstructionText(state, text, force = false):
 
 var lastProcessState = global.States.badGuysMove
 var lastProcessActionCount = 0
+var showingInfo = false
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
@@ -160,7 +194,29 @@ func _process(delta):
 			#tween2.tween_property(%InstructionLabel, 'modulate:a', 1, 2)
 			#await tween.finished
 			#
-		if lastProcessActionCount != actionCount and actionCount > 0:
+			
+			
+		if showingInfo:
+			pass
+		elif lastProcessState == global.States.waitingForstart:
+			showingInfo = true
+			await showInstructionText(global.States.playingFlower, 'play cards to', true)
+			await get_tree().create_timer(2).timeout
+			await showInstructionText(global.States.playingFlower, 'move', true)
+			await get_tree().create_timer(2).timeout
+			await showInstructionText(global.States.playingFlower, 'GROW combos', true)
+			await get_tree().create_timer(2).timeout
+			await showInstructionText(global.States.playingFlower, 'and collect flowers', true)
+			await get_tree().create_timer(3).timeout
+			await showInstructionText(global.States.playingFlower, 'play flower cards to reveal flowers', true)
+			await get_tree().create_timer(2).timeout
+			await showInstructionText(global.States.playingFlower, 'collect flowers by moving to them', true)
+			await get_tree().create_timer(2).timeout
+			await get_tree().create_timer(2).timeout
+			await showInstructionText(global.States.playingFlower, 'play a card', true)
+			showingInfo = false
+
+		elif lastProcessActionCount != actionCount and actionCount > 0:
 			lastProcessActionCount = actionCount
 			if actionCount == 1:
 				await showInstructionText(global.States.waitingForUserCard, 'COMBO! play ' + str(actionCount) + ' card!', true)

@@ -115,6 +115,35 @@ func _ready():
 	badShorty20.setTileMap(tileMap)
 	badShorty21.setTileMap(tileMap)
 
+func showDemoFlower():
+	var tween = create_tween()
+	tween.tween_property(%DemoFlower, 'modulate:a', 1, .5)
+	await tween.finished
+
+func hideDemoFlower():
+	var tween = create_tween()
+	tween.tween_property(%DemoFlower, 'modulate:a', 0, .5)
+	await tween.finished
+
+func showFlower1():
+	#%Flower1.modulate.a = 1
+	var tween = create_tween()
+	tween.tween_property(%Flower1, 'modulate:a', 1, .5)
+	await tween.finished
+	
+func showFlower2():
+	#%Flower2.modulate.a = 1
+	var tween = create_tween()
+	tween.tween_property(%Flower2, 'modulate:a', 1, .5)
+	await tween.finished
+	
+func showFlower3():
+	#%Flower3.modulate.a = 1
+	var tween = create_tween()
+	tween.tween_property(%Flower3, 'modulate:a', 1, .5)
+	await tween.finished
+	
+
 
 func getOuterMost(playerCoordinated: Vector2, potential_movement_tiles: Array):
 	var minMaxes = {}

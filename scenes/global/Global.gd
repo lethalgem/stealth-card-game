@@ -8,6 +8,7 @@ enum States {
 	highlightingTiles,
 	waitingForTileClick,
 	characterMoving,
+	playingFlower,
 	showPossibleSpaces,
 	discardingCards,
 	badGuysMove,
