@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=15 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bbrb4qp8nd1jx" path="res://scenes/flower/Flower.tscn" id="9_xvrcr"]
 [ext_resource type="Texture2D" uid="uid://b578kft627c6u" path="res://assets/wood/NewWoodCropped.svg" id="10_4pohc"]
 [ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="12_0ee0k"]
+[ext_resource type="AudioStream" uid="uid://djjbj0g1yeom1" path="res://assets/sound/night_ambience.mp3" id="12_mkxo5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_elw4s"]
 font_size = 32
@@ -55,10 +56,6 @@ position = Vector2(72, 24)
 visible = false
 position = Vector2(20, 199)
 script = ExtResource("7_02dw6")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_w3je1")
-autoplay = true
 
 [node name="ActionCountLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -108,5 +105,14 @@ text = "play a card"
 label_settings = SubResource("LabelSettings_a6xpj")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="BackgroundMusicAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_w3je1")
+autoplay = true
+
+[node name="AmbienceAudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_mkxo5")
+volume_db = -7.02
+autoplay = true
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]
