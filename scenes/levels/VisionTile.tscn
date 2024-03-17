@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ckdeqq2wbo48x"]
+
+[node name="VisionTile" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 7.5
+mouse_filter = 2
+color = Color(0.768627, 0.113725, 0.239216, 0.188235)
