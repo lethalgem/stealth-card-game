@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfowoc2lljor1"]
+[gd_scene load_steps=15 format=3 uid="uid://bfowoc2lljor1"]
 
 [ext_resource type="Script" path="res://scenes/game/Game.gd" id="1_g3ms6"]
 [ext_resource type="PackedScene" uid="uid://qxdqo1uvgquh" path="res://scenes/hand/Hand.tscn" id="2_57qf6"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cccmm745f88ku" path="res://assets/sound/Sneaky-Adventure(chosic.com).mp3" id="9_w3je1"]
 [ext_resource type="PackedScene" uid="uid://bbrb4qp8nd1jx" path="res://scenes/flower/Flower.tscn" id="9_xvrcr"]
 [ext_resource type="Texture2D" uid="uid://b578kft627c6u" path="res://assets/wood/NewWoodCropped.svg" id="10_4pohc"]
+[ext_resource type="FontFile" uid="uid://ck30ye3hykj6u" path="res://assets/fonts/vinque.otf" id="12_0ee0k"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_elw4s"]
 font_size = 32
@@ -18,6 +19,13 @@ font_color = Color(0.219608, 0.741176, 0.862745, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 0.666667)
 shadow_offset = Vector2(3, 3)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a6xpj"]
+font = ExtResource("12_0ee0k")
+font_size = 48
+font_color = Color(0.960784, 0.803922, 0.301961, 1)
+shadow_size = 3
+shadow_color = Color(0.223529, 0.0901961, 0.0117647, 1)
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("cardDeck", "hand", "map", "player")]
 script = ExtResource("1_g3ms6")
@@ -52,6 +60,7 @@ position = Vector2(574, 594)
 position = Vector2(72, 24)
 
 [node name="Debugscene" parent="." instance=ExtResource("6_gh13b")]
+visible = false
 position = Vector2(20, 199)
 script = ExtResource("7_02dw6")
 
@@ -61,6 +70,7 @@ autoplay = true
 
 [node name="ActionCountLabel" type="Label" parent="."]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -86,5 +96,25 @@ unique_name_in_owner = true
 position = Vector2(1045, 591)
 rotation = 0.165806
 scale = Vector2(0.4, 0.4)
+
+[node name="InstructionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 394.0
+offset_top = 432.0
+offset_right = 754.0
+offset_bottom = 491.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+text = "play a card"
+label_settings = SubResource("LabelSettings_a6xpj")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="deckLocation" from="CardDeck" to="Hand" method="_on_card_deck_deck_location"]

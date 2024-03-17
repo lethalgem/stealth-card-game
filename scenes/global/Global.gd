@@ -3,6 +3,7 @@ class_name GlobalClass
 extends Node2D
 
 enum States {
+	waitingForstart,
 	waitingForUserCard,
 	highlightingTiles,
 	waitingForTileClick,
@@ -13,8 +14,8 @@ enum States {
 	multipleActionState,
 }
 
-var previousState: States = States.waitingForUserCard
-var currentState: States = States.waitingForUserCard
+var previousState: States = States.waitingForstart
+var currentState: States = States.waitingForstart
 
 
 # Called when the node enters the scene tree for the first time.

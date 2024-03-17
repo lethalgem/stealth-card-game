@@ -120,11 +120,82 @@ func _ready():
 	map.game = self
 	%Flower.hideFlower()
 
+func hideInstructionText(state):
+	if lastProcessState != state:
+		lastProcessState = state
+		var tween = create_tween()
+		tween.tween_property(%InstructionLabel, 'modulate:a', 0, .25)
+		await tween.finished
 
+func showInstructionText(state, text, force = false):
+	if lastProcessState != state or force:
+		lastProcessState = state
+		
+		if %InstructionLabel.modulate.a == 1:
+			var tween = create_tween()
+			tween.tween_property(%InstructionLabel, 'modulate:a', 0, .25)
+			await tween.finished
+			
+		%InstructionLabel.text = text
+		
+		var tween2 = create_tween()
+		tween2.tween_property(%InstructionLabel, 'modulate:a', 1, .25)
+		await tween2.finished
+
+var lastProcessState = global.States.badGuysMove
+var lastProcessActionCount = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
+	
+	if global.currentState == global.States.waitingForUserCard:
+		#if lastProcessState != global.States.waitingForUserCard:
+			#lastProcessState = global.currentState
+			#%InstructionLabel.text = 'play NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO card'
+			#var tween = create_tween()
+			#tween.tween_property(%InstructionLabel, 'modulate:a', 0, 2)
+			#await tween.finished
+			#
+			#%InstructionLabel.text = 'play a card'
+			#var tween2 = create_tween()
+			#tween2.tween_property(%InstructionLabel, 'modulate:a', 1, 2)
+			#await tween.finished
+			#
+		if lastProcessActionCount != actionCount and actionCount > 0:
+			lastProcessActionCount = actionCount
+			if actionCount == 1:
+				await showInstructionText(global.States.waitingForUserCard, 'COMBO! play ' + str(actionCount) + ' card!', true)
+			else:
+				await showInstructionText(global.States.waitingForUserCard, 'COMBO! play ' + str(actionCount) + ' cards!', true)
+				
+		elif actionCount == 0:
+			lastProcessActionCount = 0			
+			await showInstructionText(global.States.waitingForUserCard, 'play a card')
+			
+	elif global.currentState == global.States.highlightingTiles:
+		await hideInstructionText(global.States.highlightingTiles)
+			
+	elif global.currentState == global.States.waitingForTileClick:
+		await showInstructionText(global.States.waitingForTileClick, 'click flashing tile to move')
+		
+	elif global.currentState == global.States.characterMoving:
+		await hideInstructionText(global.States.characterMoving)
+		
+	elif global.currentState == global.States.showPossibleSpaces:
+		await hideInstructionText(global.States.showPossibleSpaces)
+		
+	elif global.currentState == global.States.discardingCards:
+		await hideInstructionText(global.States.discardingCards)
+		
+	elif global.currentState == global.States.badGuysMove:
+		await showInstructionText(global.States.badGuysMove, 'baddies moving')
+		
+	elif global.currentState == global.States.multipleActionState:
+		#await showInstructionText(global.States.multipleActionState, 'XXXXXXXXXX')
+		pass
+		
+	lastProcessState = global.currentState
+	
+	
 
 func draw():
 	var card = cardDeck.draw()
@@ -135,6 +206,7 @@ func draw():
 func _input(event):
 	if event.is_action_pressed("start_sim"):
 		for i in range(7):
+			global.currentState = global.States.waitingForUserCard
 			await get_tree().create_timer(.25).timeout
 			draw()
 
